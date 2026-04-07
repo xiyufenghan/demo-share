@@ -903,6 +903,85 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   </div>
 </section>
 
+<!-- ============ LIGHTHOUSE SERVER ============ -->
+<section id="lighthouse" style="padding-top:0;">
+  <div class="wrap">
+    <div class="callout blue reveal" style="margin-top:8px;border:1px solid rgba(59,130,246,.15);background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(16,185,129,.06));">
+      <span class="callout-emoji">🖥️</span>
+      <h4>进阶方案：腾讯云轻量应用服务器</h4>
+      <p>当你需要<strong>登录系统、存数据、跑后台程序</strong>时，GitHub Pages 就不够用了。这时候可以用腾讯云轻量应用服务器——可以理解为<strong style="color:#60A5FA">一台在云上的电脑</strong>，7×24 小时开机，全球都能访问。</p>
+    </div>
+
+    <div class="steps" style="margin-top:24px;">
+      <div class="step-card reveal d1">
+        <div class="step-num sn1">1</div>
+        <div class="step-body">
+          <h3>购买一台轻量服务器</h3>
+          <p>打开 <a href="https://cloud.tencent.com/product/lighthouse" target="_blank" style="color:#60A5FA;text-decoration:underline;">腾讯云轻量应用服务器</a> 页面，登录后选择套餐。</p>
+          <div style="margin-top:14px;padding:18px 20px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid rgba(59,130,246,.1);">
+            <div style="font-size:.85rem;font-weight:600;color:#60A5FA;margin-bottom:12px;">💡 推荐配置（大部分场景够用）</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+              <div style="padding:12px 16px;border-radius:10px;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.08);">
+                <div style="font-size:.82rem;font-weight:600;color:#60A5FA;">入门款 · 99 元/年</div>
+                <div style="font-size:.78rem;color:rgba(228,228,236,.45);margin-top:4px;">2核 2G 内存 · 4M 带宽<br>适合：个人项目、内部小工具</div>
+              </div>
+              <div style="padding:12px 16px;border-radius:10px;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.08);">
+                <div style="font-size:.82rem;font-weight:600;color:#60A5FA;">够用款 · 199 元/年</div>
+                <div style="font-size:.78rem;color:rgba(228,228,236,.45);margin-top:4px;">2核 4G 内存 · 6M 带宽<br>适合：小程序后台、团队工具</div>
+              </div>
+              <div style="padding:12px 16px;border-radius:10px;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.08);">
+                <div style="font-size:.82rem;font-weight:600;color:#60A5FA;">性能款 · 630 元/年</div>
+                <div style="font-size:.78rem;color:rgba(228,228,236,.45);margin-top:4px;">4核 8G 内存 · 10M 带宽<br>适合：正式业务、数据库服务</div>
+              </div>
+            </div>
+            <div style="margin-top:10px;font-size:.72rem;color:rgba(228,228,236,.25);">* 以上为 2026 年新用户活动价，实际以下单页面为准。建议首次买 1 年试试。</div>
+          </div>
+          <div style="margin-top:12px;padding:12px 16px;border-radius:10px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.1);">
+            <div style="font-size:.82rem;color:rgba(228,228,236,.5);">
+              <strong style="color:#34D399;">镜像选什么？</strong> 推荐选 <strong>应用镜像 → 宝塔 Linux 面板</strong>。装好就自带一个网页版的管理面板，后续操作都可以在浏览器里点点点完成，不用记命令。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card reveal d2">
+        <div class="step-num sn2">2</div>
+        <div class="step-body">
+          <h3>登录宝塔面板</h3>
+          <p>购买完成后，进入控制台 → 找到你的服务器 → 点击「应用管理」→ 获取宝塔面板的登录地址和密码。</p>
+          <div style="margin-top:10px;padding:14px 16px;border-radius:10px;background:rgba(0,0,0,.3);font-size:.82rem;color:rgba(228,228,236,.5);line-height:1.7;">
+            登录地址长这样：<code style="background:rgba(59,130,246,.15);padding:1px 6px;border-radius:4px;font-size:.78rem;">http://你的服务器IP:8888/xxxx</code><br>
+            在浏览器打开，输入用户名和密码就能进入管理面板。
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card reveal d3">
+        <div class="step-num sn3">3</div>
+        <div class="step-body">
+          <h3>让 WorkBuddy 帮你部署</h3>
+          <p>最酷的部分来了——你不用自己敲命令。把服务器信息告诉 WorkBuddy，它会帮你搞定一切。</p>
+          <div class="chat-hint" style="margin-top:8px;">帮我把这个项目部署到我的腾讯云服务器上，IP 是 xxx.xxx.xxx.xxx</div>
+          <div style="margin-top:12px;font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.6;">
+            WorkBuddy 会自动帮你：连接服务器 → 安装运行环境 → 上传代码 → 配置域名 → 开启 HTTPS。<br>
+            你只需要坐着看它操作就行。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;padding:16px 20px;border-radius:12px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.1);" class="reveal d4">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <span style="font-size:1.2rem;flex-shrink:0;">⚠️</span>
+        <div style="font-size:.82rem;color:rgba(228,228,236,.5);line-height:1.6;">
+          <strong style="color:#FBBF24;">温馨提示</strong><br>
+          轻量服务器需要付费（最低 99 元/年），而且需要一点耐心做初始设置。<strong>如果你的需求只是展示页面、报告、看板，用免费的 GitHub Pages 或 OA Pages 就够了。</strong>只有当你确实需要登录、存数据、跑定时任务时，再考虑服务器。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ TAKEAWAY ============ -->
 <section id="takeaway">
   <div class="wrap">
