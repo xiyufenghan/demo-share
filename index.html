@@ -222,6 +222,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   <div class="pnav-dot" data-t="solution"><span class="tip">方案</span></div>
   <div class="pnav-dot" data-t="memory"><span class="tip">AI 记忆</span></div>
   <div class="pnav-dot" data-t="memchat"><span class="tip">记忆演示</span></div>
+  <div class="pnav-dot" data-t="knowledge"><span class="tip">知识库</span></div>
   <div class="pnav-dot" data-t="github"><span class="tip">认识 GitHub</span></div>
   <div class="pnav-dot" data-t="deploy"><span class="tip">一键上线</span></div>
   <div class="pnav-dot" data-t="deploychat"><span class="tip">部署演示</span></div>
@@ -481,10 +482,123 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   </div>
 </section>
 
+<!-- ============ KNOWLEDGE BASE ============ -->
+<section id="knowledge">
+  <div class="wrap">
+    <div class="reveal"><span class="sec-tag">Chapter 04</span>
+      <h2 class="sec-title">团队知识库：经验自动沉淀</h2>
+      <p class="sec-desc">每个团队都有无数「踩过的坑」和「摸索出的经验」，但它们散落在聊天记录、脑子里、离职同事的电脑上。<br><strong style="color:#60A5FA">知识库就是把这些经验变成 AI 可以随时调用的「团队记忆」。</strong></p>
+    </div>
+
+    <div class="callout mint reveal" style="margin-top:24px;">
+      <span class="callout-emoji">🤔</span>
+      <h4>知识库和前面的「记忆」有什么区别？</h4>
+      <p><strong>记忆</strong>是个人的——AI 记住<em>你</em>的偏好、身份、习惯。<br><strong>知识库</strong>是团队的——把大家踩过的坑、总结的经验、标准流程沉淀下来，<em>每个人</em>都能用。<br>简单说：记忆是「我的笔记」，知识库是「团队的百科全书」。</p>
+    </div>
+
+    <!-- 场景一 -->
+    <div style="margin-top:32px;" class="reveal d1">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <span style="width:32px;height:32px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;">1</span>
+        <h3 style="margin:0;font-size:1.05rem;">踩坑记录 → 自动变成团队经验</h3>
+      </div>
+      <div style="padding:20px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);">
+        <div style="font-size:.85rem;color:rgba(228,228,236,.5);margin-bottom:16px;line-height:1.7;">
+          <strong style="color:#fca5a5;">场景：</strong>小王部署项目时发现 GitHub Pages 自定义域名配置一直报错，折腾了 2 小时才搞定。他随口跟 AI 说了一句：
+        </div>
+        <div class="chat-hint" style="margin-bottom:12px;">刚才那个自定义域名的问题，帮我记下来，以后别人遇到也能查到</div>
+        <div style="font-size:.85rem;color:rgba(228,228,236,.5);line-height:1.7;">
+          <strong style="color:#34D399;">AI 会做什么：</strong><br>
+          ① 自动整理问题描述、排查过程和最终解决方案<br>
+          ② 写成一条结构化的知识条目，存进团队知识库<br>
+          ③ 下次任何人遇到类似问题，AI 会自动检索并给出方案
+        </div>
+        <div style="margin-top:14px;padding:14px 16px;border-radius:10px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.08);font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.7;">
+          <strong style="color:#34D399;">一个月后——</strong>小李遇到同样的问题，他什么都不用搜，直接问 AI「自定义域名报错了怎么办」，AI 立刻调出小王当时记录的解决方案。<strong>省了 2 小时。</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- 场景二 -->
+    <div style="margin-top:24px;" class="reveal d2">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <span style="width:32px;height:32px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;">2</span>
+        <h3 style="margin:0;font-size:1.05rem;">标准流程 → 团队 SOP 自动执行</h3>
+      </div>
+      <div style="padding:20px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);">
+        <div style="font-size:.85rem;color:rgba(228,228,236,.5);margin-bottom:16px;line-height:1.7;">
+          <strong style="color:#fca5a5;">场景：</strong>团队每周要做一次活动数据周报，流程是固定的：拉数据 → 算指标 → 做图表 → 写分析 → 发邮件。每次都要跟 AI 重新解释一遍。
+        </div>
+        <div class="chat-hint" style="margin-bottom:12px;">帮我把活动周报的标准流程记成一个技能，以后说「做周报」就自动跑</div>
+        <div style="font-size:.85rem;color:rgba(228,228,236,.5);line-height:1.7;">
+          <strong style="color:#34D399;">AI 会做什么：</strong><br>
+          ① 把流程写成一个 Skill（技能文件），包含每一步的操作细节<br>
+          ② 下次你只需说「做周报」，AI 就按标准流程自动执行<br>
+          ③ 新同事入职，直接说「做周报」也能完美产出——不用老人手把手教
+        </div>
+        <div style="margin-top:14px;padding:14px 16px;border-radius:10px;background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.08);font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.7;">
+          <strong style="color:#A78BFA;">本质上就是：</strong>把团队老手脑子里的「隐性知识」变成 AI 能执行的「显性流程」。人来人走，经验永远留在团队里。
+        </div>
+      </div>
+    </div>
+
+    <!-- 场景三 -->
+    <div style="margin-top:24px;" class="reveal d3">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <span style="width:32px;height:32px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;">3</span>
+        <h3 style="margin:0;font-size:1.05rem;">项目文档 → AI 秒懂项目上下文</h3>
+      </div>
+      <div style="padding:20px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);">
+        <div style="font-size:.85rem;color:rgba(228,228,236,.5);margin-bottom:16px;line-height:1.7;">
+          <strong style="color:#fca5a5;">场景：</strong>接手一个旧项目，光是看文档、理解历史决策就要一两周。如果项目有知识库呢？
+        </div>
+        <div class="chat-hint" style="margin-bottom:12px;">这个项目的技术栈是什么？上次改价格模块为什么选了方案 B？</div>
+        <div style="font-size:.85rem;color:rgba(228,228,236,.5);line-height:1.7;">
+          <strong style="color:#34D399;">AI 会做什么：</strong><br>
+          ① 从项目知识库中检索相关记录（技术选型文档、会议决策记录等）<br>
+          ② 直接回答你的问题，附上原始出处<br>
+          ③ 新人上手时间从两周缩短到两天
+        </div>
+        <div style="margin-top:14px;padding:14px 16px;border-radius:10px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.08);font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.7;">
+          <strong style="color:#FBBF24;">怎么建？</strong>告诉 WorkBuddy：「帮我在这个项目里创建知识库文件」。然后平时遇到重要决策、技术选型、踩坑经验，随口说一句「记下来」就行。
+        </div>
+      </div>
+    </div>
+
+    <!-- 知识沉淀的三个层次 -->
+    <div style="margin-top:32px;padding:22px 24px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);" class="reveal d4">
+      <div style="font-size:.8rem;color:rgba(228,228,236,.35);font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;">知识沉淀的三个层次</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+        <div style="padding:16px;border-radius:12px;background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.08);text-align:center;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">🧠</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">个人记忆</div>
+          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">我的偏好、习惯、身份<br>（只有我的 AI 知道）</div>
+        </div>
+        <div style="padding:16px;border-radius:12px;background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.08);text-align:center;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">📚</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">项目知识库</div>
+          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">踩坑记录、技术选型、流程 SOP<br>（项目组共享）</div>
+        </div>
+        <div style="padding:16px;border-radius:12px;background:rgba(139,92,246,.04);border:1px solid rgba(139,92,246,.08);text-align:center;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">🏢</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">团队知识库</div>
+          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">跨项目的通用经验和规范<br>（整个团队受益）</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout amber reveal d5" style="margin-top:24px;">
+      <span class="callout-emoji">💡</span>
+      <h4>最关键的一句话</h4>
+      <p>知识沉淀不需要专门花时间去做——它是工作过程中<strong>顺手</strong>的事情。解决了一个问题，随口说「帮我记下来」；跑通了一个流程，随口说「做成技能」。<strong style="color:#60A5FA">日积月累，团队的 AI 就从一个什么都不懂的新人，变成了一个什么都知道的老员工。</strong></p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ GITHUB INTRO ============ -->
 <section id="github">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 04</span>
+    <div class="reveal"><span class="sec-tag">Chapter 05</span>
       <h2 class="sec-title">先聊聊 GitHub 是什么</h2>
       <p class="sec-desc">在讲「一键上线」之前，我们先花两分钟搞清楚<strong style="color:#60A5FA">这个工具到底能干什么</strong>。</p>
     </div>
@@ -599,7 +713,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 <!-- ============ DEPLOY ============ -->
 <section id="deploy">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 05</span>
+    <div class="reveal"><span class="sec-tag">Chapter 06</span>
       <h2 class="sec-title">一键上线：说句话就有链接</h2>
       <p class="sec-desc">做好的页面、报告、工具，不再只能截图——<strong style="color:#60A5FA">给它一个全球可访问的链接</strong>。</p>
     </div>
@@ -853,7 +967,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 <!-- ============ TROUBLESHOOT ============ -->
 <section id="trouble">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 06</span>
+    <div class="reveal"><span class="sec-tag">Chapter 07</span>
       <h2 class="sec-title">遇到问题别慌 🛟</h2>
       <p class="sec-desc">记住这三个场景就够了，覆盖 90% 的问题。<strong style="color:#60A5FA">而且都可以在 WorkBuddy 里解决。</strong></p>
     </div>
@@ -997,7 +1111,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 <!-- ============ TAKEAWAY ============ -->
 <section id="takeaway">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 07</span>
+    <div class="reveal"><span class="sec-tag">Chapter 08</span>
       <h2 class="sec-title">今天带走三件事</h2>
       <p class="sec-desc">不需要一步到位。<strong style="color:#60A5FA">从最简单的开始做</strong>，5 分钟就有效果。</p>
     </div>
