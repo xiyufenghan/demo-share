@@ -51,15 +51,8 @@ body {
 .d5 { transition-delay: .30s; } .d6 { transition-delay: .36s; }
 
 /* ---------- layout ---------- */
-section { position: relative; z-index: 2; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 80px 24px; }
+section { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; padding: 60px 24px; }
 .wrap { max-width: 1060px; width: 100%; margin: 0 auto; }
-
-/* ---------- progress nav ---------- */
-.pnav { position: fixed; right: 22px; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 14px; }
-.pnav-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,245,255,0.15); cursor: pointer; transition: all .3s; position: relative; }
-.pnav-dot:hover, .pnav-dot.on { background: #00F5FF; box-shadow: 0 0 12px #00F5FF, 0 0 24px rgba(0,245,255,.4); transform: scale(1.4); }
-.pnav-dot .tip { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: .72rem; color: #00F5FF; background: rgba(5,5,8,.95); border: 1px solid rgba(0,245,255,.2); padding: 3px 10px; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity .2s; }
-.pnav-dot:hover .tip { opacity: 1; }
 
 /* ==================== HERO ==================== */
 .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
@@ -224,6 +217,43 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 .take-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: #FFFFFF; }
 .take-card p { font-size: .82rem; color: rgba(226,232,240,.5); }
 
+/* ---------- tab nav ---------- */
+.tab-nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; justify-content: center; gap: 4px;
+  padding: 12px 16px;
+  background: rgba(5,5,8,.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0,245,255,.08);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex-shrink: 0;
+  padding: 8px 18px;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(226,232,240,.5);
+  font-size: .82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .25s;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.tab-btn:hover { border-color: rgba(0,245,255,.2); color: rgba(226,232,240,.8); }
+.tab-btn.active {
+  background: rgba(0,245,255,.08);
+  border-color: rgba(0,245,255,.3);
+  color: #00F5FF;
+  box-shadow: 0 0 12px rgba(0,245,255,.12);
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
 /* ---------- footer ---------- */
 .site-footer { text-align: center; padding: 60px 24px; position: relative; z-index: 2; border-top: 1px solid rgba(0,245,255,.08); }
 .site-footer p { font-size: .8rem; color: rgba(226,232,240,.3); }
@@ -233,8 +263,8 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 @media (max-width: 768px) {
   .sol-flow { flex-direction: column; }
   .fl-arr { transform: rotate(90deg); }
-  .pnav { display: none; }
   .step-card { flex-direction: column; gap: 12px; }
+  .tab-btn { padding: 6px 12px; font-size: .76rem; }
 }
 </style>
 </head>
@@ -242,20 +272,6 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 
 <div class="cursor-glow" id="cursorGlow"></div>
 <div class="bg-dots"></div>
-
-<nav class="pnav" id="pnav">
-  <div class="pnav-dot on" data-t="hero"><span class="tip">首页</span></div>
-  <div class="pnav-dot" data-t="pain"><span class="tip">痛点</span></div>
-  <div class="pnav-dot" data-t="solution"><span class="tip">方案</span></div>
-  <div class="pnav-dot" data-t="memory"><span class="tip">AI 记忆</span></div>
-  <div class="pnav-dot" data-t="memchat"><span class="tip">记忆演示</span></div>
-  <div class="pnav-dot" data-t="github"><span class="tip">认识 GitHub</span></div>
-  <div class="pnav-dot" data-t="deploy"><span class="tip">一键上线</span></div>
-  <div class="pnav-dot" data-t="deploychat"><span class="tip">部署演示</span></div>
-  <div class="pnav-dot" data-t="knowledge"><span class="tip">知识库</span></div>
-  <div class="pnav-dot" data-t="trouble"><span class="tip">排障</span></div>
-  <div class="pnav-dot" data-t="takeaway"><span class="tip">收获</span></div>
-</nav>
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="hero">
@@ -344,6 +360,19 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     </div>
   </div>
 </section>
+
+<!-- ============ TAB NAV ============ -->
+<nav class="tab-nav" id="tabNav">
+  <button class="tab-btn active" data-tab="memory">🧠 AI 记忆</button>
+  <button class="tab-btn" data-tab="deploy">🚀 一键上线</button>
+  <button class="tab-btn" data-tab="knowledge">📚 知识沉淀</button>
+  <button class="tab-btn" data-tab="advanced">🖥️ 进阶方案</button>
+  <button class="tab-btn" data-tab="trouble">🛟 常见问题</button>
+  <button class="tab-btn" data-tab="takeaway">🎯 收获</button>
+</nav>
+
+<!-- ====== TAB: AI 记忆 ====== -->
+<div class="tab-panel active" id="tab-memory">
 
 <!-- ============ MEMORY SYSTEM ============ -->
 <section id="memory">
@@ -512,6 +541,10 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     </div>
   </div>
 </section>
+</div><!-- /tab-memory -->
+
+<!-- ====== TAB: 一键上线 ====== -->
+<div class="tab-panel" id="tab-deploy">
 
 <!-- ============ GITHUB INTRO ============ -->
 <section id="github">
@@ -881,6 +914,10 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     </div>
   </div>
 </section>
+</div><!-- /tab-deploy -->
+
+<!-- ====== TAB: 知识沉淀 ====== -->
+<div class="tab-panel" id="tab-knowledge">
 
 <!-- ============ KNOWLEDGE BASE ============ -->
 <section id="knowledge">
@@ -1000,6 +1037,10 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     </div>
   </div>
 </section>
+</div><!-- /tab-knowledge -->
+
+<!-- ====== TAB: 常见问题 ====== -->
+<div class="tab-panel" id="tab-trouble">
 
 <!-- ============ TROUBLESHOOT ============ -->
 <section id="trouble">
@@ -1031,6 +1072,10 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     </div>
   </div>
 </section>
+</div><!-- /tab-trouble -->
+
+<!-- ====== TAB: 进阶方案 ====== -->
+<div class="tab-panel" id="tab-advanced">
 
 <!-- ============ COMPARE ============ -->
 <section id="compare" style="min-height: auto; padding: 40px 24px 80px;">
@@ -1144,6 +1189,10 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     </div>
   </div>
 </section>
+</div><!-- /tab-advanced -->
+
+<!-- ====== TAB: 收获 ====== -->
+<div class="tab-panel" id="tab-takeaway">
 
 <!-- ============ TAKEAWAY ============ -->
 <section id="takeaway">
@@ -1178,6 +1227,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     </div>
   </div>
 </section>
+</div><!-- /tab-takeaway -->
 
 <footer class="site-footer">
   <p>轻量化技术工具链 · 团队经验分享 · 2026.04.08</p>
@@ -1198,23 +1248,27 @@ const revObs = new IntersectionObserver(es => {
 }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
 revEls.forEach(el => revObs.observe(el));
 
-// Progress nav
-const secs = document.querySelectorAll('section[id]');
-const dots = document.querySelectorAll('.pnav-dot');
-dots.forEach(d => d.addEventListener('click', () => {
-  const t = document.getElementById(d.dataset.t);
-  if (t) t.scrollIntoView({ behavior: 'smooth' });
-}));
-const navObs = new IntersectionObserver(es => {
-  es.forEach(e => {
-    if (e.isIntersecting) {
-      dots.forEach(d => d.classList.remove('on'));
-      const a = document.querySelector(`.pnav-dot[data-t="${e.target.id}"]`);
-      if (a) a.classList.add('on');
+// Tab navigation
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabPanels = document.querySelectorAll('.tab-panel');
+
+function switchTab(tabId) {
+  tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+  tabPanels.forEach(p => p.classList.toggle('active', p.id === 'tab-' + tabId));
+  // Scroll to tab nav
+  document.getElementById('tabNav').scrollIntoView({ behavior: 'smooth' });
+  // Re-trigger reveal animations for newly visible content
+  setTimeout(() => {
+    const panel = document.getElementById('tab-' + tabId);
+    if (panel) {
+      panel.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
     }
-  });
-}, { threshold: .25 });
-secs.forEach(s => navObs.observe(s));
+  }, 100);
+}
+
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+});
 
 // Chat bubble demos
 function renderChat(containerId, messages) {
