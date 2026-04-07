@@ -11,22 +11,22 @@
 html { scroll-behavior: smooth; font-size: 16px; }
 body {
   font-family: 'Noto Sans SC', -apple-system, sans-serif;
-  background: #08090e;
-  color: #e4e4ec;
+  background: #FAF8F4;
+  color: #2D2A26;
   overflow-x: hidden;
   line-height: 1.75;
 }
 
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #08090e; }
-::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #3B82F6, #818cf8); border-radius: 3px; }
+::-webkit-scrollbar-track { background: #F0EDE7; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #D97706, #B45309); border-radius: 3px; }
 
 /* ---------- cursor glow ---------- */
 .cursor-glow {
   position: fixed;
   width: 500px; height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,82,217,0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(217,119,6,0.06) 0%, transparent 70%);
   pointer-events: none; z-index: 9999;
   transform: translate(-50%, -50%);
   transition: left .35s ease-out, top .35s ease-out;
@@ -35,7 +35,7 @@ body {
 /* ---------- bg ---------- */
 .bg-dots {
   position: fixed; inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(180,83,9,0.06) 1px, transparent 1px);
   background-size: 32px 32px;
   z-index: 0;
 }
@@ -56,96 +56,97 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 
 /* ---------- progress nav ---------- */
 .pnav { position: fixed; right: 22px; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 14px; }
-.pnav-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.12); cursor: pointer; transition: all .3s; position: relative; }
-.pnav-dot:hover, .pnav-dot.on { background: #3B82F6; box-shadow: 0 0 14px rgba(59,130,246,.5); transform: scale(1.4); }
-.pnav-dot .tip { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: .72rem; color: #3B82F6; background: rgba(0,0,0,.85); padding: 3px 10px; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity .2s; }
+.pnav-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(45,42,38,0.15); cursor: pointer; transition: all .3s; position: relative; }
+.pnav-dot:hover, .pnav-dot.on { background: #D97706; box-shadow: 0 0 14px rgba(217,119,6,.4); transform: scale(1.4); }
+.pnav-dot .tip { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: .72rem; color: #92400E; background: rgba(250,248,244,.95); border: 1px solid rgba(180,83,9,.15); padding: 3px 10px; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity .2s; }
 .pnav-dot:hover .tip { opacity: 1; }
 
 /* ==================== HERO ==================== */
 .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
 
-.hero-orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .35; animation: orbF 10s ease-in-out infinite; }
-.orb1 { width: 520px; height: 520px; background: radial-gradient(circle,#3B82F6,transparent); top:-120px; left:-80px; }
-.orb2 { width: 420px; height: 420px; background: radial-gradient(circle,#818cf8,transparent); bottom:-60px; right:-60px; animation-delay:-4s; }
-.orb3 { width: 280px; height: 280px; background: radial-gradient(circle,#60A5FA,transparent); top:35%; right:12%; animation-delay:-7s; opacity:.18; }
+.hero-orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .25; animation: orbF 10s ease-in-out infinite; }
+.orb1 { width: 520px; height: 520px; background: radial-gradient(circle,#FDE68A,transparent); top:-120px; left:-80px; }
+.orb2 { width: 420px; height: 420px; background: radial-gradient(circle,#FCA5A5,transparent); bottom:-60px; right:-60px; animation-delay:-4s; }
+.orb3 { width: 280px; height: 280px; background: radial-gradient(circle,#D97706,transparent); top:35%; right:12%; animation-delay:-7s; opacity:.15; }
 @keyframes orbF { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(25px,-18px) scale(1.04)} 66%{transform:translate(-18px,12px) scale(.96)} }
 
-.hero-tag { display: inline-flex; align-items: center; gap: 8px; padding: 7px 18px; border: 1px solid rgba(59,130,246,.3); border-radius: 100px; font-size: .82rem; color: #60A5FA; background: rgba(59,130,246,.05); backdrop-filter: blur(8px); margin-bottom: 28px; letter-spacing: .04em; }
-.hero-tag .dot { width: 7px; height: 7px; background: #3B82F6; border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; padding: 7px 18px; border: 1px solid rgba(180,83,9,.25); border-radius: 100px; font-size: .82rem; color: #92400E; background: rgba(217,119,6,.06); backdrop-filter: blur(8px); margin-bottom: 28px; letter-spacing: .04em; }
+.hero-tag .dot { width: 7px; height: 7px; background: #D97706; border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.45;transform:scale(.75)} }
 
-.hero h1 { font-family: 'DM Serif Display','Noto Sans SC',serif; font-size: clamp(2.6rem,6.5vw,5rem); font-weight: 400; line-height: 1.12; margin-bottom: 22px; background: linear-gradient(135deg,#fff 0%,#60A5FA 50%,#818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero h1 { font-family: 'DM Serif Display','Noto Sans SC',serif; font-size: clamp(2.6rem,6.5vw,5rem); font-weight: 400; line-height: 1.12; margin-bottom: 22px; background: linear-gradient(135deg,#2D2A26 0%,#92400E 50%,#D97706 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-.hero-sub { font-size: clamp(1rem,2.2vw,1.25rem); color: rgba(228,228,236,.65); max-width: 640px; margin: 0 auto 40px; font-weight: 300; }
-.hero-sub strong { color: #60A5FA; font-weight: 500; }
+.hero-sub { font-size: clamp(1rem,2.2vw,1.25rem); color: rgba(45,42,38,.6); max-width: 640px; margin: 0 auto 40px; font-weight: 300; }
+.hero-sub strong { color: #B45309; font-weight: 500; }
 
 .hero-pills { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
-.pill { display: flex; align-items: center; gap: 6px; font-size: .88rem; color: rgba(228,228,236,.5); }
+.pill { display: flex; align-items: center; gap: 6px; font-size: .88rem; color: rgba(45,42,38,.45); }
 
-.scroll-cue { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; color: rgba(228,228,236,.25); font-size: .72rem; letter-spacing: .1em; animation: cBounce 2.2s ease-in-out infinite; }
-.scroll-cue .arr { width: 18px; height: 18px; border-right: 2px solid rgba(59,130,246,.35); border-bottom: 2px solid rgba(59,130,246,.35); transform: rotate(45deg); }
+.scroll-cue { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; color: rgba(45,42,38,.3); font-size: .72rem; letter-spacing: .1em; animation: cBounce 2.2s ease-in-out infinite; }
+.scroll-cue .arr { width: 18px; height: 18px; border-right: 2px solid rgba(180,83,9,.4); border-bottom: 2px solid rgba(180,83,9,.4); transform: rotate(45deg); }
 @keyframes cBounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(10px)} }
 
 /* ---------- section header ---------- */
-.sec-tag { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono',monospace; font-size: .78rem; color: #3B82F6; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 10px; }
-.sec-tag::before { content: ''; display: block; width: 22px; height: 2px; background: #3B82F6; }
-.sec-title { font-size: clamp(1.9rem,4vw,2.8rem); font-weight: 900; margin-bottom: 14px; line-height: 1.2; }
-.sec-desc { font-size: 1.05rem; color: rgba(228,228,236,.55); max-width: 680px; margin-bottom: 44px; font-weight: 300; }
+.sec-tag { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono',monospace; font-size: .78rem; color: #B45309; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 10px; }
+.sec-tag::before { content: ''; display: block; width: 22px; height: 2px; background: #B45309; }
+.sec-title { font-size: clamp(1.9rem,4vw,2.8rem); font-weight: 900; margin-bottom: 14px; line-height: 1.2; color: #1C1917; }
+.sec-desc { font-size: 1.05rem; color: rgba(45,42,38,.55); max-width: 680px; margin-bottom: 44px; font-weight: 300; }
 
 /* ---------- callout ---------- */
 .callout { border-radius: 16px; padding: 28px 32px; margin: 36px 0; position: relative; overflow: hidden; }
-.callout.mint { background: linear-gradient(135deg,rgba(59,130,246,.07) 0%,rgba(59,130,246,.015) 100%); border: 1px solid rgba(59,130,246,.15); }
-.callout.purple { background: linear-gradient(135deg,rgba(129,140,248,.07) 0%,rgba(129,140,248,.015) 100%); border: 1px solid rgba(129,140,248,.15); }
-.callout.amber { background: linear-gradient(135deg,rgba(59,130,246,.05) 0%,rgba(59,130,246,.01) 100%); border: 1px solid rgba(59,130,246,.12); }
+.callout.mint { background: linear-gradient(135deg,rgba(180,83,9,.05) 0%,rgba(180,83,9,.01) 100%); border: 1px solid rgba(180,83,9,.15); }
+.callout.purple { background: linear-gradient(135deg,rgba(217,119,6,.05) 0%,rgba(217,119,6,.01) 100%); border: 1px solid rgba(217,119,6,.15); }
+.callout.amber { background: linear-gradient(135deg,rgba(180,83,9,.04) 0%,rgba(180,83,9,.01) 100%); border: 1px solid rgba(180,83,9,.12); }
+.callout.blue { background: linear-gradient(135deg,rgba(180,83,9,.04) 0%,rgba(217,119,6,.02) 100%); border: 1px solid rgba(180,83,9,.12); }
 .callout-emoji { font-size: 1.8rem; margin-bottom: 10px; display: block; }
-.callout h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
-.callout p { font-size: .93rem; color: rgba(228,228,236,.62); line-height: 1.7; }
+.callout h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: #1C1917; }
+.callout p { font-size: .93rem; color: rgba(45,42,38,.65); line-height: 1.7; }
 
 /* ---------- pain cards ---------- */
 .pain-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 22px; }
-.pain-card { padding: 28px; border-radius: 16px; background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.05); position: relative; overflow: hidden; transition: transform .3s, border-color .3s; }
-.pain-card:hover { transform: translateY(-4px); border-color: rgba(59,130,246,.3); }
-.pain-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg,#3B82F6,#818cf8); }
+.pain-card { padding: 28px; border-radius: 16px; background: #FFFFFF; border: 1px solid rgba(45,42,38,.08); position: relative; overflow: hidden; transition: transform .3s, border-color .3s; box-shadow: 0 2px 12px rgba(45,42,38,.06); }
+.pain-card:hover { transform: translateY(-4px); border-color: rgba(180,83,9,.25); box-shadow: 0 8px 28px rgba(180,83,9,.08); }
+.pain-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg,#D97706,#B45309); }
 .pain-icon { font-size: 2rem; margin-bottom: 14px; }
-.pain-card h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 8px; color: #FCA5A5; }
-.pain-card p { font-size: .9rem; color: rgba(228,228,236,.55); }
+.pain-card h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 8px; color: #B45309; }
+.pain-card p { font-size: .9rem; color: rgba(45,42,38,.55); }
 
 /* ---------- solution flow ---------- */
 .sol-flow { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; margin-bottom: 44px; }
 .fl-node { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 22px; min-width: 150px; }
 .fl-icon { width: 68px; height: 68px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 1.9rem; margin-bottom: 10px; }
-.fl-icon.c1 { background: rgba(59,130,246,.1); border: 1px solid rgba(59,130,246,.3); box-shadow: 0 0 28px rgba(59,130,246,.1); }
-.fl-icon.c2 { background: rgba(129,140,248,.1); border: 1px solid rgba(129,140,248,.3); box-shadow: 0 0 28px rgba(129,140,248,.1); }
-.fl-icon.c3 { background: rgba(96,165,250,.1); border: 1px solid rgba(96,165,250,.3); box-shadow: 0 0 28px rgba(96,165,250,.1); }
-.fl-node h4 { font-size: .92rem; font-weight: 700; margin-bottom: 3px; }
-.fl-node p { font-size: .78rem; color: rgba(228,228,236,.45); }
-.fl-arr { font-size: 1.4rem; color: rgba(59,130,246,.3); margin: 0 4px; }
+.fl-icon.c1 { background: rgba(180,83,9,.08); border: 1px solid rgba(180,83,9,.2); }
+.fl-icon.c2 { background: rgba(217,119,6,.08); border: 1px solid rgba(217,119,6,.2); }
+.fl-icon.c3 { background: rgba(146,64,14,.08); border: 1px solid rgba(146,64,14,.2); }
+.fl-node h4 { font-size: .92rem; font-weight: 700; margin-bottom: 3px; color: #1C1917; }
+.fl-node p { font-size: .78rem; color: rgba(45,42,38,.5); }
+.fl-arr { font-size: 1.4rem; color: rgba(180,83,9,.35); margin: 0 4px; }
 
 /* ---------- layer cards ---------- */
 .layer-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(230px,1fr)); gap: 18px; }
-.layer-card { padding: 26px; border-radius: 16px; background: linear-gradient(135deg,rgba(255,255,255,.035) 0%,rgba(255,255,255,.008) 100%); border: 1px solid rgba(255,255,255,.05); transition: transform .3s, box-shadow .3s; }
-.layer-card:hover { transform: translateY(-4px); box-shadow: 0 18px 50px rgba(0,0,0,.3); }
+.layer-card { padding: 26px; border-radius: 16px; background: #FFFFFF; border: 1px solid rgba(45,42,38,.08); transition: transform .3s, box-shadow .3s; box-shadow: 0 2px 10px rgba(45,42,38,.05); }
+.layer-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(180,83,9,.1); }
 .layer-badge { font-size: .68rem; padding: 3px 10px; border-radius: 100px; display: inline-block; margin-bottom: 14px; font-weight: 600; }
-.lb1 { background: rgba(59,130,246,.13); color: #60A5FA; } .lb2 { background: rgba(129,140,248,.13); color: #a5b4fc; }
-.lb3 { background: rgba(96,165,250,.13); color: #93C5FD; } .lb4 { background: rgba(59,130,246,.13); color: #60A5FA; }
+.lb1 { background: rgba(180,83,9,.1); color: #92400E; } .lb2 { background: rgba(217,119,6,.1); color: #B45309; }
+.lb3 { background: rgba(146,64,14,.1); color: #78350F; } .lb4 { background: rgba(180,83,9,.1); color: #92400E; }
 .layer-card .lc-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
-.layer-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
-.layer-card .lc-desc { font-size: .88rem; color: rgba(228,228,236,.5); margin-bottom: 12px; }
-.layer-card .lc-analogy { font-size: .82rem; color: rgba(96,165,250,.7); font-style: italic; }
+.layer-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: #1C1917; }
+.layer-card .lc-desc { font-size: .88rem; color: rgba(45,42,38,.55); margin-bottom: 12px; }
+.layer-card .lc-analogy { font-size: .82rem; color: rgba(180,83,9,.65); font-style: italic; }
 
 /* ---------- chat bubbles ---------- */
 .chat-demo { max-width: 620px; margin: 0 auto; }
-.chat-window { border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); background: rgba(0,0,0,.35); }
-.chat-bar { display: flex; align-items: center; gap: 10px; padding: 12px 18px; background: rgba(255,255,255,.04); border-bottom: 1px solid rgba(255,255,255,.05); }
+.chat-window { border-radius: 20px; overflow: hidden; border: 1px solid rgba(45,42,38,.1); background: #F5F1EB; box-shadow: 0 4px 24px rgba(45,42,38,.08); }
+.chat-bar { display: flex; align-items: center; gap: 10px; padding: 12px 18px; background: #EDE8DF; border-bottom: 1px solid rgba(45,42,38,.08); }
 .chat-bar .cbar-dot { width: 10px; height: 10px; border-radius: 50%; }
 .cbar-dot.r { background: #f87171; } .cbar-dot.y { background: #fbbf24; } .cbar-dot.g { background: #34d399; }
-.chat-bar .cbar-title { font-size: .82rem; color: rgba(228,228,236,.4); margin-left: 8px; }
+.chat-bar .cbar-title { font-size: .82rem; color: rgba(45,42,38,.45); margin-left: 8px; }
 .chat-body { padding: 24px 20px; display: flex; flex-direction: column; gap: 16px; }
 
 .bubble { max-width: 88%; padding: 14px 18px; border-radius: 16px; font-size: .9rem; line-height: 1.6; opacity: 0; animation: bubbleIn .5s forwards; }
-.bubble.user { align-self: flex-end; background: linear-gradient(135deg,#3B82F6,#0052D9); color: #fff; border-bottom-right-radius: 4px; }
-.bubble.ai { align-self: flex-start; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-bottom-left-radius: 4px; color: rgba(228,228,236,.8); }
-.bubble.ai .ai-tag { font-size: .7rem; color: #60A5FA; font-weight: 600; margin-bottom: 4px; display: block; }
+.bubble.user { align-self: flex-end; background: linear-gradient(135deg,#D97706,#92400E); color: #fff; border-bottom-right-radius: 4px; }
+.bubble.ai { align-self: flex-start; background: #FFFFFF; border: 1px solid rgba(45,42,38,.1); border-bottom-left-radius: 4px; color: rgba(45,42,38,.85); box-shadow: 0 1px 6px rgba(45,42,38,.06); }
+.bubble.ai .ai-tag { font-size: .7rem; color: #B45309; font-weight: 600; margin-bottom: 4px; display: block; }
 @keyframes bubbleIn { from { opacity:0; transform: translateY(12px) } to { opacity:1; transform:translateY(0) } }
 .bubble:nth-child(1) { animation-delay: .2s; }
 .bubble:nth-child(2) { animation-delay: .8s; }
@@ -156,51 +157,51 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 
 /* ---------- step cards (deploy) ---------- */
 .steps { display: flex; flex-direction: column; gap: 24px; }
-.step-card { display: flex; gap: 20px; padding: 28px; border-radius: 16px; background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.05); transition: border-color .3s, transform .3s; }
-.step-card:hover { border-color: rgba(59,130,246,.2); transform: translateX(4px); }
+.step-card { display: flex; gap: 20px; padding: 28px; border-radius: 16px; background: #FFFFFF; border: 1px solid rgba(45,42,38,.08); transition: border-color .3s, transform .3s; box-shadow: 0 2px 10px rgba(45,42,38,.05); }
+.step-card:hover { border-color: rgba(180,83,9,.2); transform: translateX(4px); box-shadow: 0 6px 24px rgba(180,83,9,.08); }
 .step-num { flex-shrink: 0; width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display',serif; font-size: 1.4rem; font-weight: 400; }
-.sn1 { background: rgba(59,130,246,.1); color: #60A5FA; border: 1px solid rgba(59,130,246,.25); }
-.sn2 { background: rgba(129,140,248,.1); color: #a5b4fc; border: 1px solid rgba(129,140,248,.25); }
-.sn3 { background: rgba(96,165,250,.1); color: #93C5FD; border: 1px solid rgba(96,165,250,.25); }
-.sn4 { background: rgba(59,130,246,.1); color: #60A5FA; border: 1px solid rgba(59,130,246,.25); }
-.step-body h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 6px; }
-.step-body p { font-size: .9rem; color: rgba(228,228,236,.55); }
-.step-body .chat-hint { display: inline-block; margin-top: 10px; padding: 8px 16px; border-radius: 10px; background: rgba(59,130,246,.08); border: 1px solid rgba(59,130,246,.15); font-size: .85rem; color: #60A5FA; }
+.sn1 { background: rgba(180,83,9,.08); color: #92400E; border: 1px solid rgba(180,83,9,.2); }
+.sn2 { background: rgba(217,119,6,.08); color: #B45309; border: 1px solid rgba(217,119,6,.2); }
+.sn3 { background: rgba(146,64,14,.08); color: #78350F; border: 1px solid rgba(146,64,14,.2); }
+.sn4 { background: rgba(180,83,9,.08); color: #92400E; border: 1px solid rgba(180,83,9,.2); }
+.step-body h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 6px; color: #1C1917; }
+.step-body p { font-size: .9rem; color: rgba(45,42,38,.6); }
+.step-body .chat-hint { display: inline-block; margin-top: 10px; padding: 8px 16px; border-radius: 10px; background: rgba(180,83,9,.06); border: 1px solid rgba(180,83,9,.15); font-size: .85rem; color: #92400E; }
 .step-body .chat-hint::before { content: '💬 '; }
 
 /* ---------- trouble ---------- */
 .trouble-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 22px; }
-.trouble-card { padding: 24px; border-radius: 16px; background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.05); transition: transform .3s; }
+.trouble-card { padding: 24px; border-radius: 16px; background: #FFFFFF; border: 1px solid rgba(45,42,38,.08); transition: transform .3s; box-shadow: 0 2px 10px rgba(45,42,38,.05); }
 .trouble-card:hover { transform: translateY(-4px); }
-.trouble-card .sym { font-size: .95rem; font-weight: 700; color: #fca5a5; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-.trouble-card .why { font-size: .85rem; color: rgba(228,228,236,.45); margin-bottom: 8px; padding-left: 14px; border-left: 2px solid rgba(96,165,250,.3); }
-.trouble-card .fix { font-size: .88rem; color: #60A5FA; display: flex; align-items: flex-start; gap: 6px; }
+.trouble-card .sym { font-size: .95rem; font-weight: 700; color: #B45309; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.trouble-card .why { font-size: .85rem; color: rgba(45,42,38,.5); margin-bottom: 8px; padding-left: 14px; border-left: 2px solid rgba(180,83,9,.3); }
+.trouble-card .fix { font-size: .88rem; color: #92400E; display: flex; align-items: flex-start; gap: 6px; }
 .trouble-card .fix::before { content: '✅'; flex-shrink: 0; }
 
 /* ---------- compare ---------- */
-.cmp-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 16px; overflow: hidden; font-size: .9rem; }
+.cmp-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 16px; overflow: hidden; font-size: .9rem; border: 1px solid rgba(45,42,38,.08); }
 .cmp-table th, .cmp-table td { padding: 14px 20px; text-align: left; }
-.cmp-table thead th { background: rgba(59,130,246,.07); color: #60A5FA; font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px solid rgba(59,130,246,.12); }
-.cmp-table tbody td { background: rgba(255,255,255,.015); border-bottom: 1px solid rgba(255,255,255,.03); color: rgba(228,228,236,.65); }
-.cmp-table tbody tr:hover td { background: rgba(59,130,246,.025); }
-.cmp-table .hl { color: #60A5FA; font-weight: 600; }
+.cmp-table thead th { background: rgba(180,83,9,.06); color: #92400E; font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px solid rgba(180,83,9,.1); }
+.cmp-table tbody td { background: #FFFFFF; border-bottom: 1px solid rgba(45,42,38,.05); color: rgba(45,42,38,.7); }
+.cmp-table tbody tr:hover td { background: rgba(180,83,9,.03); }
+.cmp-table .hl { color: #B45309; font-weight: 600; }
 
 /* ---------- takeaway ---------- */
 .take-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 22px; }
 .take-card { padding: 30px; border-radius: 16px; text-align: center; transition: transform .3s; }
 .take-card:hover { transform: translateY(-6px); }
-.take-card.tc1 { background: linear-gradient(135deg,rgba(59,130,246,.06) 0%,rgba(59,130,246,.01) 100%); border: 1px solid rgba(59,130,246,.15); }
-.take-card.tc2 { background: linear-gradient(135deg,rgba(129,140,248,.06) 0%,rgba(129,140,248,.01) 100%); border: 1px solid rgba(129,140,248,.15); }
-.take-card.tc3 { background: linear-gradient(135deg,rgba(96,165,250,.06) 0%,rgba(96,165,250,.01) 100%); border: 1px solid rgba(96,165,250,.15); }
+.take-card.tc1 { background: linear-gradient(135deg,rgba(180,83,9,.06) 0%,rgba(180,83,9,.01) 100%); border: 1px solid rgba(180,83,9,.15); }
+.take-card.tc2 { background: linear-gradient(135deg,rgba(217,119,6,.06) 0%,rgba(217,119,6,.01) 100%); border: 1px solid rgba(217,119,6,.15); }
+.take-card.tc3 { background: linear-gradient(135deg,rgba(146,64,14,.06) 0%,rgba(146,64,14,.01) 100%); border: 1px solid rgba(146,64,14,.15); }
 .take-card .bn { font-family: 'DM Serif Display',serif; font-size: 3.2rem; font-weight: 400; line-height: 1; margin-bottom: 6px; }
-.tc1 .bn { color: #60A5FA; } .tc2 .bn { color: #a5b4fc; } .tc3 .bn { color: #93C5FD; }
-.take-card h4 { font-size: 1.02rem; font-weight: 700; margin-bottom: 5px; }
-.take-card p { font-size: .82rem; color: rgba(228,228,236,.45); }
+.tc1 .bn { color: #B45309; } .tc2 .bn { color: #D97706; } .tc3 .bn { color: #92400E; }
+.take-card h4 { font-size: 1.02rem; font-weight: 700; margin-bottom: 5px; color: #1C1917; }
+.take-card p { font-size: .82rem; color: rgba(45,42,38,.5); }
 
 /* ---------- footer ---------- */
-.site-footer { text-align: center; padding: 56px 24px; position: relative; z-index: 2; }
-.site-footer p { font-size: .82rem; color: rgba(228,228,236,.25); }
-.site-footer .ft-tag { display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; color: rgba(59,130,246,.35); margin-top: 10px; }
+.site-footer { text-align: center; padding: 56px 24px; position: relative; z-index: 2; border-top: 1px solid rgba(45,42,38,.08); }
+.site-footer p { font-size: .82rem; color: rgba(45,42,38,.35); }
+.site-footer .ft-tag { display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; color: rgba(180,83,9,.45); margin-top: 10px; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 768px) {
@@ -277,7 +278,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     <div class="callout purple reveal d4" style="margin-top: 32px;">
       <span class="callout-emoji">📊</span>
       <h4>算一笔账</h4>
-      <p>假设每人每天在「重复说明背景 + 找历史方案 + 等待部署」上花掉 30 分钟。一个 10 人团队，一个月就是 <strong style="color:#a5b4fc">100 小时</strong>——相当于一个人满负荷工作半个月。而解决这些，可能只需要一次 15 分钟的配置。</p>
+      <p>假设每人每天在「重复说明背景 + 找历史方案 + 等待部署」上花掉 30 分钟。一个 10 人团队，一个月就是 <strong style="color:#B45309">100 小时</strong>——相当于一个人满负荷工作半个月。而解决这些，可能只需要一次 15 分钟的配置。</p>
     </div>
   </div>
 </section>
@@ -287,7 +288,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   <div class="wrap">
     <div class="reveal"><span class="sec-tag">Chapter 02</span>
       <h2 class="sec-title">今天介绍的「效率三件套」</h2>
-      <p class="sec-desc">全程在 <strong style="color:#60A5FA">WorkBuddy</strong> 里完成，不需要打开命令行，不需要写代码。</p>
+      <p class="sec-desc">全程在 <strong style="color:#92400E">WorkBuddy</strong> 里完成，不需要打开命令行，不需要写代码。</p>
     </div>
 
     <div class="sol-flow reveal">
@@ -323,7 +324,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   <div class="wrap">
     <div class="reveal"><span class="sec-tag">Chapter 03</span>
       <h2 class="sec-title">AI 记忆体系：让 AI「认识你」</h2>
-      <p class="sec-desc">AI 本来是"金鱼记忆"——聊完就忘。记忆体系就是给它装了一个<strong style="color:#60A5FA">随身笔记本</strong>。</p>
+      <p class="sec-desc">AI 本来是"金鱼记忆"——聊完就忘。记忆体系就是给它装了一个<strong style="color:#92400E">随身笔记本</strong>。</p>
     </div>
 
     <div class="callout purple reveal">
@@ -376,12 +377,12 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   <div class="wrap">
     <div class="reveal"><span class="sec-tag">实战演示</span>
       <h2 class="sec-title">记忆体系能记什么？</h2>
-      <p class="sec-desc">不只是工作信息——你可以把<strong style="color:#60A5FA">个人的完整画像</strong>都交给它，让 AI 真正理解你。</p>
+      <p class="sec-desc">不只是工作信息——你可以把<strong style="color:#92400E">个人的完整画像</strong>都交给它，让 AI 真正理解你。</p>
     </div>
 
     <!-- Demo 1: 工作记忆 -->
     <div style="margin-bottom:16px" class="reveal d1">
-      <span style="display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;color:#60A5FA;margin-bottom:12px;">
+      <span style="display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;color:#92400E;margin-bottom:12px;">
         <span style="width:24px;height:24px;border-radius:6px;background:rgba(59,130,246,.12);display:inline-flex;align-items:center;justify-content:center;font-size:.75rem;">1</span>
         场景一：工作记忆 — 让 AI 记住你的工作身份
       </span>
@@ -401,7 +402,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 
     <!-- Demo 2: 个人大背景 -->
     <div style="margin-top:48px;margin-bottom:16px" class="reveal d2">
-      <span style="display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;color:#a5b4fc;margin-bottom:12px;">
+      <span style="display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;color:#B45309;margin-bottom:12px;">
         <span style="width:24px;height:24px;border-radius:6px;background:rgba(129,140,248,.12);display:inline-flex;align-items:center;justify-content:center;font-size:.75rem;">2</span>
         场景二：个人大背景 — 让 AI 理解「你是怎样一个人」
       </span>
@@ -427,42 +428,42 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 
     <!-- 7 个维度卡片 -->
     <div style="margin-top:32px" class="reveal d4">
-      <p style="font-size:.9rem;color:rgba(228,228,236,.5);margin-bottom:16px;">💡 你可以让 AI 从以下 <strong style="color:#a5b4fc">7 个维度</strong>来构建你的个人背景记忆：</p>
+      <p style="font-size:.9rem;color:rgba(45,42,38,.6);margin-bottom:16px;">💡 你可以让 AI 从以下 <strong style="color:#B45309">7 个维度</strong>来构建你的个人背景记忆：</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
-        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.9);border:1px solid rgba(45,42,38,.06);">
           <div style="font-size:1.2rem;margin-bottom:6px;">💒</div>
           <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">童年背景解码</div>
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">全球事件、文化变化如何塑造你的早期心态</div>
+          <div style="font-size:.78rem;color:rgba(45,42,38,.5);">全球事件、文化变化如何塑造你的早期心态</div>
         </div>
-        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.9);border:1px solid rgba(45,42,38,.06);">
           <div style="font-size:1.2rem;margin-bottom:6px;">🧬</div>
           <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">人格演变地图</div>
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">你的性格特质和世界观是怎么随时间发展的</div>
+          <div style="font-size:.78rem;color:rgba(45,42,38,.5);">你的性格特质和世界观是怎么随时间发展的</div>
         </div>
-        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.9);border:1px solid rgba(45,42,38,.06);">
           <div style="font-size:1.2rem;margin-bottom:6px;">🧭</div>
           <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">职业指南针</div>
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">你天然契合的职业方向和行业赛道</div>
+          <div style="font-size:.78rem;color:rgba(45,42,38,.5);">你天然契合的职业方向和行业赛道</div>
         </div>
-        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.9);border:1px solid rgba(45,42,38,.06);">
           <div style="font-size:1.2rem;margin-bottom:6px;">💞</div>
           <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">关系模式分析</div>
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">你的沟通风格、依恋倾向和冲突模式</div>
+          <div style="font-size:.78rem;color:rgba(45,42,38,.5);">你的沟通风格、依恋倾向和冲突模式</div>
         </div>
-        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.9);border:1px solid rgba(45,42,38,.06);">
           <div style="font-size:1.2rem;margin-bottom:6px;">💰</div>
           <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">财务心态矩阵</div>
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">你对金钱、风险、储蓄的心理模式和盲点</div>
+          <div style="font-size:.78rem;color:rgba(45,42,38,.5);">你对金钱、风险、储蓄的心理模式和盲点</div>
         </div>
-        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.9);border:1px solid rgba(45,42,38,.06);">
           <div style="font-size:1.2rem;margin-bottom:6px;">🔍</div>
           <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">隐藏困境探测</div>
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">代际视角下你可能没意识到的思维盲点</div>
+          <div style="font-size:.78rem;color:rgba(45,42,38,.5);">代际视角下你可能没意识到的思维盲点</div>
         </div>
-        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.9);border:1px solid rgba(45,42,38,.06);">
           <div style="font-size:1.2rem;margin-bottom:6px;">🗺️</div>
           <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">人生路线图</div>
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">不同阶段的机遇、挑战和关键决策点</div>
+          <div style="font-size:.78rem;color:rgba(45,42,38,.5);">不同阶段的机遇、挑战和关键决策点</div>
         </div>
       </div>
     </div>
@@ -470,18 +471,18 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     <div class="callout mint reveal d5" style="margin-top:28px;">
       <span class="callout-emoji">🎯</span>
       <h4>这些信息写入记忆后会怎样？</h4>
-      <p>当 AI 既知道你的<strong>工作身份</strong>（团队、偏好、项目背景），又理解你的<strong>个人画像</strong>（思维模式、价值观、行为倾向），它给出的建议和输出就不再是通用模板——而是<strong style="color:#60A5FA">真正为你量身定制的</strong>。这就是记忆体系的终极价值。</p>
+      <p>当 AI 既知道你的<strong>工作身份</strong>（团队、偏好、项目背景），又理解你的<strong>个人画像</strong>（思维模式、价值观、行为倾向），它给出的建议和输出就不再是通用模板——而是<strong style="color:#92400E">真正为你量身定制的</strong>。这就是记忆体系的终极价值。</p>
     </div>
 
     <div class="callout mint reveal d6" style="margin-top:20px;">
       <span class="callout-emoji">💻</span>
       <h4>换电脑了怎么办？团队怎么共享？——都靠 GitHub</h4>
       <p>记忆文件默认存在本地，<strong>不会自动跨设备同步</strong>。但解决方式很简单：把你的规则目录用一个 GitHub 仓库托管。</p>
-      <div style="margin-top:12px;padding:14px 16px;border-radius:10px;background:rgba(0,0,0,.25);font-size:.85rem;color:rgba(228,228,236,.5);line-height:1.7;">
-        <strong style="color:#60A5FA;">个人同步：</strong>换一台电脑，clone 下来就恢复——所有规则、偏好、踩坑记录一个不少。<br>
-        <strong style="color:#34D399;">团队共享：</strong>建一个团队仓库，大家把经验 push 上去，其他人 pull 下来就能用。团队知识不再散落在聊天记录里。
+      <div style="margin-top:12px;padding:14px 16px;border-radius:10px;background:rgba(237,232,223,.5);font-size:.85rem;color:rgba(45,42,38,.6);line-height:1.7;">
+        <strong style="color:#92400E;">个人同步：</strong>换一台电脑，clone 下来就恢复——所有规则、偏好、踩坑记录一个不少。<br>
+        <strong style="color:#166534;">团队共享：</strong>建一个团队仓库，大家把经验 push 上去，其他人 pull 下来就能用。团队知识不再散落在聊天记录里。
       </div>
-      <p style="margin-top:10px;">这就是今天分享的核心思路：<strong style="color:#60A5FA">GitHub 不只是代码管理工具，它是你的「配置同步器」和「知识版本库」。</strong>个人记忆、团队经验、项目文件全部用 Git 管理——后面会详细讲怎么搭团队知识库。</p>
+      <p style="margin-top:10px;">这就是今天分享的核心思路：<strong style="color:#92400E">GitHub 不只是代码管理工具，它是你的「配置同步器」和「知识版本库」。</strong>个人记忆、团队经验、项目文件全部用 Git 管理——后面会详细讲怎么搭团队知识库。</p>
     </div>
   </div>
 </section>
@@ -491,7 +492,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   <div class="wrap">
     <div class="reveal"><span class="sec-tag">Chapter 04</span>
       <h2 class="sec-title">先聊聊 GitHub 是什么</h2>
-      <p class="sec-desc">在讲「一键上线」之前，我们先花两分钟搞清楚<strong style="color:#60A5FA">这个工具到底能干什么</strong>。</p>
+      <p class="sec-desc">在讲「一键上线」之前，我们先花两分钟搞清楚<strong style="color:#92400E">这个工具到底能干什么</strong>。</p>
     </div>
 
     <div class="callout purple reveal">
@@ -526,13 +527,13 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     <div class="callout mint reveal" style="margin-top:32px;">
       <span class="callout-emoji">💡</span>
       <h4>不只是程序员用的工具</h4>
-      <p>很多人觉得 GitHub 是「写代码的人才用」的。其实不是——它本质上是一个<strong>文件管理 + 协作 + 发布平台</strong>。设计师用它管理设计稿版本，产品经理用它追踪需求文档，运营用它发布活动页面。<strong style="color:#60A5FA">只要你想让文件有版本记录、能协作、能发布成网页，GitHub 就是答案。</strong></p>
+      <p>很多人觉得 GitHub 是「写代码的人才用」的。其实不是——它本质上是一个<strong>文件管理 + 协作 + 发布平台</strong>。设计师用它管理设计稿版本，产品经理用它追踪需求文档，运营用它发布活动页面。<strong style="color:#92400E">只要你想让文件有版本记录、能协作、能发布成网页，GitHub 就是答案。</strong></p>
     </div>
 
     <!-- GitHub 3月热门项目 -->
     <div style="margin-top:48px;" class="reveal">
       <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:6px;">🔥 GitHub 上都有什么好东西？</h3>
-      <p style="font-size:.92rem;color:rgba(228,228,236,.5);margin-bottom:24px;">来看看 2026 年 3 月最火的开源项目——全是免费的，拿来就能用。</p>
+      <p style="font-size:.92rem;color:rgba(45,42,38,.6);margin-bottom:24px;">来看看 2026 年 3 月最火的开源项目——全是免费的，拿来就能用。</p>
     </div>
 
     <div id="projectGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;">
@@ -540,55 +541,55 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
       <div class="layer-card reveal d1" style="position:relative;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
           <h3 style="font-size:1rem;">Superpowers</h3>
-          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(59,130,246,.1);color:#60A5FA;white-space:nowrap;">⭐ 120K</span>
+          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(180,83,9,.08);color:#92400E;white-space:nowrap;">⭐ 120K</span>
         </div>
         <p class="lc-desc">AI 编程工具的「必装技能库」。让 AI 不再拿到需求就直接写代码，而是像优秀工程师一样先讨论需求、设计评审、再编码。</p>
-        <p style="font-size:.75rem;color:rgba(228,228,236,.3);margin-top:8px;">🏷️ AI 编程效率</p>
+        <p style="font-size:.75rem;color:rgba(45,42,38,.35);margin-top:8px;">🏷️ AI 编程效率</p>
       </div>
 
       <div class="layer-card reveal d2" style="position:relative;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
           <h3 style="font-size:1rem;">DeerFlow</h3>
-          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(59,130,246,.1);color:#60A5FA;white-space:nowrap;">⭐ 50K+</span>
+          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(180,83,9,.08);color:#92400E;white-space:nowrap;">⭐ 50K+</span>
         </div>
         <p class="lc-desc">字节跳动开源的超级智能体运行框架。支持动态创建子智能体、并行执行任务、长期记忆——和我们今天讲的记忆体系理念异曲同工。</p>
-        <p style="font-size:.75rem;color:rgba(228,228,236,.3);margin-top:8px;">🏷️ AI Agent 框架</p>
+        <p style="font-size:.75rem;color:rgba(45,42,38,.35);margin-top:8px;">🏷️ AI Agent 框架</p>
       </div>
 
       <div class="layer-card reveal d3" style="position:relative;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
           <h3 style="font-size:1rem;">MiroFish</h3>
-          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(59,130,246,.1);color:#60A5FA;white-space:nowrap;">⭐ 44K</span>
+          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(180,83,9,.08);color:#92400E;white-space:nowrap;">⭐ 44K</span>
         </div>
         <p class="lc-desc">AI 预测引擎——上传新闻、政策等材料，系统构建平行世界模拟推演未来走向。可用于舆情预测、市场分析等。</p>
-        <p style="font-size:.75rem;color:rgba(228,228,236,.3);margin-top:8px;">🏷️ AI 预测分析</p>
+        <p style="font-size:.75rem;color:rgba(45,42,38,.35);margin-top:8px;">🏷️ AI 预测分析</p>
       </div>
 
       <div class="layer-card reveal d4" style="position:relative;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
           <h3 style="font-size:1rem;">RuView</h3>
-          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(59,130,246,.1);color:#60A5FA;white-space:nowrap;">⭐ 44K</span>
+          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(180,83,9,.08);color:#92400E;white-space:nowrap;">⭐ 44K</span>
         </div>
         <p class="lc-desc">用普通 WiFi 信号隔墙感知人体——实时姿态估计、呼吸心率监测。无需摄像头，硬件成本仅 8 美元。</p>
-        <p style="font-size:.75rem;color:rgba(228,228,236,.3);margin-top:8px;">🏷️ 硬件 · IoT</p>
+        <p style="font-size:.75rem;color:rgba(45,42,38,.35);margin-top:8px;">🏷️ 硬件 · IoT</p>
       </div>
 
       <div class="layer-card reveal d5" style="position:relative;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
           <h3 style="font-size:1rem;">Scrapling</h3>
-          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(59,130,246,.1);color:#60A5FA;white-space:nowrap;">⭐ 33K</span>
+          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(180,83,9,.08);color:#92400E;white-space:nowrap;">⭐ 33K</span>
         </div>
         <p class="lc-desc">自适应爬虫框架，网站改版了也能自动找到目标元素。速度比传统方案快 800 倍。做数据采集的同学可以关注。</p>
-        <p style="font-size:.75rem;color:rgba(228,228,236,.3);margin-top:8px;">🏷️ 数据采集</p>
+        <p style="font-size:.75rem;color:rgba(45,42,38,.35);margin-top:8px;">🏷️ 数据采集</p>
       </div>
 
       <div class="layer-card reveal d6" style="position:relative;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
           <h3 style="font-size:1rem;">Learn Claude Code</h3>
-          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(59,130,246,.1);color:#60A5FA;white-space:nowrap;">⭐ 41K</span>
+          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(180,83,9,.08);color:#92400E;white-space:nowrap;">⭐ 41K</span>
         </div>
         <p class="lc-desc">从零学 AI 编程的教学项目，12 个递进课程。口号"Bash is all you need"——和我们今天讲的"对话就能搞定"一个思路。</p>
-        <p style="font-size:.75rem;color:rgba(228,228,236,.3);margin-top:8px;">🏷️ AI 编程教学</p>
+        <p style="font-size:.75rem;color:rgba(45,42,38,.35);margin-top:8px;">🏷️ AI 编程教学</p>
       </div>
 
     </div>
@@ -596,7 +597,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     <div class="callout mint reveal" style="margin-top:28px;">
       <span class="callout-emoji">🎁</span>
       <h4>全都免费、开源</h4>
-      <p>以上项目全部可以在 GitHub 上免费获取和使用。<strong style="color:#60A5FA">这就是 GitHub 的生态力量——全球开发者把最好的工具免费分享出来</strong>，我们要做的就是学会找到它们、用好它们。接下来，我们讲讲怎么用 GitHub 把自己做的东西也发布上去。</p>
+      <p>以上项目全部可以在 GitHub 上免费获取和使用。<strong style="color:#92400E">这就是 GitHub 的生态力量——全球开发者把最好的工具免费分享出来</strong>，我们要做的就是学会找到它们、用好它们。接下来，我们讲讲怎么用 GitHub 把自己做的东西也发布上去。</p>
     </div>
   </div>
 </section>
@@ -606,7 +607,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   <div class="wrap">
     <div class="reveal"><span class="sec-tag">Chapter 05</span>
       <h2 class="sec-title">一键上线：说句话就有链接</h2>
-      <p class="sec-desc">做好的页面、报告、工具，不再只能截图——<strong style="color:#60A5FA">给它一个全球可访问的链接</strong>。</p>
+      <p class="sec-desc">做好的页面、报告、工具，不再只能截图——<strong style="color:#92400E">给它一个全球可访问的链接</strong>。</p>
     </div>
 
     <div class="callout purple reveal">
@@ -621,63 +622,63 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
         <div class="step-body">
           <h3>📝 注册 GitHub 账号 & 创建仓库（首次使用）</h3>
           <p>如果你还没有 GitHub 账号，先花 2 分钟注册一个：</p>
-          <div style="margin-top:14px;padding:18px 20px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid rgba(59,130,246,.1);">
-            <div style="font-size:.85rem;font-weight:600;color:#60A5FA;margin-bottom:12px;">注册账号</div>
+          <div style="margin-top:14px;padding:18px 20px;border-radius:12px;background:rgba(240,237,231,.5);border:1px solid rgba(180,83,9,.12);">
+            <div style="font-size:.85rem;font-weight:600;color:#92400E;margin-bottom:12px;">注册账号</div>
             <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;">
-              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">①</span>
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(180,83,9,.08);color:#92400E;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">①</span>
               <div>
                 <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">打开 GitHub 官网</div>
-                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">访问 <span style="color:#60A5FA">github.com</span>，点击右上角 <span style="padding:1px 8px;border-radius:4px;background:rgba(59,130,246,.12);color:#60A5FA;font-size:.8rem;">Sign up</span></div>
+                <div style="font-size:.82rem;color:rgba(45,42,38,.55);">访问 <span style="color:#92400E">github.com</span>，点击右上角 <span style="padding:1px 8px;border-radius:4px;background:rgba(59,130,246,.12);color:#92400E;font-size:.8rem;">Sign up</span></div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;">
-              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">②</span>
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(180,83,9,.08);color:#92400E;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">②</span>
               <div>
                 <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">填写基本信息</div>
-                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">输入邮箱 → 设置密码 → 选一个用户名（建议用英文，这会出现在你的页面链接里）</div>
+                <div style="font-size:.82rem;color:rgba(45,42,38,.55);">输入邮箱 → 设置密码 → 选一个用户名（建议用英文，这会出现在你的页面链接里）</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">③</span>
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(180,83,9,.08);color:#92400E;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">③</span>
               <div>
                 <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">验证邮箱，完成注册</div>
-                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">去邮箱点一下验证链接就好了。选择 Free 计划，完全够用</div>
+                <div style="font-size:.82rem;color:rgba(45,42,38,.55);">去邮箱点一下验证链接就好了。选择 Free 计划，完全够用</div>
               </div>
             </div>
           </div>
-          <div style="margin-top:16px;padding:18px 20px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid rgba(59,130,246,.1);">
-            <div style="font-size:.85rem;font-weight:600;color:#60A5FA;margin-bottom:12px;">创建仓库（Repository）</div>
+          <div style="margin-top:16px;padding:18px 20px;border-radius:12px;background:rgba(240,237,231,.5);border:1px solid rgba(180,83,9,.12);">
+            <div style="font-size:.85rem;font-weight:600;color:#92400E;margin-bottom:12px;">创建仓库（Repository）</div>
             <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;">
-              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">①</span>
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(180,83,9,.08);color:#92400E;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">①</span>
               <div>
-                <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">点击右上角 <span style="padding:1px 8px;border-radius:4px;background:rgba(255,255,255,.08);font-size:.8rem;">＋</span> → New repository</div>
-                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">仓库就是一个"项目文件夹"，用来存放你要发布的文件</div>
+                <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">点击右上角 <span style="padding:1px 8px;border-radius:4px;background:rgba(45,42,38,.08);font-size:.8rem;">＋</span> → New repository</div>
+                <div style="font-size:.82rem;color:rgba(45,42,38,.55);">仓库就是一个"项目文件夹"，用来存放你要发布的文件</div>
               </div>
             </div>
             <!-- 截图：新建仓库入口 -->
-            <div style="margin:12px 0;border-radius:10px;overflow:hidden;border:1px solid rgba(59,130,246,.1);">
+            <div style="margin:12px 0;border-radius:10px;overflow:hidden;border:1px solid rgba(180,83,9,.12);">
               <img src="./github-create-repo.png" alt="GitHub 新建仓库入口" style="width:100%;display:block;">
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;">
-              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">②</span>
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(180,83,9,.08);color:#92400E;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">②</span>
               <div>
                 <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">填写仓库名称</div>
-                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">取个英文名（如 <span style="color:#60A5FA">demo-share</span>），这会成为你网页链接的一部分：<span style="color:rgba(228,228,236,.6)">xiyufenghan.github.io/<strong style="color:#60A5FA">demo-share</strong></span></div>
+                <div style="font-size:.82rem;color:rgba(45,42,38,.55);">取个英文名（如 <span style="color:#92400E">demo-share</span>），这会成为你网页链接的一部分：<span style="color:rgba(45,42,38,.7)">xiyufenghan.github.io/<strong style="color:#92400E">demo-share</strong></span></div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">③</span>
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(180,83,9,.08);color:#92400E;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">③</span>
               <div>
                 <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">选择 Public → Create repository</div>
-                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">GitHub Pages 需要仓库设为公开（Public）。其他选项保持默认即可</div>
+                <div style="font-size:.82rem;color:rgba(45,42,38,.55);">GitHub Pages 需要仓库设为公开（Public）。其他选项保持默认即可</div>
               </div>
             </div>
             <!-- 截图：仓库创建页面 -->
-            <div style="margin-top:12px;border-radius:10px;overflow:hidden;border:1px solid rgba(59,130,246,.1);">
+            <div style="margin-top:12px;border-radius:10px;overflow:hidden;border:1px solid rgba(180,83,9,.12);">
               <img src="./github-new-repo.png" alt="GitHub 创建仓库页面" style="width:100%;display:block;">
             </div>
           </div>
-          <p style="margin-top:12px;font-size:.85rem;color:rgba(228,228,236,.45);">💡 <strong style="color:rgba(228,228,236,.7)">小贴士</strong>：注册和建仓库只需要做一次。也可以直接让 WorkBuddy 帮你创建——说一句"帮我在 GitHub 上新建一个仓库"就行。</p>
+          <p style="margin-top:12px;font-size:.85rem;color:rgba(45,42,38,.55);">💡 <strong style="color:rgba(45,42,38,.7)">小贴士</strong>：注册和建仓库只需要做一次。也可以直接让 WorkBuddy 帮你创建——说一句"帮我在 GitHub 上新建一个仓库"就行。</p>
         </div>
       </div>
 
@@ -701,46 +702,46 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
         <div class="step-body">
           <h3>首次简单设置一下（只需一次）</h3>
           <p>WorkBuddy 帮你把文件推送到 GitHub 后，需要手动开启一下 Pages 服务。按以下步骤操作：</p>
-          <div style="margin-top:14px;padding:18px 20px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid rgba(59,130,246,.1);">
+          <div style="margin-top:14px;padding:18px 20px;border-radius:12px;background:rgba(240,237,231,.5);border:1px solid rgba(180,83,9,.12);">
             <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;">
-              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">①</span>
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(180,83,9,.08);color:#92400E;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">①</span>
               <div>
                 <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">打开你的仓库页面</div>
-                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">访问 <span style="color:#60A5FA">github.com/你的用户名/仓库名</span></div>
+                <div style="font-size:.82rem;color:rgba(45,42,38,.55);">访问 <span style="color:#92400E">github.com/你的用户名/仓库名</span></div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;">
-              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">②</span>
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(180,83,9,.08);color:#92400E;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">②</span>
               <div>
                 <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">进入设置</div>
-                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">点击页面顶部的 <span style="padding:1px 8px;border-radius:4px;background:rgba(255,255,255,.08);font-size:.8rem;">⚙️ Settings</span> 标签</div>
+                <div style="font-size:.82rem;color:rgba(45,42,38,.55);">点击页面顶部的 <span style="padding:1px 8px;border-radius:4px;background:rgba(45,42,38,.08);font-size:.8rem;">⚙️ Settings</span> 标签</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;">
-              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">③</span>
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(180,83,9,.08);color:#92400E;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">③</span>
               <div>
                 <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">找到 Pages 选项</div>
-                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">左侧菜单滚动到下方，点击 <span style="padding:1px 8px;border-radius:4px;background:rgba(255,255,255,.08);font-size:.8rem;">📄 Pages</span></div>
+                <div style="font-size:.82rem;color:rgba(45,42,38,.55);">左侧菜单滚动到下方，点击 <span style="padding:1px 8px;border-radius:4px;background:rgba(45,42,38,.08);font-size:.8rem;">📄 Pages</span></div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;">
-              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">④</span>
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(180,83,9,.08);color:#92400E;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">④</span>
               <div>
                 <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">配置发布源</div>
-                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">Source 选择 <span style="padding:1px 8px;border-radius:4px;background:rgba(59,130,246,.1);color:#60A5FA;font-size:.8rem;">Deploy from a branch</span>，Branch 选择 <span style="padding:1px 8px;border-radius:4px;background:rgba(59,130,246,.1);color:#60A5FA;font-size:.8rem;">main</span>，目录保持 <span style="padding:1px 8px;border-radius:4px;background:rgba(59,130,246,.1);color:#60A5FA;font-size:.8rem;">/ (root)</span></div>
+                <div style="font-size:.82rem;color:rgba(45,42,38,.55);">Source 选择 <span style="padding:1px 8px;border-radius:4px;background:rgba(180,83,9,.08);color:#92400E;font-size:.8rem;">Deploy from a branch</span>，Branch 选择 <span style="padding:1px 8px;border-radius:4px;background:rgba(180,83,9,.08);color:#92400E;font-size:.8rem;">main</span>，目录保持 <span style="padding:1px 8px;border-radius:4px;background:rgba(180,83,9,.08);color:#92400E;font-size:.8rem;">/ (root)</span></div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:12px;">
-              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">⑤</span>
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(180,83,9,.08);color:#92400E;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">⑤</span>
               <div>
                 <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">点击 Save，等待 1-2 分钟</div>
-                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">页面顶部会出现你的网站链接 🎉 以后再也不用动这个设置了</div>
+                <div style="font-size:.82rem;color:rgba(45,42,38,.55);">页面顶部会出现你的网站链接 🎉 以后再也不用动这个设置了</div>
               </div>
             </div>
           </div>
-          <div style="margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid rgba(59,130,246,.15);">
+          <div style="margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid rgba(180,83,9,.15);">
             <img src="./github-pages-setup.png" alt="GitHub Pages 设置界面" style="width:100%;display:block;border-radius:11px;">
-            <div style="padding:8px 16px;background:rgba(0,0,0,.3);font-size:.72rem;color:rgba(228,228,236,.3);text-align:center;">
+            <div style="padding:8px 16px;background:rgba(240,237,231,.5);font-size:.72rem;color:rgba(45,42,38,.35);text-align:center;">
               ↑ GitHub Pages 设置界面：Settings → Pages → 选择 main 分支 → Save
             </div>
           </div>
@@ -761,54 +762,54 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 <!-- ============ OA PAGES ============ -->
 <section id="oapages" style="padding-top:0;">
   <div class="wrap">
-    <div class="callout blue reveal" style="margin-top:8px;border:1px solid rgba(59,130,246,.15);background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(139,92,246,.06));">
+    <div class="callout blue reveal" style="margin-top:8px;border:1px solid rgba(180,83,9,.15);background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(139,92,246,.06));">
       <span class="callout-emoji">🏢</span>
       <h4>内网专属：OA Pages</h4>
-      <p>除了 GitHub Pages，公司内网也有一套<strong>同样丝滑</strong>的静态网站托管服务——<strong style="color:#60A5FA">OA Pages</strong>（pages.woa.com）。</p>
+      <p>除了 GitHub Pages，公司内网也有一套<strong>同样丝滑</strong>的静态网站托管服务——<strong style="color:#92400E">OA Pages</strong>（pages.woa.com）。</p>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:24px;">
       <div class="step-card reveal d1" style="flex-direction:column;">
         <div style="font-size:1.4rem;margin-bottom:8px;">🔒</div>
         <h4 style="margin:0 0 6px;font-size:.95rem;">灵活的权限控制</h4>
-        <p style="margin:0;font-size:.82rem;color:rgba(228,228,236,.5);">支持<strong>公开（免登录）</strong>、<strong>tof 验证（需内网登录）</strong>、<strong>白名单</strong>三种模式，按需配置。</p>
+        <p style="margin:0;font-size:.82rem;color:rgba(45,42,38,.6);">支持<strong>公开（免登录）</strong>、<strong>tof 验证（需内网登录）</strong>、<strong>白名单</strong>三种模式，按需配置。</p>
       </div>
       <div class="step-card reveal d2" style="flex-direction:column;">
         <div style="font-size:1.4rem;margin-bottom:8px;">⚡</div>
         <h4 style="margin:0 0 6px;font-size:.95rem;">一句话部署</h4>
-        <p style="margin:0;font-size:.82rem;color:rgba(228,228,236,.5);">告诉 WorkBuddy「部署到 OA Pages」，自动创建网站、上传文件、返回链接，全程不碰代码。</p>
+        <p style="margin:0;font-size:.82rem;color:rgba(45,42,38,.6);">告诉 WorkBuddy「部署到 OA Pages」，自动创建网站、上传文件、返回链接，全程不碰代码。</p>
       </div>
       <div class="step-card reveal d3" style="flex-direction:column;">
         <div style="font-size:1.4rem;margin-bottom:8px;">🌐</div>
         <h4 style="margin:0 0 6px;font-size:.95rem;">自定义域名</h4>
-        <p style="margin:0;font-size:.82rem;color:rgba(228,228,236,.5);">你的网站会托管在 <code style="background:rgba(59,130,246,.15);padding:1px 6px;border-radius:4px;font-size:.78rem;">xxx.pages.woa.com</code>，域名自选，简洁好记。</p>
+        <p style="margin:0;font-size:.82rem;color:rgba(45,42,38,.6);">你的网站会托管在 <code style="background:rgba(180,83,9,.08);padding:1px 6px;border-radius:4px;font-size:.78rem;">xxx.pages.woa.com</code>，域名自选，简洁好记。</p>
       </div>
     </div>
 
-    <div style="margin-top:24px;padding:22px 24px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);" class="reveal d4">
-      <div style="font-size:.8rem;color:rgba(228,228,236,.35);font-weight:600;margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px;">GitHub Pages vs OA Pages · 怎么选？</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.06);">
-        <div style="padding:16px 18px;background:rgba(59,130,246,.04);border-bottom:1px solid rgba(255,255,255,.04);">
-          <div style="font-size:.78rem;color:#60A5FA;font-weight:600;margin-bottom:6px;">GitHub Pages</div>
-          <div style="font-size:.8rem;color:rgba(228,228,236,.5);">✅ 免费、全球 CDN<br>✅ 公开访问、SEO 友好<br>✅ 适合对外展示的项目</div>
+    <div style="margin-top:24px;padding:22px 24px;border-radius:14px;background:rgba(237,232,223,.5);border:1px solid rgba(45,42,38,.04);" class="reveal d4">
+      <div style="font-size:.8rem;color:rgba(45,42,38,.4);font-weight:600;margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px;">GitHub Pages vs OA Pages · 怎么选？</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:10px;overflow:hidden;border:1px solid rgba(45,42,38,.05);">
+        <div style="padding:16px 18px;background:rgba(59,130,246,.04);border-bottom:1px solid rgba(45,42,38,.04);">
+          <div style="font-size:.78rem;color:#92400E;font-weight:600;margin-bottom:6px;">GitHub Pages</div>
+          <div style="font-size:.8rem;color:rgba(45,42,38,.6);">✅ 免费、全球 CDN<br>✅ 公开访问、SEO 友好<br>✅ 适合对外展示的项目</div>
         </div>
-        <div style="padding:16px 18px;background:rgba(139,92,246,.04);border-bottom:1px solid rgba(255,255,255,.04);">
-          <div style="font-size:.78rem;color:#A78BFA;font-weight:600;margin-bottom:6px;">OA Pages</div>
-          <div style="font-size:.8rem;color:rgba(228,228,236,.5);">✅ 内网专属、权限可控<br>✅ 无需注册 GitHub<br>✅ 适合内部报告、看板、工具</div>
+        <div style="padding:16px 18px;background:rgba(146,64,14,.04);border-bottom:1px solid rgba(45,42,38,.04);">
+          <div style="font-size:.78rem;color:#B45309;font-weight:600;margin-bottom:6px;">OA Pages</div>
+          <div style="font-size:.8rem;color:rgba(45,42,38,.6);">✅ 内网专属、权限可控<br>✅ 无需注册 GitHub<br>✅ 适合内部报告、看板、工具</div>
         </div>
         <div style="padding:12px 18px;background:rgba(59,130,246,.02);grid-column:1/-1;text-align:center;">
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">💡 简单来说：<strong style="color:#60A5FA">给外部看</strong>用 GitHub Pages，<strong style="color:#A78BFA">给内部看</strong>用 OA Pages</div>
+          <div style="font-size:.78rem;color:rgba(45,42,38,.5);">💡 简单来说：<strong style="color:#92400E">给外部看</strong>用 GitHub Pages，<strong style="color:#B45309">给内部看</strong>用 OA Pages</div>
         </div>
       </div>
     </div>
 
-    <div style="margin-top:20px;padding:16px 20px;border-radius:12px;background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.1);" class="reveal d5">
+    <div style="margin-top:20px;padding:16px 20px;border-radius:12px;background:rgba(146,64,14,.05);border:1px solid rgba(180,83,9,.1);" class="reveal d5">
       <div style="display:flex;align-items:flex-start;gap:12px;">
         <span style="font-size:1.2rem;flex-shrink:0;">💬</span>
         <div>
           <div style="font-size:.88rem;font-weight:600;margin-bottom:4px;">怎么用？</div>
-          <div style="font-size:.82rem;color:rgba(228,228,236,.5);line-height:1.6;">
-            首次使用需要到 <span style="color:#A78BFA">pages.woa.com/admin</span> 申请一个 API Key，在终端配好环境变量。<br>
+          <div style="font-size:.82rem;color:rgba(45,42,38,.6);line-height:1.6;">
+            首次使用需要到 <span style="color:#B45309">pages.woa.com/admin</span> 申请一个 API Key，在终端配好环境变量。<br>
             之后只需告诉 WorkBuddy：<span class="chat-hint" style="display:inline;padding:3px 10px;font-size:.78rem;">帮我把这个项目部署到 OA Pages</span>
           </div>
         </div>
@@ -816,11 +817,11 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     </div>
 
     <div style="margin-top:28px;text-align:center;" class="reveal d6">
-      <div style="display:inline-block;padding:24px 32px;border-radius:16px;background:rgba(0,0,0,.3);border:1px solid rgba(139,92,246,.12);">
+      <div style="display:inline-block;padding:24px 32px;border-radius:16px;background:rgba(240,237,231,.5);border:1px solid rgba(139,92,246,.12);">
         <img src="./oa-pages-skill-qr.png" alt="OA Pages Skill 下载二维码" style="width:220px;height:220px;border-radius:8px;">
-        <div style="margin-top:12px;font-size:.82rem;color:rgba(228,228,236,.45);">扫码下载 OA Pages Skill</div>
-        <div style="margin-top:4px;font-size:.72rem;color:rgba(228,228,236,.25);">下载后在 WorkBuddy 中导入即可使用</div>
-        <div style="margin-top:10px;font-size:.72rem;color:rgba(228,228,236,.3);">感谢 <strong style="color:#A78BFA;">何志勇</strong> 分享此 Skill 🙏</div>
+        <div style="margin-top:12px;font-size:.82rem;color:rgba(45,42,38,.55);">扫码下载 OA Pages Skill</div>
+        <div style="margin-top:4px;font-size:.72rem;color:rgba(45,42,38,.3);">下载后在 WorkBuddy 中导入即可使用</div>
+        <div style="margin-top:10px;font-size:.72rem;color:rgba(45,42,38,.35);">感谢 <strong style="color:#B45309;">何志勇</strong> 分享此 Skill 🙏</div>
       </div>
     </div>
   </div>
@@ -831,7 +832,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   <div class="wrap">
     <div class="reveal"><span class="sec-tag">实战演示</span>
       <h2 class="sec-title">部署过程长什么样</h2>
-      <p class="sec-desc">你只需要<strong style="color:#60A5FA">说一句话</strong>，剩下的 WorkBuddy 全搞定。</p>
+      <p class="sec-desc">你只需要<strong style="color:#92400E">说一句话</strong>，剩下的 WorkBuddy 全搞定。</p>
     </div>
 
     <div class="chat-demo reveal d1">
@@ -860,24 +861,24 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   <div class="wrap">
     <div class="reveal"><span class="sec-tag">Chapter 07</span>
       <h2 class="sec-title">团队知识库：经验自动沉淀</h2>
-      <p class="sec-desc">每个团队都有无数「踩过的坑」和「摸索出的经验」，但它们散落在聊天记录、脑子里、离职同事的电脑上。<br><strong style="color:#60A5FA">怎么把这些经验变成大家都能用的「团队记忆」？</strong></p>
+      <p class="sec-desc">每个团队都有无数「踩过的坑」和「摸索出的经验」，但它们散落在聊天记录、脑子里、离职同事的电脑上。<br><strong style="color:#92400E">怎么把这些经验变成大家都能用的「团队记忆」？</strong></p>
     </div>
 
     <div class="callout mint reveal" style="margin-top:24px;">
       <span class="callout-emoji">🤔</span>
       <h4>等一下——WorkBuddy 不是在本地电脑上跑的吗？怎么共享？</h4>
       <p>好问题！WorkBuddy 确实在每个人自己的电脑上运行，知识文件也存在本地。<br>
-      但还记得前面讲的 <strong style="color:#60A5FA">GitHub</strong> 吗？它就是共享的桥梁：</p>
-      <div style="margin-top:14px;padding:16px 18px;border-radius:12px;background:rgba(0,0,0,.25);border:1px solid rgba(16,185,129,.1);">
+      但还记得前面讲的 <strong style="color:#92400E">GitHub</strong> 吗？它就是共享的桥梁：</p>
+      <div style="margin-top:14px;padding:16px 18px;border-radius:12px;background:rgba(237,232,223,.5);border:1px solid rgba(22,101,52,.12);">
         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-          <div style="padding:8px 14px;border-radius:8px;background:rgba(59,130,246,.08);font-size:.82rem;color:#60A5FA;font-weight:600;">🧑 小王的电脑</div>
-          <div style="font-size:.82rem;color:rgba(228,228,236,.35);">—— 记录经验 → push 推送 ——→</div>
-          <div style="padding:8px 14px;border-radius:8px;background:rgba(139,92,246,.08);font-size:.82rem;color:#A78BFA;font-weight:600;">☁️ GitHub 团队仓库</div>
-          <div style="font-size:.82rem;color:rgba(228,228,236,.35);">←—— pull 拉取 ←——</div>
-          <div style="padding:8px 14px;border-radius:8px;background:rgba(16,185,129,.08);font-size:.82rem;color:#34D399;font-weight:600;">🧑‍💻 小李的电脑</div>
+          <div style="padding:8px 14px;border-radius:8px;background:rgba(180,83,9,.06);font-size:.82rem;color:#92400E;font-weight:600;">🧑 小王的电脑</div>
+          <div style="font-size:.82rem;color:rgba(45,42,38,.4);">—— 记录经验 → push 推送 ——→</div>
+          <div style="padding:8px 14px;border-radius:8px;background:rgba(146,64,14,.06);font-size:.82rem;color:#B45309;font-weight:600;">☁️ GitHub 团队仓库</div>
+          <div style="font-size:.82rem;color:rgba(45,42,38,.4);">←—— pull 拉取 ←——</div>
+          <div style="padding:8px 14px;border-radius:8px;background:rgba(16,185,129,.08);font-size:.82rem;color:#166534;font-weight:600;">🧑‍💻 小李的电脑</div>
         </div>
-        <div style="margin-top:10px;font-size:.78rem;color:rgba(228,228,236,.35);line-height:1.6;">
-          简单说：<strong style="color:rgba(228,228,236,.6);">GitHub 仓库就像一个云端共享文件夹</strong>，大家各自在本地写入和读取，通过 push/pull 保持同步。<br>
+        <div style="margin-top:10px;font-size:.78rem;color:rgba(45,42,38,.4);line-height:1.6;">
+          简单说：<strong style="color:rgba(45,42,38,.7);">GitHub 仓库就像一个云端共享文件夹</strong>，大家各自在本地写入和读取，通过 push/pull 保持同步。<br>
           不用手动操作——告诉 WorkBuddy「同步一下知识库」，它帮你搞定 Git 操作。
         </div>
       </div>
@@ -886,68 +887,68 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     <!-- 具体怎么做 -->
     <div style="margin-top:32px;" class="reveal d1">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-        <span style="width:32px;height:32px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;">▶</span>
+        <span style="width:32px;height:32px;border-radius:8px;background:rgba(180,83,9,.08);color:#92400E;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;">▶</span>
         <h3 style="margin:0;font-size:1.05rem;">实际操作长什么样？</h3>
       </div>
       <div class="steps" style="gap:16px;">
-        <div style="padding:18px 20px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);">
-          <div style="font-size:.78rem;color:#60A5FA;font-weight:600;margin-bottom:8px;">第一步：建一个团队知识仓库</div>
+        <div style="padding:18px 20px;border-radius:14px;background:rgba(237,232,223,.5);border:1px solid rgba(45,42,38,.04);">
+          <div style="font-size:.78rem;color:#92400E;font-weight:600;margin-bottom:8px;">第一步：建一个团队知识仓库</div>
           <div class="chat-hint" style="margin-bottom:8px;">帮我在 GitHub 上创建一个团队知识库仓库，名字叫 team-knowledge</div>
-          <div style="font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.6;">WorkBuddy 会在 GitHub 上建好仓库，克隆到本地，创建好知识库的目录结构。<br>然后把仓库地址发给团队成员，大家各自 clone 一份到自己电脑上。</div>
+          <div style="font-size:.82rem;color:rgba(45,42,38,.55);line-height:1.6;">WorkBuddy 会在 GitHub 上建好仓库，克隆到本地，创建好知识库的目录结构。<br>然后把仓库地址发给团队成员，大家各自 clone 一份到自己电脑上。</div>
         </div>
-        <div style="padding:18px 20px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);">
-          <div style="font-size:.78rem;color:#34D399;font-weight:600;margin-bottom:8px;">第二步：日常工作中随手沉淀</div>
+        <div style="padding:18px 20px;border-radius:14px;background:rgba(237,232,223,.5);border:1px solid rgba(45,42,38,.04);">
+          <div style="font-size:.78rem;color:#166534;font-weight:600;margin-bottom:8px;">第二步：日常工作中随手沉淀</div>
           <div class="chat-hint" style="margin-bottom:8px;">刚才那个域名配置的坑，帮我记到团队知识库里</div>
-          <div style="font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.6;">AI 自动整理成结构化文档 → 保存到本地知识库目录 → push 到 GitHub。<br>就像发一条消息一样简单，但这条「消息」会永久留在团队知识库里。</div>
+          <div style="font-size:.82rem;color:rgba(45,42,38,.55);line-height:1.6;">AI 自动整理成结构化文档 → 保存到本地知识库目录 → push 到 GitHub。<br>就像发一条消息一样简单，但这条「消息」会永久留在团队知识库里。</div>
         </div>
-        <div style="padding:18px 20px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);">
-          <div style="font-size:.78rem;color:#A78BFA;font-weight:600;margin-bottom:8px;">第三步：任何人随时调用</div>
+        <div style="padding:18px 20px;border-radius:14px;background:rgba(237,232,223,.5);border:1px solid rgba(45,42,38,.04);">
+          <div style="font-size:.78rem;color:#B45309;font-weight:600;margin-bottom:8px;">第三步：任何人随时调用</div>
           <div class="chat-hint" style="margin-bottom:8px;">自定义域名报错了怎么办？</div>
-          <div style="font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.6;">小李的 AI 从本地知识库中检索到小王之前记录的解决方案，直接给出答案。<br><strong style="color:rgba(228,228,236,.6);">小王花 2 小时踩的坑，小李 10 秒就跳过了。</strong></div>
+          <div style="font-size:.82rem;color:rgba(45,42,38,.55);line-height:1.6;">小李的 AI 从本地知识库中检索到小王之前记录的解决方案，直接给出答案。<br><strong style="color:rgba(45,42,38,.7);">小王花 2 小时踩的坑，小李 10 秒就跳过了。</strong></div>
         </div>
       </div>
     </div>
 
     <!-- 三个应用场景 -->
     <div style="margin-top:32px;" class="reveal d2">
-      <div style="font-size:.8rem;color:rgba(228,228,236,.35);font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;">可以往知识库里放什么？</div>
+      <div style="font-size:.8rem;color:rgba(45,42,38,.4);font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;">可以往知识库里放什么？</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
         <div class="step-card" style="flex-direction:column;gap:8px;">
           <div style="font-size:1.3rem;">🐛</div>
           <h4 style="margin:0;font-size:.92rem;">踩坑记录</h4>
-          <p style="margin:0;font-size:.8rem;color:rgba(228,228,236,.45);line-height:1.6;">「开放平台和企微绑定，主体必须一致」<br>「投放素材审核不过，是因为落地页缺了备案号」<br>随口一句"帮我记下来"就存好了。</p>
+          <p style="margin:0;font-size:.8rem;color:rgba(45,42,38,.55);line-height:1.6;">「开放平台和企微绑定，主体必须一致」<br>「投放素材审核不过，是因为落地页缺了备案号」<br>随口一句"帮我记下来"就存好了。</p>
         </div>
         <div class="step-card" style="flex-direction:column;gap:8px;">
           <div style="font-size:1.3rem;">📋</div>
           <h4 style="margin:0;font-size:.92rem;">标准流程 SOP</h4>
-          <p style="margin:0;font-size:.8rem;color:rgba(228,228,236,.45);line-height:1.6;">把「活动周报怎么做」「新项目怎么初始化」<br>做成 Skill 文件。新人说一句"做周报"，<br>AI 就按标准流程自动执行。</p>
+          <p style="margin:0;font-size:.8rem;color:rgba(45,42,38,.55);line-height:1.6;">把「活动周报怎么做」「新项目怎么初始化」<br>做成 Skill 文件。新人说一句"做周报"，<br>AI 就按标准流程自动执行。</p>
         </div>
         <div class="step-card" style="flex-direction:column;gap:8px;">
           <div style="font-size:1.3rem;">📖</div>
           <h4 style="margin:0;font-size:.92rem;">经验传承</h4>
-          <p style="margin:0;font-size:.8rem;color:rgba(228,228,236,.45);line-height:1.6;">「上次 xx 供应商视频制作能力不行，但图文<br>还可以，推荐直接联系外外」——这类散落在<br>聊天里的经验，沉淀下来谁都能查到。</p>
+          <p style="margin:0;font-size:.8rem;color:rgba(45,42,38,.55);line-height:1.6;">「上次 xx 供应商视频制作能力不行，但图文<br>还可以，推荐直接联系外外」——这类散落在<br>聊天里的经验，沉淀下来谁都能查到。</p>
         </div>
       </div>
     </div>
 
     <!-- 知识沉淀的三个层次 -->
-    <div style="margin-top:28px;padding:22px 24px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);" class="reveal d3">
-      <div style="font-size:.8rem;color:rgba(228,228,236,.35);font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;">知识沉淀的三个层次</div>
+    <div style="margin-top:28px;padding:22px 24px;border-radius:14px;background:rgba(237,232,223,.5);border:1px solid rgba(45,42,38,.04);" class="reveal d3">
+      <div style="font-size:.8rem;color:rgba(45,42,38,.4);font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;">知识沉淀的三个层次</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
         <div style="padding:16px;border-radius:12px;background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.08);text-align:center;">
           <div style="font-size:1.6rem;margin-bottom:8px;">🧠</div>
           <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">个人记忆</div>
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">我的偏好、习惯、身份<br>存在本地，只有我的 AI 知道</div>
+          <div style="font-size:.78rem;color:rgba(45,42,38,.5);">我的偏好、习惯、身份<br>存在本地，只有我的 AI 知道</div>
         </div>
-        <div style="padding:16px;border-radius:12px;background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.08);text-align:center;">
+        <div style="padding:16px;border-radius:12px;background:rgba(22,101,52,.04);border:1px solid rgba(22,101,52,.1);text-align:center;">
           <div style="font-size:1.6rem;margin-bottom:8px;">📚</div>
           <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">项目知识库</div>
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">踩坑记录、流程 SOP、项目文档<br>通过 GitHub 仓库，项目组共享</div>
+          <div style="font-size:.78rem;color:rgba(45,42,38,.5);">踩坑记录、流程 SOP、项目文档<br>通过 GitHub 仓库，项目组共享</div>
         </div>
-        <div style="padding:16px;border-radius:12px;background:rgba(139,92,246,.04);border:1px solid rgba(139,92,246,.08);text-align:center;">
+        <div style="padding:16px;border-radius:12px;background:rgba(146,64,14,.04);border:1px solid rgba(180,83,9,.08);text-align:center;">
           <div style="font-size:1.6rem;margin-bottom:8px;">🏢</div>
           <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">团队知识库</div>
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">跨项目的通用经验和规范<br>通过 GitHub 仓库，整个团队受益</div>
+          <div style="font-size:.78rem;color:rgba(45,42,38,.5);">跨项目的通用经验和规范<br>通过 GitHub 仓库，整个团队受益</div>
         </div>
       </div>
     </div>
@@ -955,20 +956,20 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     <div class="callout amber reveal d4" style="margin-top:24px;">
       <span class="callout-emoji">💡</span>
       <h4>最关键的一句话</h4>
-      <p>知识沉淀不需要专门花时间——解决了一个问题，随口说「帮我记到知识库里」就行。<strong style="color:#60A5FA">日积月累，团队的知识库就从空白变成了一本活的百科全书，每个人的 AI 都能翻阅。</strong></p>
+      <p>知识沉淀不需要专门花时间——解决了一个问题，随口说「帮我记到知识库里」就行。<strong style="color:#92400E">日积月累，团队的知识库就从空白变成了一本活的百科全书，每个人的 AI 都能翻阅。</strong></p>
     </div>
 
-    <div class="callout blue reveal d5" style="margin-top:24px;border:1px solid rgba(16,185,129,.15);background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(59,130,246,.06));">
+    <div class="callout blue reveal d5" style="margin-top:24px;border:1px solid rgba(22,101,52,.15);background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(59,130,246,.06));">
       <span class="callout-emoji">🪢</span>
       <h4>补充方案：Knot 知识库</h4>
-      <p>除了用 GitHub 仓库做知识共享，公司内网还有 <strong style="color:#34D399;">Knot</strong>（knot.woa.com）——可以直接接入 iWiki、工蜂、TAPD 等内部数据源，搭配智能体做团队知识问答，5 分钟就能搭一个懂业务的 AI 助手。适合已有大量内部文档、想快速搭建问答机器人的团队。</p>
+      <p>除了用 GitHub 仓库做知识共享，公司内网还有 <strong style="color:#166534;">Knot</strong>（knot.woa.com）——可以直接接入 iWiki、工蜂、TAPD 等内部数据源，搭配智能体做团队知识问答，5 分钟就能搭一个懂业务的 AI 助手。适合已有大量内部文档、想快速搭建问答机器人的团队。</p>
     </div>
 
     <div style="margin-top:20px;text-align:center;" class="reveal d6">
-      <div style="display:inline-block;padding:24px 32px;border-radius:16px;background:rgba(0,0,0,.3);border:1px solid rgba(16,185,129,.12);">
+      <div style="display:inline-block;padding:24px 32px;border-radius:16px;background:rgba(240,237,231,.5);border:1px solid rgba(22,101,52,.12);">
         <img src="./knot-guide-qr.png" alt="Knot 知识库搭建指南二维码" style="width:220px;height:220px;border-radius:8px;">
-        <div style="margin-top:12px;font-size:.82rem;color:rgba(228,228,236,.45);">扫码查看 Knot 知识库搭建指南</div>
-        <div style="margin-top:4px;font-size:.72rem;color:rgba(228,228,236,.25);">5 分钟搭建团队 AI 知识库助手</div>
+        <div style="margin-top:12px;font-size:.82rem;color:rgba(45,42,38,.55);">扫码查看 Knot 知识库搭建指南</div>
+        <div style="margin-top:4px;font-size:.72rem;color:rgba(45,42,38,.3);">5 分钟搭建团队 AI 知识库助手</div>
       </div>
     </div>
   </div>
@@ -979,7 +980,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   <div class="wrap">
     <div class="reveal"><span class="sec-tag">Chapter 06</span>
       <h2 class="sec-title">遇到问题别慌 🛟</h2>
-      <p class="sec-desc">记住这三个场景就够了，覆盖 90% 的问题。<strong style="color:#60A5FA">而且都可以在 WorkBuddy 里解决。</strong></p>
+      <p class="sec-desc">记住这三个场景就够了，覆盖 90% 的问题。<strong style="color:#92400E">而且都可以在 WorkBuddy 里解决。</strong></p>
     </div>
 
     <div class="trouble-grid">
@@ -996,9 +997,9 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
       <div class="trouble-card reveal d3">
         <div class="sym">🚨 改了内容但页面没更新</div>
         <div class="why">浏览器缓存了旧版本。试试以下两种方法：</div>
-        <div style="font-size:.88rem;color:#60A5FA;margin-top:4px;">
-          <p style="margin:0 0 6px;">✅ 强制刷新 — Mac 按 <kbd style="background:rgba(255,255,255,.08);padding:2px 8px;border-radius:4px;font-size:.82rem;">⌘+Shift+R</kbd>，Windows 按 <kbd style="background:rgba(255,255,255,.08);padding:2px 8px;border-radius:4px;font-size:.82rem;">Ctrl+Shift+R</kbd></p>
-          <p style="margin:0;">✅ Chrome 隐身模式 — Mac 按 <kbd style="background:rgba(255,255,255,.08);padding:2px 8px;border-radius:4px;font-size:.82rem;">⌘+Shift+N</kbd>，Windows 按 <kbd style="background:rgba(255,255,255,.08);padding:2px 8px;border-radius:4px;font-size:.82rem;">Ctrl+Shift+N</kbd> 打开隐身窗口访问</p>
+        <div style="font-size:.88rem;color:#92400E;margin-top:4px;">
+          <p style="margin:0 0 6px;">✅ 强制刷新 — Mac 按 <kbd style="background:rgba(45,42,38,.08);padding:2px 8px;border-radius:4px;font-size:.82rem;">⌘+Shift+R</kbd>，Windows 按 <kbd style="background:rgba(45,42,38,.08);padding:2px 8px;border-radius:4px;font-size:.82rem;">Ctrl+Shift+R</kbd></p>
+          <p style="margin:0;">✅ Chrome 隐身模式 — Mac 按 <kbd style="background:rgba(45,42,38,.08);padding:2px 8px;border-radius:4px;font-size:.82rem;">⌘+Shift+N</kbd>，Windows 按 <kbd style="background:rgba(45,42,38,.08);padding:2px 8px;border-radius:4px;font-size:.82rem;">Ctrl+Shift+N</kbd> 打开隐身窗口访问</p>
         </div>
       </div>
     </div>
@@ -1010,7 +1011,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   <div class="wrap">
     <div class="reveal"><span class="sec-tag">延伸阅读</span>
       <h2 class="sec-title" style="font-size: 1.7rem;">GitHub Pages vs 轻量服务器</h2>
-      <p class="sec-desc">大多数场景用 GitHub Pages 就够了。只有需要<strong style="color:#60A5FA">登录、存数据、跑程序</strong>时才需要服务器。</p>
+      <p class="sec-desc">大多数场景用 GitHub Pages 就够了。只有需要<strong style="color:#92400E">登录、存数据、跑程序</strong>时才需要服务器。</p>
     </div>
     <div style="overflow-x:auto" class="reveal d1">
       <table class="cmp-table">
@@ -1018,7 +1019,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
         <tbody>
           <tr><td>💰 费用</td><td class="hl">完全免费</td><td>约 ¥50-100/月</td></tr>
           <tr><td>🚀 上手难度</td><td class="hl">WorkBuddy 对话搞定</td><td>需要基础运维知识</td></tr>
-          <tr><td>📦 能放什么</td><td>数据看板、活动页、报告、文档等<br><span style="font-size:.78rem;color:rgba(228,228,236,.35);">（做好的东西直接展示，不需要登录或存数据）</span></td><td class="hl">什么都行<br><span style="font-size:.78rem;color:rgba(228,228,236,.35);">（能跑程序、连数据库、做登录系统等）</span></td></tr>
+          <tr><td>📦 能放什么</td><td>数据看板、活动页、报告、文档等<br><span style="font-size:.78rem;color:rgba(45,42,38,.4);">（做好的东西直接展示，不需要登录或存数据）</span></td><td class="hl">什么都行<br><span style="font-size:.78rem;color:rgba(45,42,38,.4);">（能跑程序、连数据库、做登录系统等）</span></td></tr>
           <tr><td>🔒 安全</td><td class="hl">自带 HTTPS 加密</td><td>需要自己配置</td></tr>
           <tr><td>✅ 推荐</td><td class="hl">80% 的需求都能搞定</td><td>需要登录/存数据时再用</td></tr>
         </tbody>
@@ -1030,10 +1031,10 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 <!-- ============ LIGHTHOUSE SERVER ============ -->
 <section id="lighthouse" style="padding-top:0;">
   <div class="wrap">
-    <div class="callout blue reveal" style="margin-top:8px;border:1px solid rgba(59,130,246,.15);background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(16,185,129,.06));">
+    <div class="callout blue reveal" style="margin-top:8px;border:1px solid rgba(180,83,9,.15);background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(16,185,129,.06));">
       <span class="callout-emoji">🖥️</span>
       <h4>进阶方案：腾讯云轻量应用服务器</h4>
-      <p>当你需要<strong>登录系统、存数据、跑后台程序</strong>时，GitHub Pages 就不够用了。这时候可以用腾讯云轻量应用服务器——可以理解为<strong style="color:#60A5FA">一台在云上的电脑</strong>，7×24 小时开机，全球都能访问。</p>
+      <p>当你需要<strong>登录系统、存数据、跑后台程序</strong>时，GitHub Pages 就不够用了。这时候可以用腾讯云轻量应用服务器——可以理解为<strong style="color:#92400E">一台在云上的电脑</strong>，7×24 小时开机，全球都能访问。</p>
     </div>
 
     <div class="steps" style="margin-top:24px;">
@@ -1041,28 +1042,28 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
         <div class="step-num sn1">1</div>
         <div class="step-body">
           <h3>购买一台轻量服务器</h3>
-          <p>打开 <a href="https://cloud.tencent.com/product/lighthouse" target="_blank" style="color:#60A5FA;text-decoration:underline;">腾讯云轻量应用服务器</a> 页面，登录后选择套餐。</p>
-          <div style="margin-top:14px;padding:18px 20px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid rgba(59,130,246,.1);">
-            <div style="font-size:.85rem;font-weight:600;color:#60A5FA;margin-bottom:12px;">💡 推荐配置（大部分场景够用）</div>
+          <p>打开 <a href="https://cloud.tencent.com/product/lighthouse" target="_blank" style="color:#92400E;text-decoration:underline;">腾讯云轻量应用服务器</a> 页面，登录后选择套餐。</p>
+          <div style="margin-top:14px;padding:18px 20px;border-radius:12px;background:rgba(240,237,231,.5);border:1px solid rgba(180,83,9,.12);">
+            <div style="font-size:.85rem;font-weight:600;color:#92400E;margin-bottom:12px;">💡 推荐配置（大部分场景够用）</div>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
-              <div style="padding:12px 16px;border-radius:10px;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.08);">
-                <div style="font-size:.82rem;font-weight:600;color:#60A5FA;">入门款 · 99 元/年</div>
-                <div style="font-size:.78rem;color:rgba(228,228,236,.45);margin-top:4px;">2核 2G 内存 · 4M 带宽<br>适合：个人项目、内部小工具</div>
+              <div style="padding:12px 16px;border-radius:10px;background:rgba(180,83,9,.05);border:1px solid rgba(59,130,246,.08);">
+                <div style="font-size:.82rem;font-weight:600;color:#92400E;">入门款 · 99 元/年</div>
+                <div style="font-size:.78rem;color:rgba(45,42,38,.55);margin-top:4px;">2核 2G 内存 · 4M 带宽<br>适合：个人项目、内部小工具</div>
               </div>
-              <div style="padding:12px 16px;border-radius:10px;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.08);">
-                <div style="font-size:.82rem;font-weight:600;color:#60A5FA;">够用款 · 199 元/年</div>
-                <div style="font-size:.78rem;color:rgba(228,228,236,.45);margin-top:4px;">2核 4G 内存 · 6M 带宽<br>适合：小程序后台、团队工具</div>
+              <div style="padding:12px 16px;border-radius:10px;background:rgba(180,83,9,.05);border:1px solid rgba(59,130,246,.08);">
+                <div style="font-size:.82rem;font-weight:600;color:#92400E;">够用款 · 199 元/年</div>
+                <div style="font-size:.78rem;color:rgba(45,42,38,.55);margin-top:4px;">2核 4G 内存 · 6M 带宽<br>适合：小程序后台、团队工具</div>
               </div>
-              <div style="padding:12px 16px;border-radius:10px;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.08);">
-                <div style="font-size:.82rem;font-weight:600;color:#60A5FA;">性能款 · 630 元/年</div>
-                <div style="font-size:.78rem;color:rgba(228,228,236,.45);margin-top:4px;">4核 8G 内存 · 10M 带宽<br>适合：正式业务、数据库服务</div>
+              <div style="padding:12px 16px;border-radius:10px;background:rgba(180,83,9,.05);border:1px solid rgba(59,130,246,.08);">
+                <div style="font-size:.82rem;font-weight:600;color:#92400E;">性能款 · 630 元/年</div>
+                <div style="font-size:.78rem;color:rgba(45,42,38,.55);margin-top:4px;">4核 8G 内存 · 10M 带宽<br>适合：正式业务、数据库服务</div>
               </div>
             </div>
-            <div style="margin-top:10px;font-size:.72rem;color:rgba(228,228,236,.25);">* 以上为 2026 年新用户活动价，实际以下单页面为准。建议首次买 1 年试试。</div>
+            <div style="margin-top:10px;font-size:.72rem;color:rgba(45,42,38,.3);">* 以上为 2026 年新用户活动价，实际以下单页面为准。建议首次买 1 年试试。</div>
           </div>
-          <div style="margin-top:12px;padding:12px 16px;border-radius:10px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.1);">
-            <div style="font-size:.82rem;color:rgba(228,228,236,.5);">
-              <strong style="color:#34D399;">镜像选什么？</strong> 推荐选 <strong>应用镜像 → 宝塔 Linux 面板</strong>。装好就自带一个网页版的管理面板，后续操作都可以在浏览器里点点点完成，不用记命令。
+          <div style="margin-top:12px;padding:12px 16px;border-radius:10px;background:rgba(22,101,52,.05);border:1px solid rgba(22,101,52,.12);">
+            <div style="font-size:.82rem;color:rgba(45,42,38,.6);">
+              <strong style="color:#166534;">镜像选什么？</strong> 推荐选 <strong>应用镜像 → 宝塔 Linux 面板</strong>。装好就自带一个网页版的管理面板，后续操作都可以在浏览器里点点点完成，不用记命令。
             </div>
           </div>
         </div>
@@ -1073,13 +1074,13 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
         <div class="step-body">
           <h3>登录宝塔面板</h3>
           <p>购买完成后，进入控制台 → 找到你的服务器 → 点击「应用管理」→ 获取宝塔面板的登录地址和密码。</p>
-          <div style="margin-top:10px;padding:14px 16px;border-radius:10px;background:rgba(0,0,0,.3);font-size:.82rem;color:rgba(228,228,236,.5);line-height:1.7;">
-            登录地址长这样：<code style="background:rgba(59,130,246,.15);padding:1px 6px;border-radius:4px;font-size:.78rem;">http://你的服务器IP:8888/xxxx</code><br>
+          <div style="margin-top:10px;padding:14px 16px;border-radius:10px;background:rgba(240,237,231,.5);font-size:.82rem;color:rgba(45,42,38,.6);line-height:1.7;">
+            登录地址长这样：<code style="background:rgba(180,83,9,.08);padding:1px 6px;border-radius:4px;font-size:.78rem;">http://你的服务器IP:8888/xxxx</code><br>
             在浏览器打开，输入用户名和密码就能进入管理面板。
           </div>
-          <div style="margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid rgba(59,130,246,.15);">
+          <div style="margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid rgba(180,83,9,.15);">
             <img src="./server-bt-panel.png" alt="宝塔面板管理界面" style="width:100%;display:block;">
-            <div style="padding:8px 16px;background:rgba(0,0,0,.3);font-size:.72rem;color:rgba(228,228,236,.3);text-align:center;">
+            <div style="padding:8px 16px;background:rgba(240,237,231,.5);font-size:.72rem;color:rgba(45,42,38,.35);text-align:center;">
               ↑ 宝塔面板首页：服务器状态、网站管理、数据库、流量监控一目了然
             </div>
           </div>
@@ -1092,13 +1093,13 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
           <h3>让 WorkBuddy 帮你部署</h3>
           <p>最酷的部分来了——你不用自己敲命令。把服务器信息告诉 WorkBuddy，它会帮你搞定一切。</p>
           <div class="chat-hint" style="margin-top:8px;">帮我把这个项目部署到我的腾讯云服务器上，IP 是 xxx.xxx.xxx.xxx</div>
-          <div style="margin-top:12px;font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.6;">
+          <div style="margin-top:12px;font-size:.82rem;color:rgba(45,42,38,.55);line-height:1.6;">
             WorkBuddy 会自动帮你：连接服务器 → 安装运行环境 → 上传代码 → 配置域名 → 开启 HTTPS。<br>
             你只需要坐着看它操作就行。
           </div>
-          <div style="margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid rgba(59,130,246,.15);">
+          <div style="margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid rgba(180,83,9,.15);">
             <img src="./server-dashboard-login.png" alt="部署在服务器上的活动数据看板登录页" style="width:100%;display:block;">
-            <div style="padding:8px 16px;background:rgba(0,0,0,.3);font-size:.72rem;color:rgba(228,228,236,.3);text-align:center;">
+            <div style="padding:8px 16px;background:rgba(240,237,231,.5);font-size:.72rem;color:rgba(45,42,38,.35);text-align:center;">
               ↑ 实际效果：部署在服务器上的活动数据看板，带登录系统，这就是 GitHub Pages 做不到的
             </div>
           </div>
@@ -1106,11 +1107,11 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
       </div>
     </div>
 
-    <div style="margin-top:20px;padding:16px 20px;border-radius:12px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.1);" class="reveal d4">
+    <div style="margin-top:20px;padding:16px 20px;border-radius:12px;background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.15);" class="reveal d4">
       <div style="display:flex;align-items:flex-start;gap:12px;">
         <span style="font-size:1.2rem;flex-shrink:0;">⚠️</span>
-        <div style="font-size:.82rem;color:rgba(228,228,236,.5);line-height:1.6;">
-          <strong style="color:#FBBF24;">温馨提示</strong><br>
+        <div style="font-size:.82rem;color:rgba(45,42,38,.6);line-height:1.6;">
+          <strong style="color:#92400E;">温馨提示</strong><br>
           轻量服务器需要付费（最低 99 元/年），而且需要一点耐心做初始设置。<strong>如果你的需求只是展示页面、报告、看板，用免费的 GitHub Pages 或 OA Pages 就够了。</strong>只有当你确实需要登录、存数据、跑定时任务时，再考虑服务器。
         </div>
       </div>
@@ -1123,7 +1124,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   <div class="wrap">
     <div class="reveal"><span class="sec-tag">Chapter 08</span>
       <h2 class="sec-title">今天带走三件事</h2>
-      <p class="sec-desc">不需要一步到位。<strong style="color:#60A5FA">从最简单的开始做</strong>，5 分钟就有效果。</p>
+      <p class="sec-desc">不需要一步到位。<strong style="color:#92400E">从最简单的开始做</strong>，5 分钟就有效果。</p>
     </div>
 
     <div class="take-grid">
@@ -1147,14 +1148,14 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
     <div class="callout purple reveal d4" style="margin-top: 44px; text-align: center;">
       <span class="callout-emoji">🚀</span>
       <h4 style="font-size: 1.25rem;">现在就可以试</h4>
-      <p style="font-size: 1.02rem;">打开 WorkBuddy → 说"帮我创建规则文件，记住我的信息" → 试试"你知道我是谁吗？"<br><strong style="color:#a5b4fc">5 分钟后，你的效率基建就搭好了第一块砖。</strong></p>
+      <p style="font-size: 1.02rem;">打开 WorkBuddy → 说"帮我创建规则文件，记住我的信息" → 试试"你知道我是谁吗？"<br><strong style="color:#B45309">5 分钟后，你的效率基建就搭好了第一块砖。</strong></p>
     </div>
   </div>
 </section>
 
 <footer class="site-footer">
   <p>轻量化技术工具链 · 团队经验分享 · 2026.04.08</p>
-  <p style="font-size:.85rem;color:rgba(228,228,236,.35);margin-top:4px;">分享人：Alex</p>
+  <p style="font-size:.85rem;color:rgba(45,42,38,.4);margin-top:4px;">分享人：Alex</p>
   <div class="ft-tag"><span>⚡</span> 本页面由 WorkBuddy 生成并部署 · 零代码</div>
 </footer>
 
