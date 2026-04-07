@@ -294,7 +294,7 @@ section { position: relative; z-index: 2; display: flex; align-items: center; ju
 <!-- ============ PAIN ============ -->
 <section id="pain">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 01</span>
+    <div class="reveal">
       <h2 class="sec-title">团队正在经历的「隐性损耗」</h2>
       <p class="sec-desc">这些问题不会写在周报里，却每天都在消耗我们的<strong style="color:#FCA5A5">时间、精力和协作效率</strong>。</p>
     </div>
@@ -328,7 +328,7 @@ section { position: relative; z-index: 2; display: flex; align-items: center; ju
 <!-- ============ SOLUTION ============ -->
 <section id="solution">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 02</span>
+    <div class="reveal">
       <h2 class="sec-title">今天介绍的「效率三件套」</h2>
       <p class="sec-desc">全程在 <strong style="color:#00F5FF">WorkBuddy</strong> 里完成，不需要打开命令行，不需要写代码。</p>
     </div>
@@ -362,13 +362,13 @@ section { position: relative; z-index: 2; display: flex; align-items: center; ju
 </section>
 
 <!-- ============ TAB NAV ============ -->
+<div id="tabAnchor" style="height:0;margin:0;padding:0;"></div>
 <nav class="tab-nav" id="tabNav">
   <button class="tab-btn active" data-tab="memory">🧠 AI 记忆</button>
   <button class="tab-btn" data-tab="deploy">🚀 一键上线</button>
   <button class="tab-btn" data-tab="knowledge">📚 知识沉淀</button>
   <button class="tab-btn" data-tab="advanced">🖥️ 进阶方案</button>
-  <button class="tab-btn" data-tab="trouble">🛟 常见问题</button>
-  <button class="tab-btn" data-tab="takeaway">🎯 收获</button>
+  <button class="tab-btn" data-tab="other">📌 其他</button>
 </nav>
 
 <!-- ====== TAB: AI 记忆 ====== -->
@@ -377,7 +377,7 @@ section { position: relative; z-index: 2; display: flex; align-items: center; ju
 <!-- ============ MEMORY SYSTEM ============ -->
 <section id="memory">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 03</span>
+    <div class="reveal"><span class="sec-tag">Chapter 01</span>
       <h2 class="sec-title">AI 记忆体系：让 AI「认识你」</h2>
       <p class="sec-desc">AI 本来是"金鱼记忆"——聊完就忘。记忆体系就是给它装了一个<strong style="color:#00F5FF">随身笔记本</strong>。</p>
     </div>
@@ -549,7 +549,7 @@ section { position: relative; z-index: 2; display: flex; align-items: center; ju
 <!-- ============ GITHUB INTRO ============ -->
 <section id="github">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 04</span>
+    <div class="reveal"><span class="sec-tag">Chapter 02</span>
       <h2 class="sec-title">先聊聊 GitHub 是什么</h2>
       <p class="sec-desc">在讲「一键上线」之前，我们先花两分钟搞清楚<strong style="color:#00F5FF">这个工具到底能干什么</strong>。</p>
     </div>
@@ -664,7 +664,7 @@ section { position: relative; z-index: 2; display: flex; align-items: center; ju
 <!-- ============ DEPLOY ============ -->
 <section id="deploy">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 05</span>
+    <div class="reveal"><span class="sec-tag">Chapter 03</span>
       <h2 class="sec-title">一键上线：说句话就有链接</h2>
       <p class="sec-desc">做好的页面、报告、工具，不再只能截图——<strong style="color:#00F5FF">给它一个全球可访问的链接</strong>。</p>
     </div>
@@ -922,7 +922,7 @@ section { position: relative; z-index: 2; display: flex; align-items: center; ju
 <!-- ============ KNOWLEDGE BASE ============ -->
 <section id="knowledge">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 07</span>
+    <div class="reveal"><span class="sec-tag">Chapter 04</span>
       <h2 class="sec-title">团队知识库：经验自动沉淀</h2>
       <p class="sec-desc">每个团队都有无数「踩过的坑」和「摸索出的经验」，但它们散落在聊天记录、脑子里、离职同事的电脑上。<br><strong style="color:#00F5FF">怎么把这些经验变成大家都能用的「团队记忆」？</strong></p>
     </div>
@@ -972,6 +972,43 @@ section { position: relative; z-index: 2; display: flex; align-items: center; ju
       </div>
     </div>
 
+    <!-- 怎么在新项目中调用知识库 -->
+    <div style="margin-top:28px;" class="reveal d2">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <span style="width:32px;height:32px;border-radius:8px;background:rgba(124,58,237,.08);color:#A78BFA;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;">？</span>
+        <h3 style="margin:0;font-size:1.05rem;">做新项目时，怎么调用之前的知识库？</h3>
+      </div>
+      <div style="padding:20px 22px;border-radius:14px;background:rgba(124,58,237,.04);border:1px solid rgba(124,58,237,.15);">
+        <p style="font-size:.88rem;color:rgba(226,232,240,.6);margin-bottom:16px;line-height:1.7;">你不需要写代码、不需要记路径——全程<strong style="color:#00F5FF">对话就能搞定</strong>。以下是三种最常用的方式：</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="padding:14px 16px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <span style="width:22px;height:22px;border-radius:6px;background:rgba(0,245,255,.08);color:#00F5FF;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;">1</span>
+              <span style="font-size:.85rem;font-weight:600;color:#FFFFFF;">写进规则，自动关联（推荐）</span>
+            </div>
+            <div class="chat-hint" style="margin-bottom:8px;">帮我在规则文件里加一条：团队知识库在 ~/team-knowledge 目录</div>
+            <div style="font-size:.8rem;color:rgba(226,232,240,.5);line-height:1.6;">配置一次，以后不管打开什么项目，AI 都知道去哪里找知识库。<br>遇到问题时它会<strong style="color:rgba(226,232,240,.65);">自动翻阅知识库</strong>寻找答案，不用你提醒。</div>
+          </div>
+          <div style="padding:14px 16px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <span style="width:22px;height:22px;border-radius:6px;background:rgba(0,245,255,.08);color:#00F5FF;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;">2</span>
+              <span style="font-size:.85rem;font-weight:600;color:#FFFFFF;">对话中直接让它去查</span>
+            </div>
+            <div class="chat-hint" style="margin-bottom:8px;">去翻翻团队知识库里有没有关于微信支付回调的经验</div>
+            <div style="font-size:.8rem;color:rgba(226,232,240,.5);line-height:1.6;">就像让同事帮你查笔记一样自然——说一句话，AI 就去知识库里搜索相关记录。</div>
+          </div>
+          <div style="padding:14px 16px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <span style="width:22px;height:22px;border-radius:6px;background:rgba(0,245,255,.08);color:#00F5FF;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;">3</span>
+              <span style="font-size:.85rem;font-weight:600;color:#FFFFFF;">同步最新内容也是一句话</span>
+            </div>
+            <div class="chat-hint" style="margin-bottom:8px;">帮我同步一下团队知识库的最新内容</div>
+            <div style="font-size:.8rem;color:rgba(226,232,240,.5);line-height:1.6;">AI 帮你执行 git pull，把其他同事新增的经验拉到本地。<br><strong style="color:rgba(226,232,240,.65);">全程不用打开终端、不用记任何命令。</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 三个应用场景 -->
     <div style="margin-top:32px;" class="reveal d2">
       <div style="font-size:.8rem;color:rgba(226,232,240,.4);font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;">可以往知识库里放什么？</div>
@@ -1001,17 +1038,17 @@ section { position: relative; z-index: 2; display: flex; align-items: center; ju
         <div style="padding:16px;border-radius:12px;background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.1);text-align:center;">
           <div style="font-size:1.6rem;margin-bottom:8px;">🧠</div>
           <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">个人记忆</div>
-          <div style="font-size:.78rem;color:rgba(226,232,240,.5);">我的偏好、习惯、身份<br>存在本地，只有我的 AI 知道</div>
+          <div style="font-size:.78rem;color:rgba(226,232,240,.5);">我的偏好、习惯、身份<br>存在本地，AI 自动加载</div>
         </div>
         <div style="padding:16px;border-radius:12px;background:rgba(0,245,255,.05);border:1px solid rgba(255,255,255,.07);text-align:center;">
           <div style="font-size:1.6rem;margin-bottom:8px;">📚</div>
-          <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">项目知识库</div>
-          <div style="font-size:.78rem;color:rgba(226,232,240,.5);">踩坑记录、流程 SOP、项目文档<br>通过 GitHub 仓库，项目组共享</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">团队知识库</div>
+          <div style="font-size:.78rem;color:rgba(226,232,240,.5);">踩坑记录、经验文档、项目资料<br>通过 GitHub 仓库，团队共享</div>
         </div>
         <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(180,83,9,.08);text-align:center;">
-          <div style="font-size:1.6rem;margin-bottom:8px;">🏢</div>
-          <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">团队知识库</div>
-          <div style="font-size:.78rem;color:rgba(226,232,240,.5);">跨项目的通用经验和规范<br>通过 GitHub 仓库，整个团队受益</div>
+          <div style="font-size:1.6rem;margin-bottom:8px;">⚙️</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">技能 / 工作流</div>
+          <div style="font-size:.78rem;color:rgba(226,232,240,.5);">标准流程封装成 Skill<br>说一句话就能执行，可复用可传播</div>
         </div>
       </div>
     </div>
@@ -1039,8 +1076,8 @@ section { position: relative; z-index: 2; display: flex; align-items: center; ju
 </section>
 </div><!-- /tab-knowledge -->
 
-<!-- ====== TAB: 常见问题 ====== -->
-<div class="tab-panel" id="tab-trouble">
+<!-- ====== TAB: 其他 ====== -->
+<div class="tab-panel" id="tab-other">
 
 <!-- ============ TROUBLESHOOT ============ -->
 <section id="trouble">
@@ -1072,15 +1109,47 @@ section { position: relative; z-index: 2; display: flex; align-items: center; ju
     </div>
   </div>
 </section>
-</div><!-- /tab-trouble -->
 
-<!-- ====== TAB: 进阶方案 ====== -->
+<!-- ============ TAKEAWAY ============ -->
+<section id="takeaway">
+  <div class="wrap">
+    <div class="reveal"><span class="sec-tag">Chapter 07</span>
+      <h2 class="sec-title">今天带走三件事</h2>
+      <p class="sec-desc">不需要一步到位。<strong style="color:#00F5FF">从最简单的开始做</strong>，5 分钟就有效果。</p>
+    </div>
+
+    <div class="take-grid">
+      <div class="take-card tc1 reveal d1">
+        <div class="bn">01</div>
+        <h4>给 AI 装个「记忆」</h4>
+        <p>在 WorkBuddy 里说一句"帮我建规则文件"<br>从此 AI 开机就认识你</p>
+      </div>
+      <div class="take-card tc2 reveal d2">
+        <div class="bn">02</div>
+        <h4>成果一句话上线</h4>
+        <p>做完的东西说"帮我部署"就行<br>一个链接，全球可看</p>
+      </div>
+      <div class="take-card tc3 reveal d3">
+        <div class="bn">03</div>
+        <h4>踩坑经验自动沉淀</h4>
+        <p>遇到的问题让 AI 记下来<br>团队知识库越来越聪明</p>
+      </div>
+    </div>
+
+    <div class="callout purple reveal d4" style="margin-top: 44px; text-align: center;">
+      <span class="callout-emoji">🚀</span>
+      <h4 style="font-size: 1.25rem;">现在就可以试</h4>
+      <p style="font-size: 1.02rem;">打开 WorkBuddy → 说"帮我创建规则文件，记住我的信息" → 试试"你知道我是谁吗？"<br><strong style="color:#00F5FF">5 分钟后，你的效率基建就搭好了第一块砖。</strong></p>
+    </div>
+  </div>
+</section>
+</div><!-- /tab-other -->
 <div class="tab-panel" id="tab-advanced">
 
 <!-- ============ COMPARE ============ -->
 <section id="compare" style="min-height: auto; padding: 40px 24px 80px;">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">延伸阅读</span>
+    <div class="reveal"><span class="sec-tag">Chapter 05</span>
       <h2 class="sec-title" style="font-size: 1.7rem;">GitHub Pages vs 轻量服务器</h2>
       <p class="sec-desc">大多数场景用 GitHub Pages 就够了。只有需要<strong style="color:#00F5FF">登录、存数据、跑程序</strong>时才需要服务器。</p>
     </div>
@@ -1191,43 +1260,7 @@ section { position: relative; z-index: 2; display: flex; align-items: center; ju
 </section>
 </div><!-- /tab-advanced -->
 
-<!-- ====== TAB: 收获 ====== -->
-<div class="tab-panel" id="tab-takeaway">
 
-<!-- ============ TAKEAWAY ============ -->
-<section id="takeaway">
-  <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 08</span>
-      <h2 class="sec-title">今天带走三件事</h2>
-      <p class="sec-desc">不需要一步到位。<strong style="color:#00F5FF">从最简单的开始做</strong>，5 分钟就有效果。</p>
-    </div>
-
-    <div class="take-grid">
-      <div class="take-card tc1 reveal d1">
-        <div class="bn">01</div>
-        <h4>给 AI 装个「记忆」</h4>
-        <p>在 WorkBuddy 里说一句"帮我建规则文件"<br>从此 AI 开机就认识你</p>
-      </div>
-      <div class="take-card tc2 reveal d2">
-        <div class="bn">02</div>
-        <h4>成果一句话上线</h4>
-        <p>做完的东西说"帮我部署"就行<br>一个链接，全球可看</p>
-      </div>
-      <div class="take-card tc3 reveal d3">
-        <div class="bn">03</div>
-        <h4>踩坑经验自动沉淀</h4>
-        <p>遇到的问题让 AI 记下来<br>团队知识库越来越聪明</p>
-      </div>
-    </div>
-
-    <div class="callout purple reveal d4" style="margin-top: 44px; text-align: center;">
-      <span class="callout-emoji">🚀</span>
-      <h4 style="font-size: 1.25rem;">现在就可以试</h4>
-      <p style="font-size: 1.02rem;">打开 WorkBuddy → 说"帮我创建规则文件，记住我的信息" → 试试"你知道我是谁吗？"<br><strong style="color:#00F5FF">5 分钟后，你的效率基建就搭好了第一块砖。</strong></p>
-    </div>
-  </div>
-</section>
-</div><!-- /tab-takeaway -->
 
 <footer class="site-footer">
   <p>轻量化技术工具链 · 团队经验分享 · 2026.04.08</p>
@@ -1253,19 +1286,25 @@ const tabBtns = document.querySelectorAll('.tab-btn');
 const tabPanels = document.querySelectorAll('.tab-panel');
 
 function switchTab(tabId) {
+  // 切换 panel
   tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
   tabPanels.forEach(p => p.classList.toggle('active', p.id === 'tab-' + tabId));
-  // 临时禁用 smooth scroll，瞬间跳回 tab 导航条
-  document.documentElement.style.scrollBehavior = 'auto';
-  window.scrollTo(0, document.getElementById('tabNav').offsetTop);
-  requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = ''; });
+
+  // 等 DOM 重排后滚动到锚点位置
+  setTimeout(() => {
+    var anchor = document.getElementById('tabAnchor');
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }
+  }, 20);
+
   // Re-trigger reveal animations for newly visible content
   setTimeout(() => {
-    const panel = document.getElementById('tab-' + tabId);
+    var panel = document.getElementById('tab-' + tabId);
     if (panel) {
-      panel.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+      panel.querySelectorAll('.reveal').forEach(function(el) { revObs.observe(el); });
     }
-  }, 100);
+  }, 150);
 }
 
 tabBtns.forEach(btn => {
