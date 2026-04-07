@@ -222,10 +222,10 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   <div class="pnav-dot" data-t="solution"><span class="tip">方案</span></div>
   <div class="pnav-dot" data-t="memory"><span class="tip">AI 记忆</span></div>
   <div class="pnav-dot" data-t="memchat"><span class="tip">记忆演示</span></div>
-  <div class="pnav-dot" data-t="knowledge"><span class="tip">知识库</span></div>
   <div class="pnav-dot" data-t="github"><span class="tip">认识 GitHub</span></div>
   <div class="pnav-dot" data-t="deploy"><span class="tip">一键上线</span></div>
   <div class="pnav-dot" data-t="deploychat"><span class="tip">部署演示</span></div>
+  <div class="pnav-dot" data-t="knowledge"><span class="tip">知识库</span></div>
   <div class="pnav-dot" data-t="trouble"><span class="tip">排障</span></div>
   <div class="pnav-dot" data-t="takeaway"><span class="tip">收获</span></div>
 </nav>
@@ -475,143 +475,13 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 
     <div class="callout mint reveal d6" style="margin-top:20px;">
       <span class="callout-emoji">💻</span>
-      <h4>换电脑了怎么办？——用 GitHub 同步你的记忆</h4>
-      <p>记忆文件默认存在本地，<strong>不会自动跨设备同步</strong>。但解决方式很简单：把你的规则目录用一个 GitHub 仓库托管。换一台电脑，clone 下来就恢复了——所有规则、偏好、踩坑记录一个不少。</p>
-      <p style="margin-top:10px;">这恰好也是今天分享的核心思路：<strong style="color:#60A5FA">GitHub 不只是代码管理工具，它是你的「配置同步器」和「知识版本库」。</strong>记忆配置 + 项目文件全部用 Git 管理，团队成员之间也能共享同一套规则。</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ KNOWLEDGE BASE ============ -->
-<section id="knowledge">
-  <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 04</span>
-      <h2 class="sec-title">团队知识库：经验自动沉淀</h2>
-      <p class="sec-desc">每个团队都有无数「踩过的坑」和「摸索出的经验」，但它们散落在聊天记录、脑子里、离职同事的电脑上。<br><strong style="color:#60A5FA">怎么把这些经验变成大家都能用的「团队记忆」？</strong></p>
-    </div>
-
-    <div class="callout mint reveal" style="margin-top:24px;">
-      <span class="callout-emoji">🤔</span>
-      <h4>等一下——WorkBuddy 不是在本地电脑上跑的吗？怎么共享？</h4>
-      <p>好问题！WorkBuddy 确实在每个人自己的电脑上运行，知识文件也存在本地。<br>
-      但还记得前面讲的 <strong style="color:#60A5FA">GitHub</strong> 吗？它就是共享的桥梁：</p>
-      <div style="margin-top:14px;padding:16px 18px;border-radius:12px;background:rgba(0,0,0,.25);border:1px solid rgba(16,185,129,.1);">
-        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-          <div style="padding:8px 14px;border-radius:8px;background:rgba(59,130,246,.08);font-size:.82rem;color:#60A5FA;font-weight:600;">🧑 小王的电脑</div>
-          <div style="font-size:.82rem;color:rgba(228,228,236,.35);">—— 记录经验 → push 推送 ——→</div>
-          <div style="padding:8px 14px;border-radius:8px;background:rgba(139,92,246,.08);font-size:.82rem;color:#A78BFA;font-weight:600;">☁️ GitHub 团队仓库</div>
-          <div style="font-size:.82rem;color:rgba(228,228,236,.35);">←—— pull 拉取 ←——</div>
-          <div style="padding:8px 14px;border-radius:8px;background:rgba(16,185,129,.08);font-size:.82rem;color:#34D399;font-weight:600;">🧑‍💻 小李的电脑</div>
-        </div>
-        <div style="margin-top:10px;font-size:.78rem;color:rgba(228,228,236,.35);line-height:1.6;">
-          简单说：<strong style="color:rgba(228,228,236,.6);">GitHub 仓库就像一个云端共享文件夹</strong>，大家各自在本地写入和读取，通过 push/pull 保持同步。<br>
-          不用手动操作——告诉 WorkBuddy「同步一下知识库」，它帮你搞定 Git 操作。
-        </div>
+      <h4>换电脑了怎么办？团队怎么共享？——都靠 GitHub</h4>
+      <p>记忆文件默认存在本地，<strong>不会自动跨设备同步</strong>。但解决方式很简单：把你的规则目录用一个 GitHub 仓库托管。</p>
+      <div style="margin-top:12px;padding:14px 16px;border-radius:10px;background:rgba(0,0,0,.25);font-size:.85rem;color:rgba(228,228,236,.5);line-height:1.7;">
+        <strong style="color:#60A5FA;">个人同步：</strong>换一台电脑，clone 下来就恢复——所有规则、偏好、踩坑记录一个不少。<br>
+        <strong style="color:#34D399;">团队共享：</strong>建一个团队仓库，大家把经验 push 上去，其他人 pull 下来就能用。团队知识不再散落在聊天记录里。
       </div>
-    </div>
-
-    <!-- 具体怎么做 -->
-    <div style="margin-top:32px;" class="reveal d1">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-        <span style="width:32px;height:32px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;">▶</span>
-        <h3 style="margin:0;font-size:1.05rem;">实际操作长什么样？</h3>
-      </div>
-
-      <div class="steps" style="gap:16px;">
-        <!-- Step 1 -->
-        <div style="padding:18px 20px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);">
-          <div style="font-size:.78rem;color:#60A5FA;font-weight:600;margin-bottom:8px;">第一步：建一个团队知识仓库</div>
-          <div class="chat-hint" style="margin-bottom:8px;">帮我在 GitHub 上创建一个团队知识库仓库，名字叫 team-knowledge</div>
-          <div style="font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.6;">
-            WorkBuddy 会在 GitHub 上建好仓库，克隆到本地，创建好知识库的目录结构。<br>
-            然后把仓库地址发给团队成员，大家各自 clone 一份到自己电脑上。
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div style="padding:18px 20px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);">
-          <div style="font-size:.78rem;color:#34D399;font-weight:600;margin-bottom:8px;">第二步：日常工作中随手沉淀</div>
-          <div class="chat-hint" style="margin-bottom:8px;">刚才那个域名配置的坑，帮我记到团队知识库里</div>
-          <div style="font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.6;">
-            AI 自动整理成结构化文档 → 保存到本地知识库目录 → push 到 GitHub。<br>
-            就像发一条消息一样简单，但这条「消息」会永久留在团队知识库里。
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div style="padding:18px 20px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);">
-          <div style="font-size:.78rem;color:#A78BFA;font-weight:600;margin-bottom:8px;">第三步：任何人随时调用</div>
-          <div class="chat-hint" style="margin-bottom:8px;">自定义域名报错了怎么办？</div>
-          <div style="font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.6;">
-            小李的 AI 从本地知识库中检索到小王之前记录的解决方案，直接给出答案。<br>
-            <strong style="color:rgba(228,228,236,.6);">小王花 2 小时踩的坑，小李 10 秒就跳过了。</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 三个应用场景 -->
-    <div style="margin-top:32px;" class="reveal d2">
-      <div style="font-size:.8rem;color:rgba(228,228,236,.35);font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;">可以往知识库里放什么？</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
-        <div class="step-card" style="flex-direction:column;gap:8px;">
-          <div style="font-size:1.3rem;">🐛</div>
-          <h4 style="margin:0;font-size:.92rem;">踩坑记录</h4>
-          <p style="margin:0;font-size:.8rem;color:rgba(228,228,236,.45);line-height:1.6;">「开放平台和企微绑定，主体必须一致」<br>「投放素材审核不过，是因为落地页缺了备案号」<br>随口一句"帮我记下来"就存好了。</p>
-        </div>
-        <div class="step-card" style="flex-direction:column;gap:8px;">
-          <div style="font-size:1.3rem;">📋</div>
-          <h4 style="margin:0;font-size:.92rem;">标准流程 SOP</h4>
-          <p style="margin:0;font-size:.8rem;color:rgba(228,228,236,.45);line-height:1.6;">把「活动周报怎么做」「新项目怎么初始化」<br>做成 Skill 文件。新人说一句"做周报"，<br>AI 就按标准流程自动执行。</p>
-        </div>
-        <div class="step-card" style="flex-direction:column;gap:8px;">
-          <div style="font-size:1.3rem;">📖</div>
-          <h4 style="margin:0;font-size:.92rem;">经验传承</h4>
-          <p style="margin:0;font-size:.8rem;color:rgba(228,228,236,.45);line-height:1.6;">「上次 xx 供应商视频制作能力不行，但图文<br>还可以，推荐直接联系外外」——这类散落在<br>聊天里的经验，沉淀下来谁都能查到。</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- 知识沉淀的三个层次 -->
-    <div style="margin-top:28px;padding:22px 24px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);" class="reveal d3">
-      <div style="font-size:.8rem;color:rgba(228,228,236,.35);font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;">知识沉淀的三个层次</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
-        <div style="padding:16px;border-radius:12px;background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.08);text-align:center;">
-          <div style="font-size:1.6rem;margin-bottom:8px;">🧠</div>
-          <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">个人记忆</div>
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">我的偏好、习惯、身份<br>存在本地，只有我的 AI 知道</div>
-        </div>
-        <div style="padding:16px;border-radius:12px;background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.08);text-align:center;">
-          <div style="font-size:1.6rem;margin-bottom:8px;">📚</div>
-          <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">项目知识库</div>
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">踩坑记录、流程 SOP、项目文档<br>通过 GitHub 仓库，项目组共享</div>
-        </div>
-        <div style="padding:16px;border-radius:12px;background:rgba(139,92,246,.04);border:1px solid rgba(139,92,246,.08);text-align:center;">
-          <div style="font-size:1.6rem;margin-bottom:8px;">🏢</div>
-          <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">团队知识库</div>
-          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">跨项目的通用经验和规范<br>通过 GitHub 仓库，整个团队受益</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout amber reveal d4" style="margin-top:24px;">
-      <span class="callout-emoji">💡</span>
-      <h4>最关键的一句话</h4>
-      <p>知识沉淀不需要专门花时间——解决了一个问题，随口说「帮我记到知识库里」就行。<strong style="color:#60A5FA">日积月累，团队的知识库就从空白变成了一本活的百科全书，每个人的 AI 都能翻阅。</strong></p>
-    </div>
-
-    <div class="callout blue reveal d5" style="margin-top:24px;border:1px solid rgba(16,185,129,.15);background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(59,130,246,.06));">
-      <span class="callout-emoji">🪢</span>
-      <h4>补充方案：Knot 知识库</h4>
-      <p>除了用 GitHub 仓库做知识共享，公司内网还有 <strong style="color:#34D399;">Knot</strong>（knot.woa.com）——可以直接接入 iWiki、工蜂、TAPD 等内部数据源，搭配智能体做团队知识问答，5 分钟就能搭一个懂业务的 AI 助手。适合已有大量内部文档、想快速搭建问答机器人的团队。</p>
-    </div>
-
-    <div style="margin-top:20px;text-align:center;" class="reveal d6">
-      <div style="display:inline-block;padding:24px 32px;border-radius:16px;background:rgba(0,0,0,.3);border:1px solid rgba(16,185,129,.12);">
-        <img src="./knot-guide-qr.png" alt="Knot 知识库搭建指南二维码" style="width:220px;height:220px;border-radius:8px;">
-        <div style="margin-top:12px;font-size:.82rem;color:rgba(228,228,236,.45);">扫码查看 Knot 知识库搭建指南</div>
-        <div style="margin-top:4px;font-size:.72rem;color:rgba(228,228,236,.25);">5 分钟搭建团队 AI 知识库助手</div>
-      </div>
+      <p style="margin-top:10px;">这就是今天分享的核心思路：<strong style="color:#60A5FA">GitHub 不只是代码管理工具，它是你的「配置同步器」和「知识版本库」。</strong>个人记忆、团队经验、项目文件全部用 Git 管理——后面会详细讲怎么搭团队知识库。</p>
     </div>
   </div>
 </section>
@@ -619,7 +489,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 <!-- ============ GITHUB INTRO ============ -->
 <section id="github">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 05</span>
+    <div class="reveal"><span class="sec-tag">Chapter 04</span>
       <h2 class="sec-title">先聊聊 GitHub 是什么</h2>
       <p class="sec-desc">在讲「一键上线」之前，我们先花两分钟搞清楚<strong style="color:#60A5FA">这个工具到底能干什么</strong>。</p>
     </div>
@@ -734,7 +604,7 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
 <!-- ============ DEPLOY ============ -->
 <section id="deploy">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 06</span>
+    <div class="reveal"><span class="sec-tag">Chapter 05</span>
       <h2 class="sec-title">一键上线：说句话就有链接</h2>
       <p class="sec-desc">做好的页面、报告、工具，不再只能截图——<strong style="color:#60A5FA">给它一个全球可访问的链接</strong>。</p>
     </div>
@@ -985,10 +855,129 @@ section { position: relative; z-index: 2; min-height: 100vh; display: flex; alig
   </div>
 </section>
 
+<!-- ============ KNOWLEDGE BASE ============ -->
+<section id="knowledge">
+  <div class="wrap">
+    <div class="reveal"><span class="sec-tag">Chapter 07</span>
+      <h2 class="sec-title">团队知识库：经验自动沉淀</h2>
+      <p class="sec-desc">每个团队都有无数「踩过的坑」和「摸索出的经验」，但它们散落在聊天记录、脑子里、离职同事的电脑上。<br><strong style="color:#60A5FA">怎么把这些经验变成大家都能用的「团队记忆」？</strong></p>
+    </div>
+
+    <div class="callout mint reveal" style="margin-top:24px;">
+      <span class="callout-emoji">🤔</span>
+      <h4>等一下——WorkBuddy 不是在本地电脑上跑的吗？怎么共享？</h4>
+      <p>好问题！WorkBuddy 确实在每个人自己的电脑上运行，知识文件也存在本地。<br>
+      但还记得前面讲的 <strong style="color:#60A5FA">GitHub</strong> 吗？它就是共享的桥梁：</p>
+      <div style="margin-top:14px;padding:16px 18px;border-radius:12px;background:rgba(0,0,0,.25);border:1px solid rgba(16,185,129,.1);">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div style="padding:8px 14px;border-radius:8px;background:rgba(59,130,246,.08);font-size:.82rem;color:#60A5FA;font-weight:600;">🧑 小王的电脑</div>
+          <div style="font-size:.82rem;color:rgba(228,228,236,.35);">—— 记录经验 → push 推送 ——→</div>
+          <div style="padding:8px 14px;border-radius:8px;background:rgba(139,92,246,.08);font-size:.82rem;color:#A78BFA;font-weight:600;">☁️ GitHub 团队仓库</div>
+          <div style="font-size:.82rem;color:rgba(228,228,236,.35);">←—— pull 拉取 ←——</div>
+          <div style="padding:8px 14px;border-radius:8px;background:rgba(16,185,129,.08);font-size:.82rem;color:#34D399;font-weight:600;">🧑‍💻 小李的电脑</div>
+        </div>
+        <div style="margin-top:10px;font-size:.78rem;color:rgba(228,228,236,.35);line-height:1.6;">
+          简单说：<strong style="color:rgba(228,228,236,.6);">GitHub 仓库就像一个云端共享文件夹</strong>，大家各自在本地写入和读取，通过 push/pull 保持同步。<br>
+          不用手动操作——告诉 WorkBuddy「同步一下知识库」，它帮你搞定 Git 操作。
+        </div>
+      </div>
+    </div>
+
+    <!-- 具体怎么做 -->
+    <div style="margin-top:32px;" class="reveal d1">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <span style="width:32px;height:32px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;">▶</span>
+        <h3 style="margin:0;font-size:1.05rem;">实际操作长什么样？</h3>
+      </div>
+      <div class="steps" style="gap:16px;">
+        <div style="padding:18px 20px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);">
+          <div style="font-size:.78rem;color:#60A5FA;font-weight:600;margin-bottom:8px;">第一步：建一个团队知识仓库</div>
+          <div class="chat-hint" style="margin-bottom:8px;">帮我在 GitHub 上创建一个团队知识库仓库，名字叫 team-knowledge</div>
+          <div style="font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.6;">WorkBuddy 会在 GitHub 上建好仓库，克隆到本地，创建好知识库的目录结构。<br>然后把仓库地址发给团队成员，大家各自 clone 一份到自己电脑上。</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);">
+          <div style="font-size:.78rem;color:#34D399;font-weight:600;margin-bottom:8px;">第二步：日常工作中随手沉淀</div>
+          <div class="chat-hint" style="margin-bottom:8px;">刚才那个域名配置的坑，帮我记到团队知识库里</div>
+          <div style="font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.6;">AI 自动整理成结构化文档 → 保存到本地知识库目录 → push 到 GitHub。<br>就像发一条消息一样简单，但这条「消息」会永久留在团队知识库里。</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);">
+          <div style="font-size:.78rem;color:#A78BFA;font-weight:600;margin-bottom:8px;">第三步：任何人随时调用</div>
+          <div class="chat-hint" style="margin-bottom:8px;">自定义域名报错了怎么办？</div>
+          <div style="font-size:.82rem;color:rgba(228,228,236,.45);line-height:1.6;">小李的 AI 从本地知识库中检索到小王之前记录的解决方案，直接给出答案。<br><strong style="color:rgba(228,228,236,.6);">小王花 2 小时踩的坑，小李 10 秒就跳过了。</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 三个应用场景 -->
+    <div style="margin-top:32px;" class="reveal d2">
+      <div style="font-size:.8rem;color:rgba(228,228,236,.35);font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;">可以往知识库里放什么？</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+        <div class="step-card" style="flex-direction:column;gap:8px;">
+          <div style="font-size:1.3rem;">🐛</div>
+          <h4 style="margin:0;font-size:.92rem;">踩坑记录</h4>
+          <p style="margin:0;font-size:.8rem;color:rgba(228,228,236,.45);line-height:1.6;">「开放平台和企微绑定，主体必须一致」<br>「投放素材审核不过，是因为落地页缺了备案号」<br>随口一句"帮我记下来"就存好了。</p>
+        </div>
+        <div class="step-card" style="flex-direction:column;gap:8px;">
+          <div style="font-size:1.3rem;">📋</div>
+          <h4 style="margin:0;font-size:.92rem;">标准流程 SOP</h4>
+          <p style="margin:0;font-size:.8rem;color:rgba(228,228,236,.45);line-height:1.6;">把「活动周报怎么做」「新项目怎么初始化」<br>做成 Skill 文件。新人说一句"做周报"，<br>AI 就按标准流程自动执行。</p>
+        </div>
+        <div class="step-card" style="flex-direction:column;gap:8px;">
+          <div style="font-size:1.3rem;">📖</div>
+          <h4 style="margin:0;font-size:.92rem;">经验传承</h4>
+          <p style="margin:0;font-size:.8rem;color:rgba(228,228,236,.45);line-height:1.6;">「上次 xx 供应商视频制作能力不行，但图文<br>还可以，推荐直接联系外外」——这类散落在<br>聊天里的经验，沉淀下来谁都能查到。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 知识沉淀的三个层次 -->
+    <div style="margin-top:28px;padding:22px 24px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);" class="reveal d3">
+      <div style="font-size:.8rem;color:rgba(228,228,236,.35);font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;">知识沉淀的三个层次</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+        <div style="padding:16px;border-radius:12px;background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.08);text-align:center;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">🧠</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">个人记忆</div>
+          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">我的偏好、习惯、身份<br>存在本地，只有我的 AI 知道</div>
+        </div>
+        <div style="padding:16px;border-radius:12px;background:rgba(16,185,129,.04);border:1px solid rgba(16,185,129,.08);text-align:center;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">📚</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">项目知识库</div>
+          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">踩坑记录、流程 SOP、项目文档<br>通过 GitHub 仓库，项目组共享</div>
+        </div>
+        <div style="padding:16px;border-radius:12px;background:rgba(139,92,246,.04);border:1px solid rgba(139,92,246,.08);text-align:center;">
+          <div style="font-size:1.6rem;margin-bottom:8px;">🏢</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:4px;">团队知识库</div>
+          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">跨项目的通用经验和规范<br>通过 GitHub 仓库，整个团队受益</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout amber reveal d4" style="margin-top:24px;">
+      <span class="callout-emoji">💡</span>
+      <h4>最关键的一句话</h4>
+      <p>知识沉淀不需要专门花时间——解决了一个问题，随口说「帮我记到知识库里」就行。<strong style="color:#60A5FA">日积月累，团队的知识库就从空白变成了一本活的百科全书，每个人的 AI 都能翻阅。</strong></p>
+    </div>
+
+    <div class="callout blue reveal d5" style="margin-top:24px;border:1px solid rgba(16,185,129,.15);background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(59,130,246,.06));">
+      <span class="callout-emoji">🪢</span>
+      <h4>补充方案：Knot 知识库</h4>
+      <p>除了用 GitHub 仓库做知识共享，公司内网还有 <strong style="color:#34D399;">Knot</strong>（knot.woa.com）——可以直接接入 iWiki、工蜂、TAPD 等内部数据源，搭配智能体做团队知识问答，5 分钟就能搭一个懂业务的 AI 助手。适合已有大量内部文档、想快速搭建问答机器人的团队。</p>
+    </div>
+
+    <div style="margin-top:20px;text-align:center;" class="reveal d6">
+      <div style="display:inline-block;padding:24px 32px;border-radius:16px;background:rgba(0,0,0,.3);border:1px solid rgba(16,185,129,.12);">
+        <img src="./knot-guide-qr.png" alt="Knot 知识库搭建指南二维码" style="width:220px;height:220px;border-radius:8px;">
+        <div style="margin-top:12px;font-size:.82rem;color:rgba(228,228,236,.45);">扫码查看 Knot 知识库搭建指南</div>
+        <div style="margin-top:4px;font-size:.72rem;color:rgba(228,228,236,.25);">5 分钟搭建团队 AI 知识库助手</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ TROUBLESHOOT ============ -->
 <section id="trouble">
   <div class="wrap">
-    <div class="reveal"><span class="sec-tag">Chapter 07</span>
+    <div class="reveal"><span class="sec-tag">Chapter 06</span>
       <h2 class="sec-title">遇到问题别慌 🛟</h2>
       <p class="sec-desc">记住这三个场景就够了，覆盖 90% 的问题。<strong style="color:#60A5FA">而且都可以在 WorkBuddy 里解决。</strong></p>
     </div>
