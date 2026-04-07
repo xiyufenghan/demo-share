@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>轻量化技术工具链 — 用 WorkBuddy 搭建团队效率基础设施</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: #08090e;
+  color: #e4e4ec;
+  overflow-x: hidden;
+  line-height: 1.75;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #08090e; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #3B82F6, #818cf8); border-radius: 3px; }
+
+/* ---------- cursor glow ---------- */
+.cursor-glow {
+  position: fixed;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,82,217,0.06) 0%, transparent 70%);
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: left .35s ease-out, top .35s ease-out;
+}
+
+/* ---------- bg ---------- */
+.bg-dots {
+  position: fixed; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  z-index: 0;
+}
+
+/* ---------- reveal ---------- */
+.reveal {
+  opacity: 0; transform: translateY(36px);
+  transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: .08s; } .d2 { transition-delay: .16s; }
+.d3 { transition-delay: .24s; } .d4 { transition-delay: .32s; }
+.d5 { transition-delay: .40s; } .d6 { transition-delay: .48s; }
+
+/* ---------- layout ---------- */
+section { position: relative; z-index: 2; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 80px 24px; }
+.wrap { max-width: 1060px; width: 100%; margin: 0 auto; }
+
+/* ---------- progress nav ---------- */
+.pnav { position: fixed; right: 22px; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 14px; }
+.pnav-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.12); cursor: pointer; transition: all .3s; position: relative; }
+.pnav-dot:hover, .pnav-dot.on { background: #3B82F6; box-shadow: 0 0 14px rgba(59,130,246,.5); transform: scale(1.4); }
+.pnav-dot .tip { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: .72rem; color: #3B82F6; background: rgba(0,0,0,.85); padding: 3px 10px; border-radius: 4px; opacity: 0; pointer-events: none; transition: opacity .2s; }
+.pnav-dot:hover .tip { opacity: 1; }
+
+/* ==================== HERO ==================== */
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
+
+.hero-orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .35; animation: orbF 10s ease-in-out infinite; }
+.orb1 { width: 520px; height: 520px; background: radial-gradient(circle,#3B82F6,transparent); top:-120px; left:-80px; }
+.orb2 { width: 420px; height: 420px; background: radial-gradient(circle,#818cf8,transparent); bottom:-60px; right:-60px; animation-delay:-4s; }
+.orb3 { width: 280px; height: 280px; background: radial-gradient(circle,#60A5FA,transparent); top:35%; right:12%; animation-delay:-7s; opacity:.18; }
+@keyframes orbF { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(25px,-18px) scale(1.04)} 66%{transform:translate(-18px,12px) scale(.96)} }
+
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; padding: 7px 18px; border: 1px solid rgba(59,130,246,.3); border-radius: 100px; font-size: .82rem; color: #60A5FA; background: rgba(59,130,246,.05); backdrop-filter: blur(8px); margin-bottom: 28px; letter-spacing: .04em; }
+.hero-tag .dot { width: 7px; height: 7px; background: #3B82F6; border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.45;transform:scale(.75)} }
+
+.hero h1 { font-family: 'DM Serif Display','Noto Sans SC',serif; font-size: clamp(2.6rem,6.5vw,5rem); font-weight: 400; line-height: 1.12; margin-bottom: 22px; background: linear-gradient(135deg,#fff 0%,#60A5FA 50%,#818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.hero-sub { font-size: clamp(1rem,2.2vw,1.25rem); color: rgba(228,228,236,.65); max-width: 640px; margin: 0 auto 40px; font-weight: 300; }
+.hero-sub strong { color: #60A5FA; font-weight: 500; }
+
+.hero-pills { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+.pill { display: flex; align-items: center; gap: 6px; font-size: .88rem; color: rgba(228,228,236,.5); }
+
+.scroll-cue { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; color: rgba(228,228,236,.25); font-size: .72rem; letter-spacing: .1em; animation: cBounce 2.2s ease-in-out infinite; }
+.scroll-cue .arr { width: 18px; height: 18px; border-right: 2px solid rgba(59,130,246,.35); border-bottom: 2px solid rgba(59,130,246,.35); transform: rotate(45deg); }
+@keyframes cBounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(10px)} }
+
+/* ---------- section header ---------- */
+.sec-tag { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono',monospace; font-size: .78rem; color: #3B82F6; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 10px; }
+.sec-tag::before { content: ''; display: block; width: 22px; height: 2px; background: #3B82F6; }
+.sec-title { font-size: clamp(1.9rem,4vw,2.8rem); font-weight: 900; margin-bottom: 14px; line-height: 1.2; }
+.sec-desc { font-size: 1.05rem; color: rgba(228,228,236,.55); max-width: 680px; margin-bottom: 44px; font-weight: 300; }
+
+/* ---------- callout ---------- */
+.callout { border-radius: 16px; padding: 28px 32px; margin: 36px 0; position: relative; overflow: hidden; }
+.callout.mint { background: linear-gradient(135deg,rgba(59,130,246,.07) 0%,rgba(59,130,246,.015) 100%); border: 1px solid rgba(59,130,246,.15); }
+.callout.purple { background: linear-gradient(135deg,rgba(129,140,248,.07) 0%,rgba(129,140,248,.015) 100%); border: 1px solid rgba(129,140,248,.15); }
+.callout.amber { background: linear-gradient(135deg,rgba(59,130,246,.05) 0%,rgba(59,130,246,.01) 100%); border: 1px solid rgba(59,130,246,.12); }
+.callout-emoji { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+.callout h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+.callout p { font-size: .93rem; color: rgba(228,228,236,.62); line-height: 1.7; }
+
+/* ---------- pain cards ---------- */
+.pain-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 22px; }
+.pain-card { padding: 28px; border-radius: 16px; background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.05); position: relative; overflow: hidden; transition: transform .3s, border-color .3s; }
+.pain-card:hover { transform: translateY(-4px); border-color: rgba(59,130,246,.3); }
+.pain-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg,#3B82F6,#818cf8); }
+.pain-icon { font-size: 2rem; margin-bottom: 14px; }
+.pain-card h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 8px; color: #FCA5A5; }
+.pain-card p { font-size: .9rem; color: rgba(228,228,236,.55); }
+
+/* ---------- solution flow ---------- */
+.sol-flow { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; margin-bottom: 44px; }
+.fl-node { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 22px; min-width: 150px; }
+.fl-icon { width: 68px; height: 68px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 1.9rem; margin-bottom: 10px; }
+.fl-icon.c1 { background: rgba(59,130,246,.1); border: 1px solid rgba(59,130,246,.3); box-shadow: 0 0 28px rgba(59,130,246,.1); }
+.fl-icon.c2 { background: rgba(129,140,248,.1); border: 1px solid rgba(129,140,248,.3); box-shadow: 0 0 28px rgba(129,140,248,.1); }
+.fl-icon.c3 { background: rgba(96,165,250,.1); border: 1px solid rgba(96,165,250,.3); box-shadow: 0 0 28px rgba(96,165,250,.1); }
+.fl-node h4 { font-size: .92rem; font-weight: 700; margin-bottom: 3px; }
+.fl-node p { font-size: .78rem; color: rgba(228,228,236,.45); }
+.fl-arr { font-size: 1.4rem; color: rgba(59,130,246,.3); margin: 0 4px; }
+
+/* ---------- layer cards ---------- */
+.layer-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(230px,1fr)); gap: 18px; }
+.layer-card { padding: 26px; border-radius: 16px; background: linear-gradient(135deg,rgba(255,255,255,.035) 0%,rgba(255,255,255,.008) 100%); border: 1px solid rgba(255,255,255,.05); transition: transform .3s, box-shadow .3s; }
+.layer-card:hover { transform: translateY(-4px); box-shadow: 0 18px 50px rgba(0,0,0,.3); }
+.layer-badge { font-size: .68rem; padding: 3px 10px; border-radius: 100px; display: inline-block; margin-bottom: 14px; font-weight: 600; }
+.lb1 { background: rgba(59,130,246,.13); color: #60A5FA; } .lb2 { background: rgba(129,140,248,.13); color: #a5b4fc; }
+.lb3 { background: rgba(96,165,250,.13); color: #93C5FD; } .lb4 { background: rgba(59,130,246,.13); color: #60A5FA; }
+.layer-card .lc-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+.layer-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+.layer-card .lc-desc { font-size: .88rem; color: rgba(228,228,236,.5); margin-bottom: 12px; }
+.layer-card .lc-analogy { font-size: .82rem; color: rgba(96,165,250,.7); font-style: italic; }
+
+/* ---------- chat bubbles ---------- */
+.chat-demo { max-width: 620px; margin: 0 auto; }
+.chat-window { border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); background: rgba(0,0,0,.35); }
+.chat-bar { display: flex; align-items: center; gap: 10px; padding: 12px 18px; background: rgba(255,255,255,.04); border-bottom: 1px solid rgba(255,255,255,.05); }
+.chat-bar .cbar-dot { width: 10px; height: 10px; border-radius: 50%; }
+.cbar-dot.r { background: #f87171; } .cbar-dot.y { background: #fbbf24; } .cbar-dot.g { background: #34d399; }
+.chat-bar .cbar-title { font-size: .82rem; color: rgba(228,228,236,.4); margin-left: 8px; }
+.chat-body { padding: 24px 20px; display: flex; flex-direction: column; gap: 16px; }
+
+.bubble { max-width: 88%; padding: 14px 18px; border-radius: 16px; font-size: .9rem; line-height: 1.6; opacity: 0; animation: bubbleIn .5s forwards; }
+.bubble.user { align-self: flex-end; background: linear-gradient(135deg,#3B82F6,#0052D9); color: #fff; border-bottom-right-radius: 4px; }
+.bubble.ai { align-self: flex-start; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-bottom-left-radius: 4px; color: rgba(228,228,236,.8); }
+.bubble.ai .ai-tag { font-size: .7rem; color: #60A5FA; font-weight: 600; margin-bottom: 4px; display: block; }
+@keyframes bubbleIn { from { opacity:0; transform: translateY(12px) } to { opacity:1; transform:translateY(0) } }
+.bubble:nth-child(1) { animation-delay: .2s; }
+.bubble:nth-child(2) { animation-delay: .8s; }
+.bubble:nth-child(3) { animation-delay: 1.6s; }
+.bubble:nth-child(4) { animation-delay: 2.4s; }
+.bubble:nth-child(5) { animation-delay: 3.2s; }
+.bubble:nth-child(6) { animation-delay: 4s; }
+
+/* ---------- step cards (deploy) ---------- */
+.steps { display: flex; flex-direction: column; gap: 24px; }
+.step-card { display: flex; gap: 20px; padding: 28px; border-radius: 16px; background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.05); transition: border-color .3s, transform .3s; }
+.step-card:hover { border-color: rgba(59,130,246,.2); transform: translateX(4px); }
+.step-num { flex-shrink: 0; width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display',serif; font-size: 1.4rem; font-weight: 400; }
+.sn1 { background: rgba(59,130,246,.1); color: #60A5FA; border: 1px solid rgba(59,130,246,.25); }
+.sn2 { background: rgba(129,140,248,.1); color: #a5b4fc; border: 1px solid rgba(129,140,248,.25); }
+.sn3 { background: rgba(96,165,250,.1); color: #93C5FD; border: 1px solid rgba(96,165,250,.25); }
+.sn4 { background: rgba(59,130,246,.1); color: #60A5FA; border: 1px solid rgba(59,130,246,.25); }
+.step-body h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 6px; }
+.step-body p { font-size: .9rem; color: rgba(228,228,236,.55); }
+.step-body .chat-hint { display: inline-block; margin-top: 10px; padding: 8px 16px; border-radius: 10px; background: rgba(59,130,246,.08); border: 1px solid rgba(59,130,246,.15); font-size: .85rem; color: #60A5FA; }
+.step-body .chat-hint::before { content: '💬 '; }
+
+/* ---------- trouble ---------- */
+.trouble-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 22px; }
+.trouble-card { padding: 24px; border-radius: 16px; background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.05); transition: transform .3s; }
+.trouble-card:hover { transform: translateY(-4px); }
+.trouble-card .sym { font-size: .95rem; font-weight: 700; color: #fca5a5; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.trouble-card .why { font-size: .85rem; color: rgba(228,228,236,.45); margin-bottom: 8px; padding-left: 14px; border-left: 2px solid rgba(96,165,250,.3); }
+.trouble-card .fix { font-size: .88rem; color: #60A5FA; display: flex; align-items: flex-start; gap: 6px; }
+.trouble-card .fix::before { content: '✅'; flex-shrink: 0; }
+
+/* ---------- compare ---------- */
+.cmp-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 16px; overflow: hidden; font-size: .9rem; }
+.cmp-table th, .cmp-table td { padding: 14px 20px; text-align: left; }
+.cmp-table thead th { background: rgba(59,130,246,.07); color: #60A5FA; font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px solid rgba(59,130,246,.12); }
+.cmp-table tbody td { background: rgba(255,255,255,.015); border-bottom: 1px solid rgba(255,255,255,.03); color: rgba(228,228,236,.65); }
+.cmp-table tbody tr:hover td { background: rgba(59,130,246,.025); }
+.cmp-table .hl { color: #60A5FA; font-weight: 600; }
+
+/* ---------- takeaway ---------- */
+.take-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 22px; }
+.take-card { padding: 30px; border-radius: 16px; text-align: center; transition: transform .3s; }
+.take-card:hover { transform: translateY(-6px); }
+.take-card.tc1 { background: linear-gradient(135deg,rgba(59,130,246,.06) 0%,rgba(59,130,246,.01) 100%); border: 1px solid rgba(59,130,246,.15); }
+.take-card.tc2 { background: linear-gradient(135deg,rgba(129,140,248,.06) 0%,rgba(129,140,248,.01) 100%); border: 1px solid rgba(129,140,248,.15); }
+.take-card.tc3 { background: linear-gradient(135deg,rgba(96,165,250,.06) 0%,rgba(96,165,250,.01) 100%); border: 1px solid rgba(96,165,250,.15); }
+.take-card .bn { font-family: 'DM Serif Display',serif; font-size: 3.2rem; font-weight: 400; line-height: 1; margin-bottom: 6px; }
+.tc1 .bn { color: #60A5FA; } .tc2 .bn { color: #a5b4fc; } .tc3 .bn { color: #93C5FD; }
+.take-card h4 { font-size: 1.02rem; font-weight: 700; margin-bottom: 5px; }
+.take-card p { font-size: .82rem; color: rgba(228,228,236,.45); }
+
+/* ---------- footer ---------- */
+.site-footer { text-align: center; padding: 56px 24px; position: relative; z-index: 2; }
+.site-footer p { font-size: .82rem; color: rgba(228,228,236,.25); }
+.site-footer .ft-tag { display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; color: rgba(59,130,246,.35); margin-top: 10px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 768px) {
+  .sol-flow { flex-direction: column; }
+  .fl-arr { transform: rotate(90deg); }
+  .pnav { display: none; }
+  .step-card { flex-direction: column; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="bg-dots"></div>
+
+<nav class="pnav" id="pnav">
+  <div class="pnav-dot on" data-t="hero"><span class="tip">首页</span></div>
+  <div class="pnav-dot" data-t="pain"><span class="tip">痛点</span></div>
+  <div class="pnav-dot" data-t="solution"><span class="tip">方案</span></div>
+  <div class="pnav-dot" data-t="memory"><span class="tip">AI 记忆</span></div>
+  <div class="pnav-dot" data-t="memchat"><span class="tip">记忆演示</span></div>
+  <div class="pnav-dot" data-t="github"><span class="tip">认识 GitHub</span></div>
+  <div class="pnav-dot" data-t="deploy"><span class="tip">一键上线</span></div>
+  <div class="pnav-dot" data-t="deploychat"><span class="tip">部署演示</span></div>
+  <div class="pnav-dot" data-t="trouble"><span class="tip">排障</span></div>
+  <div class="pnav-dot" data-t="takeaway"><span class="tip">收获</span></div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-orb orb3"></div>
+
+  <div class="reveal"><div class="hero-tag"><span class="dot"></span>经验分享 · 2026.04.08</div></div>
+  <h1 class="reveal d1">轻量化<br>技术工具链</h1>
+  <p class="hero-sub reveal d2">用 <strong>WorkBuddy</strong> 搭建团队效率基础设施<br>让 AI 记住你、帮你做事、把成果一键上线</p>
+  <div class="hero-pills reveal d3">
+    <span class="pill">📍 团队经验分享</span>
+    <span class="pill">⏱ 约 10-15 分钟</span>
+    <span class="pill">🎯 不用写代码</span>
+    <span class="pill">💬 对话就能搞定</span>
+  </div>
+  <div class="scroll-cue"><span>向下滚动开始</span><div class="arr"></div></div>
+</section>
+
+<!-- ============ PAIN ============ -->
+<section id="pain">
+  <div class="wrap">
+    <div class="reveal"><span class="sec-tag">Chapter 01</span>
+      <h2 class="sec-title">团队正在经历的「隐性损耗」</h2>
+      <p class="sec-desc">这些问题不会写在周报里，却每天都在消耗我们的<strong style="color:#FCA5A5">时间、精力和协作效率</strong>。</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card reveal d1">
+        <div class="pain-icon">🧠</div>
+        <h3>上下文反复归零</h3>
+        <p>每次使用 AI 工具，都要重新建立对话背景——你是谁、项目是什么、输出要什么格式。<strong>同样的铺垫工作，一周可能重复 20 次以上。</strong>这不是 AI 的问题，是我们还没有给它建立「持久记忆」。</p>
+      </div>
+      <div class="pain-card reveal d2">
+        <div class="pain-icon">🔁</div>
+        <h3>经验无法复用，团队在重复交学费</h3>
+        <p>A 踩过的坑，B 一个月后又踩一遍。解决方案散落在企业微信群、腾讯文档、聊天记录里，<strong>知识没有结构化沉淀，就等于没有知识。</strong>团队规模越大，这种损耗越被放大。</p>
+      </div>
+      <div class="pain-card reveal d3">
+        <div class="pain-icon">🚧</div>
+        <h3>成果交付的「最后一公里」卡住了</h3>
+        <p>数据看板做好了、活动页面写好了，但要让别人看到，就得找开发帮忙部署、等排期、走流程。<strong>从「做完」到「可被访问」之间，往往隔着 3-5 天和好几个人。</strong>这条路本可以缩短到 5 分钟。</p>
+        <p style="margin-top:12px;padding:10px 14px;border-radius:8px;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);font-size:.82rem;color:#fca5a5;line-height:1.6;">⚠️ <strong>安全提醒</strong>：上传代码仓或分享配置时务必注意脱敏，避免企业机密或个人敏感信息泄露。</p>
+      </div>
+    </div>
+
+    <div class="callout purple reveal d4" style="margin-top: 32px;">
+      <span class="callout-emoji">📊</span>
+      <h4>算一笔账</h4>
+      <p>假设每人每天在「重复说明背景 + 找历史方案 + 等待部署」上花掉 30 分钟。一个 10 人团队，一个月就是 <strong style="color:#a5b4fc">100 小时</strong>——相当于一个人满负荷工作半个月。而解决这些，可能只需要一次 15 分钟的配置。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOLUTION ============ -->
+<section id="solution">
+  <div class="wrap">
+    <div class="reveal"><span class="sec-tag">Chapter 02</span>
+      <h2 class="sec-title">今天介绍的「效率三件套」</h2>
+      <p class="sec-desc">全程在 <strong style="color:#60A5FA">WorkBuddy</strong> 里完成，不需要打开命令行，不需要写代码。</p>
+    </div>
+
+    <div class="sol-flow reveal">
+      <div class="fl-node reveal d1">
+        <div class="fl-icon c1">🧠</div>
+        <h4>AI 记忆体系</h4>
+        <p>让 AI 认识你<br>按你的习惯工作</p>
+      </div>
+      <span class="fl-arr reveal d2">→</span>
+      <div class="fl-node reveal d2">
+        <div class="fl-icon c2">🚀</div>
+        <h4>一键上线</h4>
+        <p>说一句话<br>成果变成可访问的链接</p>
+      </div>
+      <span class="fl-arr reveal d3">→</span>
+      <div class="fl-node reveal d3">
+        <div class="fl-icon c3">📚</div>
+        <h4>知识沉淀</h4>
+        <p>踩坑记录自动归档<br>团队越用越聪明</p>
+      </div>
+    </div>
+
+    <div class="callout mint reveal d4">
+      <span class="callout-emoji">💡</span>
+      <h4>一句话理解</h4>
+      <p>想象你有一个超级助理：<strong>记忆体系</strong>让它记住你所有的偏好（不用每次都交代），<strong>一键上线</strong>让它帮你把东西发布到网上（不用找运维），<strong>知识沉淀</strong>让它帮你记笔记（踩过的坑永不再踩）。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEMORY SYSTEM ============ -->
+<section id="memory">
+  <div class="wrap">
+    <div class="reveal"><span class="sec-tag">Chapter 03</span>
+      <h2 class="sec-title">AI 记忆体系：让 AI「认识你」</h2>
+      <p class="sec-desc">AI 本来是"金鱼记忆"——聊完就忘。记忆体系就是给它装了一个<strong style="color:#60A5FA">随身笔记本</strong>。</p>
+    </div>
+
+    <div class="callout purple reveal">
+      <span class="callout-emoji">🎯</span>
+      <h4>核心价值</h4>
+      <p>配置一次，永久生效。以后每次打开 WorkBuddy，它就已经知道：你是谁、你喜欢什么格式、你的项目背景是什么、你之前踩过哪些坑。<strong>不用再重复交代，直接进入工作状态。</strong></p>
+    </div>
+
+    <div class="layer-grid">
+      <div class="layer-card reveal d1">
+        <span class="layer-badge lb1">自动生效</span>
+        <span class="lc-icon">🪪</span>
+        <h3>规则层</h3>
+        <p class="lc-desc">你的身份、偏好、工作习惯。每次对话自动加载。</p>
+        <p class="lc-analogy">💬 好比你的「身份证」——出门自动带上</p>
+      </div>
+      <div class="layer-card reveal d2">
+        <span class="layer-badge lb2">需要时启用</span>
+        <span class="lc-icon">🧰</span>
+        <h3>技能层</h3>
+        <p class="lc-desc">标准流程和专家经验。用的时候说一声就行。</p>
+        <p class="lc-analogy">💬 好比你的「工具箱」——需要时打开</p>
+      </div>
+      <div class="layer-card reveal d3">
+        <span class="layer-badge lb3">指名调用</span>
+        <span class="lc-icon">🎭</span>
+        <h3>代理层</h3>
+        <p class="lc-desc">不同角色各司其职：产品经理、数据分析师……</p>
+        <p class="lc-analogy">💬 好比「专家团」——@谁谁就上</p>
+      </div>
+      <div class="layer-card reveal d4">
+        <span class="layer-badge lb4">知识复用</span>
+        <span class="lc-icon">📖</span>
+        <h3>模块层</h3>
+        <p class="lc-desc">踩坑记录、配置模板、常用知识，随时调取。</p>
+        <p class="lc-analogy">💬 好比「团队笔记本」——经验在这里沉淀</p>
+      </div>
+    </div>
+
+    <div class="callout amber reveal" style="margin-top: 36px;">
+      <span class="callout-emoji">⚡</span>
+      <h4>5 分钟快速上手</h4>
+      <p>在 WorkBuddy 里说：<strong>"帮我创建一个规则文件，记住我的身份信息"</strong>。然后告诉它你的名字、团队、偏好就行。下次新建对话，问它"你知道我是谁吗？"——它能准确回答就说明成功了。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEMORY CHAT DEMO ============ -->
+<section id="memchat">
+  <div class="wrap">
+    <div class="reveal"><span class="sec-tag">实战演示</span>
+      <h2 class="sec-title">记忆体系能记什么？</h2>
+      <p class="sec-desc">不只是工作信息——你可以把<strong style="color:#60A5FA">个人的完整画像</strong>都交给它，让 AI 真正理解你。</p>
+    </div>
+
+    <!-- Demo 1: 工作记忆 -->
+    <div style="margin-bottom:16px" class="reveal d1">
+      <span style="display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;color:#60A5FA;margin-bottom:12px;">
+        <span style="width:24px;height:24px;border-radius:6px;background:rgba(59,130,246,.12);display:inline-flex;align-items:center;justify-content:center;font-size:.75rem;">1</span>
+        场景一：工作记忆 — 让 AI 记住你的工作身份
+      </span>
+    </div>
+
+    <div class="chat-demo reveal d1">
+      <div class="chat-window">
+        <div class="chat-bar">
+          <div class="cbar-dot r"></div><div class="cbar-dot y"></div><div class="cbar-dot g"></div>
+          <span class="cbar-title">WorkBuddy — 工作记忆配置</span>
+        </div>
+        <div class="chat-body" id="memChatBody">
+          <!-- JS will inject -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo 2: 个人大背景 -->
+    <div style="margin-top:48px;margin-bottom:16px" class="reveal d2">
+      <span style="display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;color:#a5b4fc;margin-bottom:12px;">
+        <span style="width:24px;height:24px;border-radius:6px;background:rgba(129,140,248,.12);display:inline-flex;align-items:center;justify-content:center;font-size:.75rem;">2</span>
+        场景二：个人大背景 — 让 AI 理解「你是怎样一个人」
+      </span>
+    </div>
+
+    <div class="callout purple reveal d2" style="margin-top:0;margin-bottom:24px;">
+      <span class="callout-emoji">🌍</span>
+      <h4>进阶玩法：用出生日期构建个人背景画像</h4>
+      <p>把你的出生日期告诉 AI，让它从代际心理学、经济周期、文化背景等维度构建你的「人生底图」。这些信息写入记忆后，AI 对你的理解深度会质变——它不再只知道你的工作，还理解你的思维方式、价值观和行为模式。</p>
+    </div>
+
+    <div class="chat-demo reveal d3">
+      <div class="chat-window">
+        <div class="chat-bar">
+          <div class="cbar-dot r"></div><div class="cbar-dot y"></div><div class="cbar-dot g"></div>
+          <span class="cbar-title">WorkBuddy — 个人背景画像</span>
+        </div>
+        <div class="chat-body" id="bgChatBody">
+          <!-- JS will inject -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 个维度卡片 -->
+    <div style="margin-top:32px" class="reveal d4">
+      <p style="font-size:.9rem;color:rgba(228,228,236,.5);margin-bottom:16px;">💡 你可以让 AI 从以下 <strong style="color:#a5b4fc">7 个维度</strong>来构建你的个人背景记忆：</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+          <div style="font-size:1.2rem;margin-bottom:6px;">💒</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">童年背景解码</div>
+          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">全球事件、文化变化如何塑造你的早期心态</div>
+        </div>
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+          <div style="font-size:1.2rem;margin-bottom:6px;">🧬</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">人格演变地图</div>
+          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">你的性格特质和世界观是怎么随时间发展的</div>
+        </div>
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+          <div style="font-size:1.2rem;margin-bottom:6px;">🧭</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">职业指南针</div>
+          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">你天然契合的职业方向和行业赛道</div>
+        </div>
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+          <div style="font-size:1.2rem;margin-bottom:6px;">💞</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">关系模式分析</div>
+          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">你的沟通风格、依恋倾向和冲突模式</div>
+        </div>
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+          <div style="font-size:1.2rem;margin-bottom:6px;">💰</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">财务心态矩阵</div>
+          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">你对金钱、风险、储蓄的心理模式和盲点</div>
+        </div>
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+          <div style="font-size:1.2rem;margin-bottom:6px;">🔍</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">隐藏困境探测</div>
+          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">代际视角下你可能没意识到的思维盲点</div>
+        </div>
+        <div style="padding:16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);">
+          <div style="font-size:1.2rem;margin-bottom:6px;">🗺️</div>
+          <div style="font-size:.85rem;font-weight:600;margin-bottom:3px;">人生路线图</div>
+          <div style="font-size:.78rem;color:rgba(228,228,236,.4);">不同阶段的机遇、挑战和关键决策点</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout mint reveal d5" style="margin-top:28px;">
+      <span class="callout-emoji">🎯</span>
+      <h4>这些信息写入记忆后会怎样？</h4>
+      <p>当 AI 既知道你的<strong>工作身份</strong>（团队、偏好、项目背景），又理解你的<strong>个人画像</strong>（思维模式、价值观、行为倾向），它给出的建议和输出就不再是通用模板——而是<strong style="color:#60A5FA">真正为你量身定制的</strong>。这就是记忆体系的终极价值。</p>
+    </div>
+
+    <div class="callout mint reveal d6" style="margin-top:20px;">
+      <span class="callout-emoji">💻</span>
+      <h4>换电脑了怎么办？——用 GitHub 同步你的记忆</h4>
+      <p>记忆文件默认存在本地，<strong>不会自动跨设备同步</strong>。但解决方式很简单：把你的规则目录用一个 GitHub 仓库托管。换一台电脑，clone 下来就恢复了——所有规则、偏好、踩坑记录一个不少。</p>
+      <p style="margin-top:10px;">这恰好也是今天分享的核心思路：<strong style="color:#60A5FA">GitHub 不只是代码管理工具，它是你的「配置同步器」和「知识版本库」。</strong>记忆配置 + 项目文件全部用 Git 管理，团队成员之间也能共享同一套规则。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GITHUB INTRO ============ -->
+<section id="github">
+  <div class="wrap">
+    <div class="reveal"><span class="sec-tag">Chapter 04</span>
+      <h2 class="sec-title">先聊聊 GitHub 是什么</h2>
+      <p class="sec-desc">在讲「一键上线」之前，我们先花两分钟搞清楚<strong style="color:#60A5FA">这个工具到底能干什么</strong>。</p>
+    </div>
+
+    <div class="callout purple reveal">
+      <span class="callout-emoji">🐙</span>
+      <h4>GitHub = 代码界的「腾讯文档」</h4>
+      <p>就像腾讯文档让你多人协作编辑文档一样，GitHub 让你多人协作管理文件——只不过它最擅长的是管理代码和网页文件。但它的价值远不止于此：</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:24px;">
+      <div class="layer-card reveal d1">
+        <span class="lc-icon">📦</span>
+        <h3>版本管理</h3>
+        <p class="lc-desc">每次修改都有记录，改坏了随时回退。再也不用「方案_终版_最终版_真的最终版.pptx」。</p>
+      </div>
+      <div class="layer-card reveal d2">
+        <span class="lc-icon">👥</span>
+        <h3>团队协作</h3>
+        <p class="lc-desc">多人同时修改不冲突，每个人的贡献清晰可追溯。</p>
+      </div>
+      <div class="layer-card reveal d3">
+        <span class="lc-icon">🌐</span>
+        <h3>一键发布网页</h3>
+        <p class="lc-desc">GitHub Pages 功能——把文件变成网站，免费、自动加密、全球可访问。</p>
+      </div>
+      <div class="layer-card reveal d4">
+        <span class="lc-icon">🔄</span>
+        <h3>跨设备同步</h3>
+        <p class="lc-desc">公司电脑和家里电脑的文件永远保持一致，前面讲的记忆同步就靠它。</p>
+      </div>
+    </div>
+
+    <div class="callout mint reveal" style="margin-top:32px;">
+      <span class="callout-emoji">💡</span>
+      <h4>不只是程序员用的工具</h4>
+      <p>很多人觉得 GitHub 是「写代码的人才用」的。其实不是——它本质上是一个<strong>文件管理 + 协作 + 发布平台</strong>。设计师用它管理设计稿版本，产品经理用它追踪需求文档，运营用它发布活动页面。<strong style="color:#60A5FA">只要你想让文件有版本记录、能协作、能发布成网页，GitHub 就是答案。</strong></p>
+    </div>
+
+    <!-- GitHub 3月热门项目 -->
+    <div style="margin-top:48px;" class="reveal">
+      <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:6px;">🔥 GitHub 上都有什么好东西？</h3>
+      <p style="font-size:.92rem;color:rgba(228,228,236,.5);margin-bottom:24px;">来看看 2026 年 3 月最火的开源项目——全是免费的，拿来就能用。</p>
+    </div>
+
+    <div id="projectGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;">
+
+      <div class="layer-card reveal d1" style="position:relative;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <h3 style="font-size:1rem;">Superpowers</h3>
+          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(59,130,246,.1);color:#60A5FA;white-space:nowrap;">⭐ 120K</span>
+        </div>
+        <p class="lc-desc">AI 编程工具的「必装技能库」。让 AI 不再拿到需求就直接写代码，而是像优秀工程师一样先讨论需求、设计评审、再编码。</p>
+        <p style="font-size:.75rem;color:rgba(228,228,236,.3);margin-top:8px;">🏷️ AI 编程效率</p>
+      </div>
+
+      <div class="layer-card reveal d2" style="position:relative;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <h3 style="font-size:1rem;">DeerFlow</h3>
+          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(59,130,246,.1);color:#60A5FA;white-space:nowrap;">⭐ 50K+</span>
+        </div>
+        <p class="lc-desc">字节跳动开源的超级智能体运行框架。支持动态创建子智能体、并行执行任务、长期记忆——和我们今天讲的记忆体系理念异曲同工。</p>
+        <p style="font-size:.75rem;color:rgba(228,228,236,.3);margin-top:8px;">🏷️ AI Agent 框架</p>
+      </div>
+
+      <div class="layer-card reveal d3" style="position:relative;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <h3 style="font-size:1rem;">MiroFish</h3>
+          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(59,130,246,.1);color:#60A5FA;white-space:nowrap;">⭐ 44K</span>
+        </div>
+        <p class="lc-desc">AI 预测引擎——上传新闻、政策等材料，系统构建平行世界模拟推演未来走向。可用于舆情预测、市场分析等。</p>
+        <p style="font-size:.75rem;color:rgba(228,228,236,.3);margin-top:8px;">🏷️ AI 预测分析</p>
+      </div>
+
+      <div class="layer-card reveal d4" style="position:relative;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <h3 style="font-size:1rem;">RuView</h3>
+          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(59,130,246,.1);color:#60A5FA;white-space:nowrap;">⭐ 44K</span>
+        </div>
+        <p class="lc-desc">用普通 WiFi 信号隔墙感知人体——实时姿态估计、呼吸心率监测。无需摄像头，硬件成本仅 8 美元。</p>
+        <p style="font-size:.75rem;color:rgba(228,228,236,.3);margin-top:8px;">🏷️ 硬件 · IoT</p>
+      </div>
+
+      <div class="layer-card reveal d5" style="position:relative;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <h3 style="font-size:1rem;">Scrapling</h3>
+          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(59,130,246,.1);color:#60A5FA;white-space:nowrap;">⭐ 33K</span>
+        </div>
+        <p class="lc-desc">自适应爬虫框架，网站改版了也能自动找到目标元素。速度比传统方案快 800 倍。做数据采集的同学可以关注。</p>
+        <p style="font-size:.75rem;color:rgba(228,228,236,.3);margin-top:8px;">🏷️ 数据采集</p>
+      </div>
+
+      <div class="layer-card reveal d6" style="position:relative;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <h3 style="font-size:1rem;">Learn Claude Code</h3>
+          <span style="font-size:.72rem;padding:2px 8px;border-radius:100px;background:rgba(59,130,246,.1);color:#60A5FA;white-space:nowrap;">⭐ 41K</span>
+        </div>
+        <p class="lc-desc">从零学 AI 编程的教学项目，12 个递进课程。口号"Bash is all you need"——和我们今天讲的"对话就能搞定"一个思路。</p>
+        <p style="font-size:.75rem;color:rgba(228,228,236,.3);margin-top:8px;">🏷️ AI 编程教学</p>
+      </div>
+
+    </div>
+
+    <div class="callout mint reveal" style="margin-top:28px;">
+      <span class="callout-emoji">🎁</span>
+      <h4>全都免费、开源</h4>
+      <p>以上项目全部可以在 GitHub 上免费获取和使用。<strong style="color:#60A5FA">这就是 GitHub 的生态力量——全球开发者把最好的工具免费分享出来</strong>，我们要做的就是学会找到它们、用好它们。接下来，我们讲讲怎么用 GitHub 把自己做的东西也发布上去。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPLOY ============ -->
+<section id="deploy">
+  <div class="wrap">
+    <div class="reveal"><span class="sec-tag">Chapter 05</span>
+      <h2 class="sec-title">一键上线：说句话就有链接</h2>
+      <p class="sec-desc">做好的页面、报告、工具，不再只能截图——<strong style="color:#60A5FA">给它一个全球可访问的链接</strong>。</p>
+    </div>
+
+    <div class="callout purple reveal">
+      <span class="callout-emoji">🏠</span>
+      <h4>原理其实很简单</h4>
+      <p>GitHub Pages 相当于一个<strong>免费的网盘 + 自动变网页</strong>。你把文件放上去，它帮你变成一个网站链接。自带加密（HTTPS）、全球加速（CDN）、历史版本记录——而且完全免费。</p>
+    </div>
+
+    <div class="steps">
+      <div class="step-card reveal d1">
+        <div class="step-num sn1">0</div>
+        <div class="step-body">
+          <h3>📝 注册 GitHub 账号 & 创建仓库（首次使用）</h3>
+          <p>如果你还没有 GitHub 账号，先花 2 分钟注册一个：</p>
+          <div style="margin-top:14px;padding:18px 20px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid rgba(59,130,246,.1);">
+            <div style="font-size:.85rem;font-weight:600;color:#60A5FA;margin-bottom:12px;">注册账号</div>
+            <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;">
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">①</span>
+              <div>
+                <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">打开 GitHub 官网</div>
+                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">访问 <span style="color:#60A5FA">github.com</span>，点击右上角 <span style="padding:1px 8px;border-radius:4px;background:rgba(59,130,246,.12);color:#60A5FA;font-size:.8rem;">Sign up</span></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;">
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">②</span>
+              <div>
+                <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">填写基本信息</div>
+                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">输入邮箱 → 设置密码 → 选一个用户名（建议用英文，这会出现在你的页面链接里）</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">③</span>
+              <div>
+                <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">验证邮箱，完成注册</div>
+                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">去邮箱点一下验证链接就好了。选择 Free 计划，完全够用</div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:16px;padding:18px 20px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid rgba(59,130,246,.1);">
+            <div style="font-size:.85rem;font-weight:600;color:#60A5FA;margin-bottom:12px;">创建仓库（Repository）</div>
+            <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;">
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">①</span>
+              <div>
+                <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">点击右上角 <span style="padding:1px 8px;border-radius:4px;background:rgba(255,255,255,.08);font-size:.8rem;">＋</span> → New repository</div>
+                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">仓库就是一个"项目文件夹"，用来存放你要发布的文件</div>
+              </div>
+            </div>
+            <!-- 截图：新建仓库入口 -->
+            <div style="margin:12px 0;border-radius:10px;overflow:hidden;border:1px solid rgba(59,130,246,.1);">
+              <img src="./github-create-repo.png" alt="GitHub 新建仓库入口" style="width:100%;display:block;">
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;">
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">②</span>
+              <div>
+                <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">填写仓库名称</div>
+                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">取个英文名（如 <span style="color:#60A5FA">my-dashboard</span>），这会成为你网页链接的一部分：<span style="color:rgba(228,228,236,.6)">yourname.github.io/<strong style="color:#60A5FA">my-dashboard</strong></span></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">③</span>
+              <div>
+                <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">选择 Public → Create repository</div>
+                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">GitHub Pages 需要仓库设为公开（Public）。其他选项保持默认即可</div>
+              </div>
+            </div>
+            <!-- 截图：仓库创建页面 -->
+            <div style="margin-top:12px;border-radius:10px;overflow:hidden;border:1px solid rgba(59,130,246,.1);">
+              <img src="./github-new-repo.png" alt="GitHub 创建仓库页面" style="width:100%;display:block;">
+            </div>
+          </div>
+          <p style="margin-top:12px;font-size:.85rem;color:rgba(228,228,236,.45);">💡 <strong style="color:rgba(228,228,236,.7)">小贴士</strong>：注册和建仓库只需要做一次。也可以直接让 WorkBuddy 帮你创建——说一句"帮我在 GitHub 上新建一个仓库"就行。</p>
+        </div>
+      </div>
+
+      <div class="step-card reveal d2">
+        <div class="step-num sn1">1</div>
+        <div class="step-body">
+          <h3>在 WorkBuddy 里做好你的东西</h3>
+          <p>不管是数据看板、活动页面还是工具原型，在 WorkBuddy 里做好就行。它会自动生成标准的网页文件。</p>
+        </div>
+      </div>
+      <div class="step-card reveal d2">
+        <div class="step-num sn2">2</div>
+        <div class="step-body">
+          <h3>说一句话，触发部署</h3>
+          <p>直接告诉 WorkBuddy 你想上线。它会自动完成所有技术操作。</p>
+          <div class="chat-hint">把这个项目部署到 GitHub Pages 上线吧</div>
+        </div>
+      </div>
+      <div class="step-card reveal d3">
+        <div class="step-num sn3">3</div>
+        <div class="step-body">
+          <h3>首次简单设置一下（只需一次）</h3>
+          <p>WorkBuddy 帮你把文件推送到 GitHub 后，需要手动开启一下 Pages 服务。按以下步骤操作：</p>
+          <div style="margin-top:14px;padding:18px 20px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid rgba(59,130,246,.1);">
+            <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;">
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">①</span>
+              <div>
+                <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">打开你的仓库页面</div>
+                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">访问 <span style="color:#60A5FA">github.com/你的用户名/仓库名</span></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;">
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">②</span>
+              <div>
+                <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">进入设置</div>
+                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">点击页面顶部的 <span style="padding:1px 8px;border-radius:4px;background:rgba(255,255,255,.08);font-size:.8rem;">⚙️ Settings</span> 标签</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;">
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">③</span>
+              <div>
+                <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">找到 Pages 选项</div>
+                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">左侧菜单滚动到下方，点击 <span style="padding:1px 8px;border-radius:4px;background:rgba(255,255,255,.08);font-size:.8rem;">📄 Pages</span></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;">
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">④</span>
+              <div>
+                <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">配置发布源</div>
+                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">Source 选择 <span style="padding:1px 8px;border-radius:4px;background:rgba(59,130,246,.1);color:#60A5FA;font-size:.8rem;">Deploy from a branch</span>，Branch 选择 <span style="padding:1px 8px;border-radius:4px;background:rgba(59,130,246,.1);color:#60A5FA;font-size:.8rem;">main</span>，目录保持 <span style="padding:1px 8px;border-radius:4px;background:rgba(59,130,246,.1);color:#60A5FA;font-size:.8rem;">/ (root)</span></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <span style="flex-shrink:0;width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,.1);color:#60A5FA;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;">⑤</span>
+              <div>
+                <div style="font-size:.9rem;font-weight:600;margin-bottom:2px;">点击 Save，等待 1-2 分钟</div>
+                <div style="font-size:.82rem;color:rgba(228,228,236,.45);">页面顶部会出现你的网站链接 🎉 以后再也不用动这个设置了</div>
+              </div>
+            </div>
+          <div style="margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid rgba(59,130,246,.15);">
+            <img src="./github-pages-setup.png" alt="GitHub Pages 设置界面" style="width:100%;display:block;border-radius:11px;">
+            <div style="padding:8px 16px;background:rgba(0,0,0,.3);font-size:.72rem;color:rgba(228,228,236,.3);text-align:center;">
+              ↑ GitHub Pages 设置界面：Settings → Pages → 选择 main 分支 → Save
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card reveal d4">
+        <div class="step-num sn4">4</div>
+        <div class="step-body">
+          <h3>🎉 拿到链接，分享给任何人</h3>
+          <p>1-2 分钟后就能访问。以后每次更新内容，WorkBuddy 推送一下，网页自动刷新。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPLOY CHAT DEMO ============ -->
+<section id="deploychat">
+  <div class="wrap">
+    <div class="reveal"><span class="sec-tag">实战演示</span>
+      <h2 class="sec-title">部署过程长什么样</h2>
+      <p class="sec-desc">你只需要<strong style="color:#60A5FA">说一句话</strong>，剩下的 WorkBuddy 全搞定。</p>
+    </div>
+
+    <div class="chat-demo reveal d1">
+      <div class="chat-window">
+        <div class="chat-bar">
+          <div class="cbar-dot r"></div><div class="cbar-dot y"></div><div class="cbar-dot g"></div>
+          <span class="cbar-title">WorkBuddy</span>
+        </div>
+        <div class="chat-body" id="deployChatBody">
+          <!-- JS will inject -->
+        </div>
+      </div>
+    </div>
+
+    <div class="callout mint reveal d2" style="margin-top: 28px;">
+      <span class="callout-emoji">🤯</span>
+      <h4>对了——你正在看的这个页面</h4>
+      <p>就是用 WorkBuddy 生成、用同样的方式部署上线的。<strong>整个过程不到 5 分钟，一行代码没写。</strong>这就是效率基建的力量。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TROUBLESHOOT ============ -->
+<section id="trouble">
+  <div class="wrap">
+    <div class="reveal"><span class="sec-tag">Chapter 06</span>
+      <h2 class="sec-title">遇到问题别慌 🛟</h2>
+      <p class="sec-desc">记住这三个场景就够了，覆盖 90% 的问题。<strong style="color:#60A5FA">而且都可以在 WorkBuddy 里解决。</strong></p>
+    </div>
+
+    <div class="trouble-grid">
+      <div class="trouble-card reveal d1">
+        <div class="sym">🚨 打开链接是空白页</div>
+        <div class="why"><strong>别急</strong>——GitHub 还在"施工"中，一般需要 1-2 分钟。</div>
+        <div class="fix">等两分钟刷新；或者在 WorkBuddy 里说"帮我重新触发部署"。</div>
+      </div>
+      <div class="trouble-card reveal d2">
+        <div class="sym">🚨 页面打开了但很丑/图片不显示</div>
+        <div class="why">通常是文件路径写法的问题，不用自己排查。</div>
+        <div class="fix">直接告诉 WorkBuddy"页面样式丢了，帮我检查路径问题"。</div>
+      </div>
+      <div class="trouble-card reveal d3">
+        <div class="sym">🚨 改了内容但页面没更新</div>
+        <div class="why">浏览器缓存了旧版本。</div>
+        <div class="fix">Mac 按 <kbd style="background:rgba(255,255,255,.08);padding:2px 8px;border-radius:4px;font-size:.82rem">⌘ + Shift + R</kbd>，Windows 按 <kbd style="background:rgba(255,255,255,.08);padding:2px 8px;border-radius:4px;font-size:.82rem">Ctrl + Shift + R</kbd> 强制刷新。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPARE ============ -->
+<section id="compare" style="min-height: auto; padding: 40px 24px 80px;">
+  <div class="wrap">
+    <div class="reveal"><span class="sec-tag">延伸阅读</span>
+      <h2 class="sec-title" style="font-size: 1.7rem;">GitHub Pages vs 轻量服务器</h2>
+      <p class="sec-desc">大多数场景用 GitHub Pages 就够了。只有需要<strong style="color:#60A5FA">后端服务、数据库</strong>时才需要服务器。</p>
+    </div>
+    <div style="overflow-x:auto" class="reveal d1">
+      <table class="cmp-table">
+        <thead><tr><th>维度</th><th>GitHub Pages（推荐优先用）</th><th>轻量服务器（进阶兜底）</th></tr></thead>
+        <tbody>
+          <tr><td>💰 费用</td><td class="hl">完全免费</td><td>约 ¥50-100/月</td></tr>
+          <tr><td>🚀 上手难度</td><td class="hl">WorkBuddy 对话搞定</td><td>需要基础运维知识</td></tr>
+          <tr><td>📦 能放什么</td><td>网页、报告、文档、工具前端</td><td class="hl">什么都行，包括后端和数据库</td></tr>
+          <tr><td>🔒 安全</td><td class="hl">自带 HTTPS 加密</td><td>需要自己配置</td></tr>
+          <tr><td>✅ 推荐</td><td class="hl">80% 的需求都能搞定</td><td>需要"动态服务"时再用</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAKEAWAY ============ -->
+<section id="takeaway">
+  <div class="wrap">
+    <div class="reveal"><span class="sec-tag">Chapter 07</span>
+      <h2 class="sec-title">今天带走三件事</h2>
+      <p class="sec-desc">不需要一步到位。<strong style="color:#60A5FA">从最简单的开始做</strong>，5 分钟就有效果。</p>
+    </div>
+
+    <div class="take-grid">
+      <div class="take-card tc1 reveal d1">
+        <div class="bn">01</div>
+        <h4>给 AI 装个「记忆」</h4>
+        <p>在 WorkBuddy 里说一句"帮我建规则文件"<br>从此 AI 开机就认识你</p>
+      </div>
+      <div class="take-card tc2 reveal d2">
+        <div class="bn">02</div>
+        <h4>成果一句话上线</h4>
+        <p>做完的东西说"帮我部署"就行<br>一个链接，全球可看</p>
+      </div>
+      <div class="take-card tc3 reveal d3">
+        <div class="bn">03</div>
+        <h4>踩坑经验自动沉淀</h4>
+        <p>遇到的问题让 AI 记下来<br>团队知识库越来越聪明</p>
+      </div>
+    </div>
+
+    <div class="callout purple reveal d4" style="margin-top: 44px; text-align: center;">
+      <span class="callout-emoji">🚀</span>
+      <h4 style="font-size: 1.25rem;">现在就可以试</h4>
+      <p style="font-size: 1.02rem;">打开 WorkBuddy → 说"帮我创建规则文件，记住我的信息" → 试试"你知道我是谁吗？"<br><strong style="color:#a5b4fc">5 分钟后，你的效率基建就搭好了第一块砖。</strong></p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p>轻量化技术工具链 · 团队经验分享 · 2026.04.08</p>
+  <div class="ft-tag"><span>⚡</span> 本页面由 WorkBuddy 生成并部署 · 零代码</div>
+</footer>
+
+<script>
+// Cursor glow
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', e => { glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; });
+
+// Scroll reveal
+const revEls = document.querySelectorAll('.reveal');
+const revObs = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+revEls.forEach(el => revObs.observe(el));
+
+// Progress nav
+const secs = document.querySelectorAll('section[id]');
+const dots = document.querySelectorAll('.pnav-dot');
+dots.forEach(d => d.addEventListener('click', () => {
+  const t = document.getElementById(d.dataset.t);
+  if (t) t.scrollIntoView({ behavior: 'smooth' });
+}));
+const navObs = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if (e.isIntersecting) {
+      dots.forEach(d => d.classList.remove('on'));
+      const a = document.querySelector(`.pnav-dot[data-t="${e.target.id}"]`);
+      if (a) a.classList.add('on');
+    }
+  });
+}, { threshold: .25 });
+secs.forEach(s => navObs.observe(s));
+
+// Chat bubble demos
+function renderChat(containerId, messages) {
+  const el = document.getElementById(containerId);
+  let rendered = false;
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (e.isIntersecting && !rendered) {
+        rendered = true;
+        el.innerHTML = '';
+        messages.forEach((m, i) => {
+          const div = document.createElement('div');
+          div.className = 'bubble ' + m.role;
+          div.style.animationDelay = (0.2 + i * 0.8) + 's';
+          if (m.role === 'ai') {
+            div.innerHTML = '<span class="ai-tag">WorkBuddy</span>' + m.text;
+          } else {
+            div.textContent = m.text;
+          }
+          el.appendChild(div);
+        });
+      }
+    });
+  }, { threshold: .3 });
+  obs.observe(el);
+}
+
+// Memory chat demo
+renderChat('memChatBody', [
+  { role: 'user', text: '帮我创建一个规则文件，记住我的身份信息' },
+  { role: 'ai', text: '好的！我来帮你建立记忆配置。先告诉我几个信息：你的名字、团队、平时喜欢什么样的输出格式？' },
+  { role: 'user', text: '我叫小明，市场部的，喜欢用表格和要点列表，别给我写太长的段落' },
+  { role: 'ai', text: '✅ 搞定！我已经帮你创建好规则文件了。以后每次新对话我都会自动加载这些信息。你可以试试新建一个对话，问我"你知道我是谁吗？"' },
+  { role: 'user', text: '你知道我是谁吗？' },
+  { role: 'ai', text: '你是市场部的小明 👋 你喜欢表格和要点列表，不喜欢长段落。有什么可以帮你的？' }
+]);
+
+// Deploy chat demo
+renderChat('deployChatBody', [
+  { role: 'user', text: '帮我把这个数据看板部署到 GitHub Pages 上' },
+  { role: 'ai', text: '好的，我来帮你上线！正在创建仓库并推送文件……' },
+  { role: 'ai', text: '✅ 部署完成！你的页面链接是：<br><strong style="color:#60A5FA">https://yourname.github.io/data-dashboard/</strong><br><br>首次访问可能需要等 1-2 分钟。之后每次你更新内容，我帮你推送一下就自动刷新了。' },
+  { role: 'user', text: '太棒了，我把链接发给领导看看 🎉' },
+]);
+
+// Background persona chat demo
+renderChat('bgChatBody', [
+  { role: 'user', text: '我的出生日期是 1995/03/15。帮我从代际心理学角度，分析我这个时期出生的人有什么共同特征，然后把这些写入我的记忆配置。' },
+  { role: 'ai', text: '好的！正在从全球事件、文化变化和代际心理学维度为你构建背景画像……<br><br>🔍 <strong>95后核心特征</strong>：互联网原住民、经历了从 Web1.0 到移动互联网的完整变迁、务实与理想并存、高信息密度下成长形成的快速决策能力……<br><br>我已将这些作为你的「个人大背景」写入记忆。以后我在给你建议时，会把你的代际思维模式考虑在内。' },
+  { role: 'user', text: '继续帮我分析职业指南针和财务心态' },
+  { role: 'ai', text: '📊 已更新你的记忆画像：<br>• <strong>职业</strong>：天然适合「技术+创意」交叉领域，偏好扁平化团队<br>• <strong>财务</strong>：风险偏好中等偏高，倾向体验消费，需注意长期储蓄盲点<br><br>这些都已写入记忆，后续涉及职业规划或理财话题时会自动参考 ✅' },
+]);
+
+// Hero orb parallax
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  document.querySelectorAll('.hero-orb').forEach((o, i) => {
+    o.style.transform = `translateY(${y * (0.08 + i * 0.04)}px)`;
+  });
+});
+</script>
+
+</body>
+</html>
